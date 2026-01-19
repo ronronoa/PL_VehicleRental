@@ -27,5 +27,14 @@ namespace PL_VehicleRental.Forms
             headerSeparator.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             headerSeparator.FillThickness = 2;
         }
+
+        private void clearBtn_Click(object sender, EventArgs e)
+        {
+            firstNameTextBox.Clear();
+            lastNameTextBox.Clear();
+            addressTextBox.Clear();
+            roleCmb.StartIndex = 0;
+            statusCmb.StartIndex = 0;
+        }
     }
 }

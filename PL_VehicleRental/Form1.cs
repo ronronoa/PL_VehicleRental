@@ -8,12 +8,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace PL_VehicleRental
 {
     public partial class Form1 : Form
     {
+        //string connString = "server=mysql-car-rental-ravenakira22-d25a.j.aivencloud.com;port=10681;database=mainDb;uid=avnadmin;pwd=AVNS_KkSsK8DVbXftqWP322A";
         private Form ActiveForm;
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            ActivateButton(sender, FormPageTitles.Test);
+            LoadForm(new UserManagementForm());
+
+            //using (MySqlConnection conn = new MySqlConnection(connString))
+            //{
+            //    try
+            //    {
+            //        conn.Open();
+            //        MessageBox.Show("Connected Successfully");
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show("Error:" + ex.Message);
+            //    }
+            //}
+
+        }
 
         public static class Theme
         {
@@ -77,13 +99,6 @@ namespace PL_VehicleRental
             {
                 this.WindowState = FormWindowState.Maximized;
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            ActivateButton(sender, FormPageTitles.Test);
-            LoadForm(new UserManagementForm());
-
         }
 
 

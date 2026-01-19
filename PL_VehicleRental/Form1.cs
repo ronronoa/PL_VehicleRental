@@ -27,7 +27,7 @@ namespace PL_VehicleRental
             public const string Test = "Users";
         }
         
-        private void OpenForm(Form childForm)
+        private void LoadForm(Form childForm)
         {
             if (ActiveForm != null)
             {
@@ -38,6 +38,7 @@ namespace PL_VehicleRental
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.Dock = DockStyle.Fill;
+            mainPanel.Dock = DockStyle.Fill;
             mainPanel.Controls.Add(childForm);
             mainPanel.Tag = childForm;
             childForm.BringToFront();
@@ -60,10 +61,6 @@ namespace PL_VehicleRental
             InitializeComponent();
         }
 
-        private void OpenForm()
-        {
-            
-        }
 
         private void btnMinimize_Click(object sender, EventArgs e)
         {
@@ -84,20 +81,11 @@ namespace PL_VehicleRental
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ActivateButton(sender, FormPageTitles.Test);
+            LoadForm(new UserManagementForm());
 
         }
 
-        private void Form1_Resize(object sender, EventArgs e)
-        {
-            if (this.WindowState == FormWindowState.Maximized)
-            {
-                btnFullWindow.Text = "❐"; 
-            }
-            else
-            {
-                btnFullWindow.Text = "☐";
-            }
-        }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -107,7 +95,31 @@ namespace PL_VehicleRental
         private void Test1Btn_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, FormPageTitles.Test);
-            OpenForm(new Test1());
+            LoadForm(new UserManagementForm());
+        }
+
+        private void sideBarPanel_Paint(object sender, PaintEventArgs e)
+        {
+            int borderWidth = 2;
+            Color borderColor = Color.Gray;
+
+            using (Pen pen = new Pen(borderColor, borderWidth))
+            {
+                int x = sideBarPanel.Width - borderWidth;
+                e.Graphics.DrawLine(pen, x, 0, x, sideBarPanel.Height);
+            }
+        }
+
+        private void headerPanel_Paint(object sender, PaintEventArgs e)
+        {
+            int borderHeight = 1;
+            Color borderColor = Color.Gray;
+
+            using (Pen pen = new Pen(borderColor, borderHeight))
+            {
+                int y = headerPanel.Height - borderHeight;
+                e.Graphics.DrawLine(pen, 0, y, headerPanel.Width, y);
+            }
         }
     }
 }

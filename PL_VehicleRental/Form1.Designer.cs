@@ -29,175 +29,137 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.btnMinimize = new System.Windows.Forms.Button();
-            this.btnFullWindow = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
-            this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.userBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.mainPanel = new Guna.UI2.WinForms.Guna2GradientPanel();
-            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.pageLabel = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.sideBarPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Panel1.SuspendLayout();
-            this.guna2Panel2.SuspendLayout();
+            this.userBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.headerPanel = new Guna.UI2.WinForms.Guna2Panel();
+            this.pageLabel = new System.Windows.Forms.Label();
+            this.mainPanel = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2VSeparator1 = new Guna.UI2.WinForms.Guna2VSeparator();
+            this.sideBarPanel.SuspendLayout();
+            this.headerPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnMinimize
+            // sideBarPanel
             // 
-            this.btnMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMinimize.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMinimize.Location = new System.Drawing.Point(1220, 11);
-            this.btnMinimize.Name = "btnMinimize";
-            this.btnMinimize.Size = new System.Drawing.Size(52, 43);
-            this.btnMinimize.TabIndex = 0;
-            this.btnMinimize.Text = "-";
-            this.btnMinimize.UseVisualStyleBackColor = true;
-            this.btnMinimize.Click += new System.EventHandler(this.btnMinimize_Click);
-            // 
-            // btnFullWindow
-            // 
-            this.btnFullWindow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFullWindow.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFullWindow.Location = new System.Drawing.Point(1278, 11);
-            this.btnFullWindow.Name = "btnFullWindow";
-            this.btnFullWindow.Size = new System.Drawing.Size(52, 43);
-            this.btnFullWindow.TabIndex = 1;
-            this.btnFullWindow.Text = "❐";
-            this.btnFullWindow.UseVisualStyleBackColor = true;
-            this.btnFullWindow.Click += new System.EventHandler(this.btnFullWindow_Click);
-            // 
-            // btnExit
-            // 
-            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.Location = new System.Drawing.Point(1336, 11);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(52, 43);
-            this.btnExit.TabIndex = 2;
-            this.btnExit.Text = "X";
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // guna2Panel1
-            // 
-            this.guna2Panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.guna2Panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.guna2Panel1.BorderColor = System.Drawing.Color.Gray;
-            this.guna2Panel1.BorderThickness = 1;
-            this.guna2Panel1.Controls.Add(this.guna2Button1);
-            this.guna2Panel1.Controls.Add(this.userBtn);
-            this.guna2Panel1.Location = new System.Drawing.Point(1, 114);
-            this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(267, 658);
-            this.guna2Panel1.TabIndex = 3;
-            // 
-            // userBtn
-            // 
-            this.userBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.userBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.userBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.userBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.userBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userBtn.ForeColor = System.Drawing.Color.White;
-            this.userBtn.Image = ((System.Drawing.Image)(resources.GetObject("userBtn.Image")));
-            this.userBtn.ImageSize = new System.Drawing.Size(30, 30);
-            this.userBtn.Location = new System.Drawing.Point(3, 6);
-            this.userBtn.Name = "userBtn";
-            this.userBtn.Size = new System.Drawing.Size(261, 73);
-            this.userBtn.TabIndex = 4;
-            this.userBtn.Text = "Users";
-            this.userBtn.Click += new System.EventHandler(this.Test1Btn_Click);
-            // 
-            // mainPanel
-            // 
-            this.mainPanel.BorderColor = System.Drawing.Color.Gray;
-            this.mainPanel.Location = new System.Drawing.Point(273, 87);
-            this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(1117, 685);
-            this.mainPanel.TabIndex = 4;
-            // 
-            // guna2Panel2
-            // 
-            this.guna2Panel2.BorderColor = System.Drawing.Color.Gray;
-            this.guna2Panel2.BorderThickness = 1;
-            this.guna2Panel2.Controls.Add(this.pageLabel);
-            this.guna2Panel2.Controls.Add(this.btnMinimize);
-            this.guna2Panel2.Controls.Add(this.btnFullWindow);
-            this.guna2Panel2.Controls.Add(this.btnExit);
-            this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.guna2Panel2.Location = new System.Drawing.Point(0, 0);
-            this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(1391, 80);
-            this.guna2Panel2.TabIndex = 5;
-            // 
-            // pageLabel
-            // 
-            this.pageLabel.AutoSize = true;
-            this.pageLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pageLabel.Location = new System.Drawing.Point(267, 9);
-            this.pageLabel.Name = "pageLabel";
-            this.pageLabel.Size = new System.Drawing.Size(79, 31);
-            this.pageLabel.TabIndex = 3;
-            this.pageLabel.Text = "label1";
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(0, 1);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(268, 115);
-            this.panel1.TabIndex = 6;
+            this.sideBarPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.sideBarPanel.BorderColor = System.Drawing.Color.Gray;
+            this.sideBarPanel.Controls.Add(this.guna2Button1);
+            this.sideBarPanel.Controls.Add(this.userBtn);
+            this.sideBarPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.sideBarPanel.Location = new System.Drawing.Point(0, 80);
+            this.sideBarPanel.Name = "sideBarPanel";
+            this.sideBarPanel.Size = new System.Drawing.Size(267, 692);
+            this.sideBarPanel.TabIndex = 3;
+            this.sideBarPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.sideBarPanel_Paint);
             // 
             // guna2Button1
             // 
+            this.guna2Button1.BorderRadius = 2;
             this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
             this.guna2Button1.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2Button1.ForeColor = System.Drawing.Color.White;
             this.guna2Button1.Image = ((System.Drawing.Image)(resources.GetObject("guna2Button1.Image")));
             this.guna2Button1.ImageSize = new System.Drawing.Size(30, 30);
-            this.guna2Button1.Location = new System.Drawing.Point(3, 85);
+            this.guna2Button1.Location = new System.Drawing.Point(21, 151);
             this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(261, 73);
+            this.guna2Button1.Size = new System.Drawing.Size(221, 59);
             this.guna2Button1.TabIndex = 5;
             this.guna2Button1.Text = "Add User";
+            // 
+            // userBtn
+            // 
+            this.userBtn.BorderRadius = 2;
+            this.userBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.userBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.userBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.userBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.userBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.userBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userBtn.ForeColor = System.Drawing.Color.White;
+            this.userBtn.Image = ((System.Drawing.Image)(resources.GetObject("userBtn.Image")));
+            this.userBtn.ImageSize = new System.Drawing.Size(30, 30);
+            this.userBtn.Location = new System.Drawing.Point(21, 86);
+            this.userBtn.Name = "userBtn";
+            this.userBtn.Size = new System.Drawing.Size(221, 59);
+            this.userBtn.TabIndex = 4;
+            this.userBtn.Text = "Users";
+            this.userBtn.Click += new System.EventHandler(this.Test1Btn_Click);
+            // 
+            // headerPanel
+            // 
+            this.headerPanel.BorderColor = System.Drawing.Color.Gray;
+            this.headerPanel.Controls.Add(this.guna2VSeparator1);
+            this.headerPanel.Controls.Add(this.pageLabel);
+            this.headerPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.headerPanel.Location = new System.Drawing.Point(0, 0);
+            this.headerPanel.Name = "headerPanel";
+            this.headerPanel.Size = new System.Drawing.Size(1391, 80);
+            this.headerPanel.TabIndex = 5;
+            this.headerPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.headerPanel_Paint);
+            // 
+            // pageLabel
+            // 
+            this.pageLabel.AutoSize = true;
+            this.pageLabel.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pageLabel.Location = new System.Drawing.Point(274, 22);
+            this.pageLabel.Name = "pageLabel";
+            this.pageLabel.Size = new System.Drawing.Size(197, 46);
+            this.pageLabel.TabIndex = 3;
+            this.pageLabel.Text = "Form Label";
+            // 
+            // mainPanel
+            // 
+            this.mainPanel.BorderColor = System.Drawing.Color.Black;
+            this.mainPanel.BorderRadius = 2;
+            this.mainPanel.BorderThickness = 2;
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanel.Location = new System.Drawing.Point(267, 80);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(1124, 692);
+            this.mainPanel.TabIndex = 6;
+            // 
+            // guna2VSeparator1
+            // 
+            this.guna2VSeparator1.FillColor = System.Drawing.Color.Gray;
+            this.guna2VSeparator1.FillThickness = 2;
+            this.guna2VSeparator1.Location = new System.Drawing.Point(258, 9);
+            this.guna2VSeparator1.Name = "guna2VSeparator1";
+            this.guna2VSeparator1.Size = new System.Drawing.Size(10, 71);
+            this.guna2VSeparator1.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1391, 772);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.guna2Panel2);
             this.Controls.Add(this.mainPanel);
-            this.Controls.Add(this.guna2Panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Controls.Add(this.sideBarPanel);
+            this.Controls.Add(this.headerPanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.guna2Panel1.ResumeLayout(false);
-            this.guna2Panel2.ResumeLayout(false);
-            this.guna2Panel2.PerformLayout();
+            this.sideBarPanel.ResumeLayout(false);
+            this.headerPanel.ResumeLayout(false);
+            this.headerPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button btnMinimize;
-        private System.Windows.Forms.Button btnFullWindow;
-        private System.Windows.Forms.Button btnExit;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
+        private Guna.UI2.WinForms.Guna2Panel sideBarPanel;
         private Guna.UI2.WinForms.Guna2Button userBtn;
-        private Guna.UI2.WinForms.Guna2GradientPanel mainPanel;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
+        private Guna.UI2.WinForms.Guna2Panel headerPanel;
         private System.Windows.Forms.Label pageLabel;
-        private System.Windows.Forms.Panel panel1;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2Panel mainPanel;
+        private Guna.UI2.WinForms.Guna2VSeparator guna2VSeparator1;
     }
 }
 

@@ -13,7 +13,7 @@ namespace PL_VehicleRental.Forms
 {
     public partial class UserManagementForm : Form
     {
-            //string connString = "server=mysql-38168e71-maronfajardo5-ba90.d.aivencloud.com;port=23294;database=mainDb;uid=avnadmin;pwd=AVNS_OPfCiHLDdQfO2YrV2gR";
+         
         public UserManagementForm()
         {
             InitializeComponent();
@@ -31,17 +31,6 @@ namespace PL_VehicleRental.Forms
 
             //addBtn.BackColor = UITheme.PrimaryColor;
 
-            //using (MySqlConnection conn = new MySqlConnection(connString))
-            //{
-            //    try
-            //    {
-            //        conn.Open();
-            //        MessageBox.Show("Connected Successfully");
-            //    }
-            //    catch (Exception ex) {
-            //        MessageBox.Show(ex.Message);
-            //    }
-            //}
         }
 
         private void clearBtn_Click(object sender, EventArgs e)

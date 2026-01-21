@@ -9,17 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Configuration;
 
 namespace PL_VehicleRental
 {
     public partial class Form1 : Form
     {
-        string connString = $@"Server={Environment.GetEnvironmentVariable("DB_HOST")};
-                               Port={Environment.GetEnvironmentVariable("DB_PORT")};
-                               Database={Environment.GetEnvironmentVariable("DB_NAME")};
-                               Uid={Environment.GetEnvironmentVariable("DB_USER")};
-                               Pwd={Environment.GetEnvironmentVariable("DB_PASS")};
-                               SslMode=Required;";
+        string connString = ConfigurationManager.ConnectionStrings["MyDbConnection"].ConnectionString;
         private Form ActiveForm;
 
         private void Form1_Load(object sender, EventArgs e)

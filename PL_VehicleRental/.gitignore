@@ -1,0 +1,22 @@
+﻿# ===============================
+# Visual Studio / C# Ignore
+# ===============================
+
+# User-specific files
+.vs/
+*.user
+*.suo
+
+# Build results
+bin/
+obj/
+
+# App secrets
+App.config
+
+# NuGet packages
+packages/
+
+# OS files
+Thumbs.db
+.DS_Store

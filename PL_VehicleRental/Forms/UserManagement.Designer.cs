@@ -31,15 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserManagementForm));
             this.BackgroundPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.UserManagementPanel = new Guna.UI2.WinForms.Guna2Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.RegisterNewStaffLabel = new System.Windows.Forms.Label();
             this.headerSeparator = new Guna.UI2.WinForms.Guna2Separator();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.clearBtn = new Guna.UI2.WinForms.Guna2Button();
             this.addBtn = new Guna.UI2.WinForms.Guna2Button();
             this.statusCmb = new Guna.UI2.WinForms.Guna2ComboBox();
@@ -53,6 +49,7 @@
             this.lastNameLabel = new System.Windows.Forms.Label();
             this.firstNameLabel = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.BackgroundPanel.SuspendLayout();
             this.UserManagementPanel.SuspendLayout();
             this.guna2Panel1.SuspendLayout();
@@ -82,42 +79,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.UserManagementPanel.BorderColor = System.Drawing.Color.Transparent;
-            this.UserManagementPanel.Controls.Add(this.panel3);
-            this.UserManagementPanel.Controls.Add(this.panel2);
-            this.UserManagementPanel.Controls.Add(this.panel1);
             this.UserManagementPanel.Controls.Add(this.guna2Panel1);
             this.UserManagementPanel.Controls.Add(this.tabControl1);
             this.UserManagementPanel.Location = new System.Drawing.Point(14, 15);
             this.UserManagementPanel.Name = "UserManagementPanel";
             this.UserManagementPanel.Size = new System.Drawing.Size(1300, 747);
             this.UserManagementPanel.TabIndex = 0;
-            // 
-            // panel3
-            // 
-            this.panel3.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.panel3.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.panel3.Location = new System.Drawing.Point(915, 66);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(301, 169);
-            this.panel3.TabIndex = 11;
-            // 
-            // panel2
-            // 
-            this.panel2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.panel2.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.panel2.Location = new System.Drawing.Point(491, 66);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(301, 169);
-            this.panel2.TabIndex = 11;
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.panel1.Location = new System.Drawing.Point(77, 66);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(301, 169);
-            this.panel1.TabIndex = 10;
             // 
             // guna2Panel1
             // 
@@ -151,15 +118,16 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(18, 287);
+            this.tabControl1.Location = new System.Drawing.Point(18, 66);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1267, 428);
+            this.tabControl1.Size = new System.Drawing.Size(1267, 649);
             this.tabControl1.TabIndex = 9;
             // 
             // tabPage1
@@ -183,26 +151,13 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 32);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1259, 392);
+            this.tabPage1.Size = new System.Drawing.Size(1259, 613);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "User Management";
             // 
-            // guna2PictureBox1
-            // 
-            this.guna2PictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.guna2PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.guna2PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox1.Image")));
-            this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(568, 19);
-            this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(668, 371);
-            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.guna2PictureBox1.TabIndex = 12;
-            this.guna2PictureBox1.TabStop = false;
-            // 
             // clearBtn
             // 
+            this.clearBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.clearBtn.BackColor = System.Drawing.Color.Transparent;
             this.clearBtn.BorderColor = System.Drawing.Color.Transparent;
             this.clearBtn.BorderRadius = 10;
@@ -214,7 +169,7 @@
             this.clearBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(89)))), ((int)(((byte)(124)))));
             this.clearBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearBtn.ForeColor = System.Drawing.Color.White;
-            this.clearBtn.Location = new System.Drawing.Point(222, 258);
+            this.clearBtn.Location = new System.Drawing.Point(221, 473);
             this.clearBtn.Name = "clearBtn";
             this.clearBtn.Size = new System.Drawing.Size(180, 45);
             this.clearBtn.TabIndex = 11;
@@ -223,6 +178,7 @@
             // 
             // addBtn
             // 
+            this.addBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.addBtn.BackColor = System.Drawing.Color.Transparent;
             this.addBtn.BorderColor = System.Drawing.Color.Transparent;
             this.addBtn.BorderRadius = 10;
@@ -234,7 +190,7 @@
             this.addBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(89)))), ((int)(((byte)(124)))));
             this.addBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addBtn.ForeColor = System.Drawing.Color.White;
-            this.addBtn.Location = new System.Drawing.Point(36, 258);
+            this.addBtn.Location = new System.Drawing.Point(35, 473);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(180, 45);
             this.addBtn.TabIndex = 10;
@@ -243,6 +199,7 @@
             // 
             // statusCmb
             // 
+            this.statusCmb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.statusCmb.BackColor = System.Drawing.Color.Transparent;
             this.statusCmb.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.statusCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -254,14 +211,16 @@
             this.statusCmb.Items.AddRange(new object[] {
             "Active",
             "Inactive"});
-            this.statusCmb.Location = new System.Drawing.Point(151, 194);
+            this.statusCmb.Location = new System.Drawing.Point(150, 409);
             this.statusCmb.Name = "statusCmb";
             this.statusCmb.Size = new System.Drawing.Size(235, 36);
             this.statusCmb.StartIndex = 0;
             this.statusCmb.TabIndex = 9;
+            this.statusCmb.SelectedIndexChanged += new System.EventHandler(this.statusCmb_SelectedIndexChanged);
             // 
             // roleCmb
             // 
+            this.roleCmb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.roleCmb.BackColor = System.Drawing.Color.Transparent;
             this.roleCmb.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.roleCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -274,14 +233,16 @@
             "Admin",
             "Staff",
             "Customer"});
-            this.roleCmb.Location = new System.Drawing.Point(151, 141);
+            this.roleCmb.Location = new System.Drawing.Point(150, 356);
             this.roleCmb.Name = "roleCmb";
             this.roleCmb.Size = new System.Drawing.Size(235, 36);
             this.roleCmb.StartIndex = 0;
             this.roleCmb.TabIndex = 8;
+            this.roleCmb.SelectedIndexChanged += new System.EventHandler(this.roleCmb_SelectedIndexChanged);
             // 
             // addressTextBox
             // 
+            this.addressTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.addressTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.addressTextBox.DefaultText = "";
             this.addressTextBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -292,16 +253,18 @@
             this.addressTextBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.addressTextBox.ForeColor = System.Drawing.Color.Black;
             this.addressTextBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.addressTextBox.Location = new System.Drawing.Point(151, 104);
+            this.addressTextBox.Location = new System.Drawing.Point(150, 319);
             this.addressTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.addressTextBox.Name = "addressTextBox";
             this.addressTextBox.PlaceholderText = "";
             this.addressTextBox.SelectedText = "";
             this.addressTextBox.Size = new System.Drawing.Size(376, 30);
             this.addressTextBox.TabIndex = 7;
+            this.addressTextBox.TextChanged += new System.EventHandler(this.addressTextBox_TextChanged);
             // 
             // lastNameTextBox
             // 
+            this.lastNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lastNameTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.lastNameTextBox.DefaultText = "";
             this.lastNameTextBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -312,16 +275,18 @@
             this.lastNameTextBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lastNameTextBox.ForeColor = System.Drawing.Color.Black;
             this.lastNameTextBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.lastNameTextBox.Location = new System.Drawing.Point(151, 66);
+            this.lastNameTextBox.Location = new System.Drawing.Point(150, 281);
             this.lastNameTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lastNameTextBox.Name = "lastNameTextBox";
             this.lastNameTextBox.PlaceholderText = "";
             this.lastNameTextBox.SelectedText = "";
             this.lastNameTextBox.Size = new System.Drawing.Size(376, 30);
             this.lastNameTextBox.TabIndex = 6;
+            this.lastNameTextBox.TextChanged += new System.EventHandler(this.lastNameTextBox_TextChanged);
             // 
             // firstNameTextBox
             // 
+            this.firstNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.firstNameTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.firstNameTextBox.DefaultText = "";
             this.firstNameTextBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -332,58 +297,69 @@
             this.firstNameTextBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.firstNameTextBox.ForeColor = System.Drawing.Color.Black;
             this.firstNameTextBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.firstNameTextBox.Location = new System.Drawing.Point(151, 28);
+            this.firstNameTextBox.Location = new System.Drawing.Point(150, 243);
             this.firstNameTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.firstNameTextBox.Name = "firstNameTextBox";
             this.firstNameTextBox.PlaceholderText = "";
             this.firstNameTextBox.SelectedText = "";
             this.firstNameTextBox.Size = new System.Drawing.Size(376, 30);
             this.firstNameTextBox.TabIndex = 5;
+            this.firstNameTextBox.TextChanged += new System.EventHandler(this.firstNameTextBox_TextChanged);
             // 
             // statusLabel
             // 
+            this.statusLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.statusLabel.AutoSize = true;
-            this.statusLabel.Location = new System.Drawing.Point(31, 199);
+            this.statusLabel.Location = new System.Drawing.Point(30, 414);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(61, 23);
             this.statusLabel.TabIndex = 4;
             this.statusLabel.Text = "Status:";
+            this.statusLabel.Click += new System.EventHandler(this.statusLabel_Click);
             // 
             // roleLabel
             // 
+            this.roleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.roleLabel.AutoSize = true;
-            this.roleLabel.Location = new System.Drawing.Point(31, 148);
+            this.roleLabel.Location = new System.Drawing.Point(30, 363);
             this.roleLabel.Name = "roleLabel";
             this.roleLabel.Size = new System.Drawing.Size(48, 23);
             this.roleLabel.TabIndex = 3;
             this.roleLabel.Text = "Role:";
+            this.roleLabel.Click += new System.EventHandler(this.roleLabel_Click);
             // 
             // addressLabel
             // 
+            this.addressLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.addressLabel.AutoSize = true;
-            this.addressLabel.Location = new System.Drawing.Point(31, 104);
+            this.addressLabel.Location = new System.Drawing.Point(30, 319);
             this.addressLabel.Name = "addressLabel";
             this.addressLabel.Size = new System.Drawing.Size(74, 23);
             this.addressLabel.TabIndex = 2;
             this.addressLabel.Text = "Address:";
+            this.addressLabel.Click += new System.EventHandler(this.addressLabel_Click);
             // 
             // lastNameLabel
             // 
+            this.lastNameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lastNameLabel.AutoSize = true;
-            this.lastNameLabel.Location = new System.Drawing.Point(31, 65);
+            this.lastNameLabel.Location = new System.Drawing.Point(30, 280);
             this.lastNameLabel.Name = "lastNameLabel";
             this.lastNameLabel.Size = new System.Drawing.Size(95, 23);
             this.lastNameLabel.TabIndex = 1;
             this.lastNameLabel.Text = "Last Name:";
+            this.lastNameLabel.Click += new System.EventHandler(this.lastNameLabel_Click);
             // 
             // firstNameLabel
             // 
+            this.firstNameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.firstNameLabel.AutoSize = true;
-            this.firstNameLabel.Location = new System.Drawing.Point(31, 28);
+            this.firstNameLabel.Location = new System.Drawing.Point(30, 243);
             this.firstNameLabel.Name = "firstNameLabel";
             this.firstNameLabel.Size = new System.Drawing.Size(97, 23);
             this.firstNameLabel.TabIndex = 0;
             this.firstNameLabel.Text = "First Name:";
+            this.firstNameLabel.Click += new System.EventHandler(this.firstNameLabel_Click);
             // 
             // tabPage2
             // 
@@ -395,6 +371,20 @@
             this.tabPage2.Size = new System.Drawing.Size(1259, 392);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
+            // 
+            // guna2PictureBox1
+            // 
+            this.guna2PictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.guna2PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.guna2PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox1.Image")));
+            this.guna2PictureBox1.ImageRotate = 0F;
+            this.guna2PictureBox1.Location = new System.Drawing.Point(567, 234);
+            this.guna2PictureBox1.Name = "guna2PictureBox1";
+            this.guna2PictureBox1.Size = new System.Drawing.Size(668, 371);
+            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.guna2PictureBox1.TabIndex = 12;
+            this.guna2PictureBox1.TabStop = false;
+            this.guna2PictureBox1.Click += new System.EventHandler(this.guna2PictureBox1_Click);
             // 
             // UserManagementForm
             // 
@@ -440,8 +430,5 @@
         private Guna.UI2.WinForms.Guna2Button addBtn;
         private Guna.UI2.WinForms.Guna2Button clearBtn;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel2;
     }
 }

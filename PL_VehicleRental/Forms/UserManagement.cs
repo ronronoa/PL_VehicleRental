@@ -109,5 +109,60 @@ namespace PL_VehicleRental.Forms
             //    }
             //}
         }
+
+        private void guna2PictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void firstNameLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void firstNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lastNameLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lastNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addressLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addressTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void roleLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void roleCmb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void statusLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void statusCmb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Configuration;
-
+using System.Configuration;
 namespace PL_VehicleRental
 {
     public partial class Form1 : Form

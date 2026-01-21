@@ -13,7 +13,7 @@ namespace PL_VehicleRental.Forms
 {
     public partial class UserManagementForm : Form
     {
-            string connString = "server=localhost;port=3306;database=mainDb;uid=root;pwd=";
+            //string connString = "server=mysql-38168e71-maronfajardo5-ba90.d.aivencloud.com;port=23294;database=mainDb;uid=avnadmin;pwd=AVNS_OPfCiHLDdQfO2YrV2gR";
         public UserManagementForm()
         {
             InitializeComponent();
@@ -30,6 +30,18 @@ namespace PL_VehicleRental.Forms
             headerSeparator.FillThickness = 2;
 
             //addBtn.BackColor = UITheme.PrimaryColor;
+
+            //using (MySqlConnection conn = new MySqlConnection(connString))
+            //{
+            //    try
+            //    {
+            //        conn.Open();
+            //        MessageBox.Show("Connected Successfully");
+            //    }
+            //    catch (Exception ex) {
+            //        MessageBox.Show(ex.Message);
+            //    }
+            //}
         }
 
         private void clearBtn_Click(object sender, EventArgs e)
@@ -48,65 +60,65 @@ namespace PL_VehicleRental.Forms
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            string sql = "INSERT INTO registeredUser (firstName, lastName, address, role, status) VALUES (@firstName, @lastName, @address, @role, @status)";
+            //string sql = "INSERT INTO registeredUser (firstName, lastName, address, role, status) VALUES (@firstName, @lastName, @address, @role, @status)";
 
-            using (MySqlConnection conn = new MySqlConnection(connString))
-            {
-                try
-                {
-                    conn.Open();
+            //using (MySqlConnection conn = new MySqlConnection(connString))
+            //{
+            //    try
+            //    {
+            //        conn.Open();
 
-                    string checkQuery = @"
-                                        SELECT COUNT(*) 
-                                        FROM registeredUser 
-                                        WHERE firstName = @firstName 
-                                        OR (firstName = @firstName AND lastName = @lastName)";
+            //        string checkQuery = @"
+            //                            SELECT COUNT(*) 
+            //                            FROM registeredUser 
+            //                            WHERE firstName = @firstName 
+            //                            OR (firstName = @firstName AND lastName = @lastName)";
 
-                    MySqlCommand checkCmd = new MySqlCommand(checkQuery, conn);
-                    checkCmd.Parameters.AddWithValue("@firstName", firstNameTextBox.Text.Trim());
-                    checkCmd.Parameters.AddWithValue("@lastName", lastNameTextBox.Text.Trim());
+            //        MySqlCommand checkCmd = new MySqlCommand(checkQuery, conn);
+            //        checkCmd.Parameters.AddWithValue("@firstName", firstNameTextBox.Text.Trim());
+            //        checkCmd.Parameters.AddWithValue("@lastName", lastNameTextBox.Text.Trim());
 
-                    int exists = Convert.ToInt32(checkCmd.ExecuteScalar());
+            //        int exists = Convert.ToInt32(checkCmd.ExecuteScalar());
 
-                    if (exists > 0)
-                    {
-                        MessageBox.Show(
-                            "Username or full name already exists.",
-                            "Duplicate Entry",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning
-                        );
-                        return;
-                    }
+            //        if (exists > 0)
+            //        {
+            //            MessageBox.Show(
+            //                "Username or full name already exists.",
+            //                "Duplicate Entry",
+            //                MessageBoxButtons.OK,
+            //                MessageBoxIcon.Warning
+            //            );
+            //            return;
+            //        }
 
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@firstName", firstNameTextBox.Text);
-                    cmd.Parameters.AddWithValue("@lastName", lastNameTextBox.Text);
-                    cmd.Parameters.AddWithValue("@address", addressTextBox.Text);
-                    cmd.Parameters.AddWithValue("@role", roleCmb.Text);
-                    cmd.Parameters.AddWithValue("@status", statusCmb.Text);
+            //        MySqlCommand cmd = new MySqlCommand(sql, conn);
+            //        cmd.Parameters.AddWithValue("@firstName", firstNameTextBox.Text);
+            //        cmd.Parameters.AddWithValue("@lastName", lastNameTextBox.Text);
+            //        cmd.Parameters.AddWithValue("@address", addressTextBox.Text);
+            //        cmd.Parameters.AddWithValue("@role", roleCmb.Text);
+            //        cmd.Parameters.AddWithValue("@status", statusCmb.Text);
 
-                    int result = cmd.ExecuteNonQuery();
+            //        int result = cmd.ExecuteNonQuery();
 
-                    if (result > 0)
-                    {
-                        MessageBox.Show("User Added Successfully");
-                        //firstNameTextBox.Clear();
-                        //lastNameTextBox.Clear();
-                        //addressTextBox.Clear();
-                        //roleCmb.StartIndex = 0;
-                        //statusCmb.StartIndex = 0;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Failed to add user.");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error:", ex.Message);
-                }
-            }
+            //        if (result > 0)
+            //        {
+            //            MessageBox.Show("User Added Successfully");
+            //            //firstNameTextBox.Clear();
+            //            //lastNameTextBox.Clear();
+            //            //addressTextBox.Clear();
+            //            //roleCmb.StartIndex = 0;
+            //            //statusCmb.StartIndex = 0;
+            //        }
+            //        else
+            //        {
+            //            MessageBox.Show("Failed to add user.");
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show("Error:", ex.Message);
+            //    }
+            //}
         }
     }
 }

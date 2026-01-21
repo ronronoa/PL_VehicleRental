@@ -14,7 +14,12 @@ namespace PL_VehicleRental
 {
     public partial class Form1 : Form
     {
-        string connString = "server=localhost;port=3306;database=mainDb;uid=root;pwd=";
+        string connString = $@"Server={Environment.GetEnvironmentVariable("DB_HOST")};
+                               Port={Environment.GetEnvironmentVariable("DB_PORT")};
+                               Database={Environment.GetEnvironmentVariable("DB_NAME")};
+                               Uid={Environment.GetEnvironmentVariable("DB_USER")};
+                               Pwd={Environment.GetEnvironmentVariable("DB_PASS")};
+                               SslMode=Required;";
         private Form ActiveForm;
 
         private void Form1_Load(object sender, EventArgs e)

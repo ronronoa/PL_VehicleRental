@@ -33,9 +33,9 @@
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.userBtn = new Guna.UI2.WinForms.Guna2Button();
             this.headerPanel = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2VSeparator1 = new Guna.UI2.WinForms.Guna2VSeparator();
             this.pageLabel = new System.Windows.Forms.Label();
             this.mainPanel = new Guna.UI2.WinForms.Guna2Panel();
-            this.guna2VSeparator1 = new Guna.UI2.WinForms.Guna2VSeparator();
             this.sideBarPanel.SuspendLayout();
             this.headerPanel.SuspendLayout();
             this.SuspendLayout();
@@ -102,13 +102,22 @@
             this.headerPanel.TabIndex = 5;
             this.headerPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.headerPanel_Paint);
             // 
+            // guna2VSeparator1
+            // 
+            this.guna2VSeparator1.FillColor = System.Drawing.Color.Gray;
+            this.guna2VSeparator1.FillThickness = 2;
+            this.guna2VSeparator1.Location = new System.Drawing.Point(258, 9);
+            this.guna2VSeparator1.Name = "guna2VSeparator1";
+            this.guna2VSeparator1.Size = new System.Drawing.Size(10, 71);
+            this.guna2VSeparator1.TabIndex = 0;
+            // 
             // pageLabel
             // 
             this.pageLabel.AutoSize = true;
             this.pageLabel.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pageLabel.Location = new System.Drawing.Point(274, 22);
             this.pageLabel.Name = "pageLabel";
-            this.pageLabel.Size = new System.Drawing.Size(197, 46);
+            this.pageLabel.Size = new System.Drawing.Size(191, 45);
             this.pageLabel.TabIndex = 3;
             this.pageLabel.Text = "Form Label";
             // 
@@ -122,15 +131,6 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(1124, 692);
             this.mainPanel.TabIndex = 6;
-            // 
-            // guna2VSeparator1
-            // 
-            this.guna2VSeparator1.FillColor = System.Drawing.Color.Gray;
-            this.guna2VSeparator1.FillThickness = 2;
-            this.guna2VSeparator1.Location = new System.Drawing.Point(258, 9);
-            this.guna2VSeparator1.Name = "guna2VSeparator1";
-            this.guna2VSeparator1.Size = new System.Drawing.Size(10, 71);
-            this.guna2VSeparator1.TabIndex = 0;
             // 
             // Form1
             // 

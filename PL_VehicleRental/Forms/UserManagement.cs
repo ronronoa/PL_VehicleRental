@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using MySql.Data.MySqlClient;
 
 namespace PL_VehicleRental.Forms
@@ -26,10 +27,11 @@ namespace PL_VehicleRental.Forms
 
         private void UserManagementForm_Load(object sender, EventArgs e)
         {
-            headerSeparator.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            headerSeparator.FillThickness = 2;
 
             //addBtn.BackColor = UITheme.PrimaryColor;
+            statCard.Dock = DockStyle.Top;
+            statCard.Height = 120;
+            this.DoubleBuffered = true;
 
         }
 
@@ -110,6 +112,7 @@ namespace PL_VehicleRental.Forms
             //}
         }
 
+
         private void guna2PictureBox1_Click(object sender, EventArgs e)
         {
 
@@ -161,6 +164,46 @@ namespace PL_VehicleRental.Forms
         }
 
         private void statusCmb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void userPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void guna2Panel1_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void userManagementTab_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void totalUserData_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void totalUserLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void activeUserData_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void activeUserData_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void activeUserLabel_Click(object sender, EventArgs e)
         {
 
         }

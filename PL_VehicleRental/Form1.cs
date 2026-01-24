@@ -36,6 +36,11 @@ namespace PL_VehicleRental
                 }
             }
 
+            this.WindowState = FormWindowState.Normal;
+            this.MinimumSize = new Size(1100, 700);
+            this.AutoScaleMode = AutoScaleMode.Font;
+            this.DoubleBuffered = true;
+
         }
 
         public static class Theme

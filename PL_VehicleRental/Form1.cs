@@ -15,7 +15,7 @@ namespace PL_VehicleRental
 {
     public partial class Form1 : Form
     {
-        string connString = ConfigurationManager.ConnectionStrings["MyDbConnection"].ConnectionString;
+        //string connString = ConfigurationManager.ConnectionStrings["MyDbConnection"].ConnectionString;
         private Form ActiveForm;
 
         private void Form1_Load(object sender, EventArgs e)
@@ -23,18 +23,18 @@ namespace PL_VehicleRental
             ActivateButton(sender, FormPageTitles.Test);
             LoadForm(new UserManagementForm());
 
-            using (MySqlConnection conn = new MySqlConnection(connString))
-            {
-                try
-                {
-                    conn.Open();
-                    MessageBox.Show("Connected Successfully");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error:" + ex.Message);
-                }
-            }
+            //using (MySqlConnection conn = new MySqlConnection(connString))
+            //{
+            //    try
+            //    {
+            //        conn.Open();
+            //        MessageBox.Show("Connected Successfully");
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show("Error:" + ex.Message);
+            //    }
+            //}
 
             this.WindowState = FormWindowState.Normal;
             this.MinimumSize = new Size(1100, 700);

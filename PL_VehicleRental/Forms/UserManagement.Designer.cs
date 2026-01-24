@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BackgroundPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.UserManagementPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.userManagementTabControl = new System.Windows.Forms.TabControl();
@@ -59,16 +62,21 @@
             this.guna2Panel5 = new Guna.UI2.WinForms.Guna2Panel();
             this.InactiveUserData = new System.Windows.Forms.Label();
             this.inActiveUserLabel = new System.Windows.Forms.Label();
+            this.guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.RolesPermissionDataGrid = new Guna.UI2.WinForms.Guna2DataGridView();
             this.BackgroundPanel.SuspendLayout();
             this.UserManagementPanel.SuspendLayout();
             this.userManagementTabControl.SuspendLayout();
             this.userManagementTab.SuspendLayout();
+            this.rolesPermissionTab.SuspendLayout();
             this.userPanel.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
             this.statCard.SuspendLayout();
             this.guna2Panel3.SuspendLayout();
             this.guna2Panel4.SuspendLayout();
             this.guna2Panel5.SuspendLayout();
+            this.guna2ShadowPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RolesPermissionDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // BackgroundPanel
@@ -121,7 +129,7 @@
             this.userManagementTab.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userManagementTab.Location = new System.Drawing.Point(4, 44);
             this.userManagementTab.Name = "userManagementTab";
-            this.userManagementTab.Padding = new System.Windows.Forms.Padding(3);
+            this.userManagementTab.Padding = new System.Windows.Forms.Padding(10);
             this.userManagementTab.Size = new System.Drawing.Size(1292, 699);
             this.userManagementTab.TabIndex = 0;
             this.userManagementTab.Text = "User Management";
@@ -349,10 +357,11 @@
             // 
             this.rolesPermissionTab.BackColor = System.Drawing.Color.Transparent;
             this.rolesPermissionTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.rolesPermissionTab.Location = new System.Drawing.Point(4, 39);
+            this.rolesPermissionTab.Controls.Add(this.guna2ShadowPanel1);
+            this.rolesPermissionTab.Location = new System.Drawing.Point(4, 44);
             this.rolesPermissionTab.Name = "rolesPermissionTab";
             this.rolesPermissionTab.Padding = new System.Windows.Forms.Padding(3);
-            this.rolesPermissionTab.Size = new System.Drawing.Size(1292, 704);
+            this.rolesPermissionTab.Size = new System.Drawing.Size(1292, 699);
             this.rolesPermissionTab.TabIndex = 1;
             this.rolesPermissionTab.Text = "Roles & Permission";
             // 
@@ -371,9 +380,9 @@
             this.userPanel.Controls.Add(this.lastNameTextBox);
             this.userPanel.Controls.Add(this.firstNameTextBox);
             this.userPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.userPanel.Location = new System.Drawing.Point(3, 3);
+            this.userPanel.Location = new System.Drawing.Point(10, 10);
             this.userPanel.Name = "userPanel";
-            this.userPanel.Size = new System.Drawing.Size(616, 691);
+            this.userPanel.Size = new System.Drawing.Size(616, 677);
             this.userPanel.TabIndex = 13;
             this.userPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.userPanel_Paint);
             // 
@@ -383,9 +392,9 @@
             this.guna2Panel2.Controls.Add(this.guna2Panel3);
             this.guna2Panel2.Controls.Add(this.statCard);
             this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.guna2Panel2.Location = new System.Drawing.Point(619, 3);
+            this.guna2Panel2.Location = new System.Drawing.Point(626, 10);
             this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(668, 691);
+            this.guna2Panel2.Size = new System.Drawing.Size(654, 677);
             this.guna2Panel2.TabIndex = 14;
             // 
             // totalUserLabel
@@ -393,7 +402,7 @@
             this.totalUserLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.totalUserLabel.AutoSize = true;
             this.totalUserLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalUserLabel.Location = new System.Drawing.Point(270, 84);
+            this.totalUserLabel.Location = new System.Drawing.Point(263, 84);
             this.totalUserLabel.Name = "totalUserLabel";
             this.totalUserLabel.Size = new System.Drawing.Size(121, 31);
             this.totalUserLabel.TabIndex = 0;
@@ -406,7 +415,7 @@
             this.totalUserData.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.totalUserData.AutoSize = true;
             this.totalUserData.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalUserData.Location = new System.Drawing.Point(309, 18);
+            this.totalUserData.Location = new System.Drawing.Point(302, 18);
             this.totalUserData.Name = "totalUserData";
             this.totalUserData.Size = new System.Drawing.Size(43, 50);
             this.totalUserData.TabIndex = 3;
@@ -421,7 +430,7 @@
             this.statCard.Dock = System.Windows.Forms.DockStyle.Top;
             this.statCard.Location = new System.Drawing.Point(0, 0);
             this.statCard.Name = "statCard";
-            this.statCard.Size = new System.Drawing.Size(668, 142);
+            this.statCard.Size = new System.Drawing.Size(654, 142);
             this.statCard.TabIndex = 6;
             // 
             // guna2Panel3
@@ -432,7 +441,7 @@
             this.guna2Panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel3.Location = new System.Drawing.Point(0, 142);
             this.guna2Panel3.Name = "guna2Panel3";
-            this.guna2Panel3.Size = new System.Drawing.Size(668, 142);
+            this.guna2Panel3.Size = new System.Drawing.Size(654, 142);
             this.guna2Panel3.TabIndex = 7;
             // 
             // activeUserData
@@ -440,7 +449,7 @@
             this.activeUserData.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.activeUserData.AutoSize = true;
             this.activeUserData.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.activeUserData.Location = new System.Drawing.Point(309, 18);
+            this.activeUserData.Location = new System.Drawing.Point(302, 18);
             this.activeUserData.Name = "activeUserData";
             this.activeUserData.Size = new System.Drawing.Size(43, 50);
             this.activeUserData.TabIndex = 3;
@@ -453,7 +462,7 @@
             this.activeUserLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.activeUserLabel.AutoSize = true;
             this.activeUserLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.activeUserLabel.Location = new System.Drawing.Point(270, 84);
+            this.activeUserLabel.Location = new System.Drawing.Point(263, 84);
             this.activeUserLabel.Name = "activeUserLabel";
             this.activeUserLabel.Size = new System.Drawing.Size(135, 31);
             this.activeUserLabel.TabIndex = 0;
@@ -468,7 +477,7 @@
             this.guna2Panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel4.Location = new System.Drawing.Point(0, 0);
             this.guna2Panel4.Name = "guna2Panel4";
-            this.guna2Panel4.Size = new System.Drawing.Size(668, 142);
+            this.guna2Panel4.Size = new System.Drawing.Size(654, 142);
             this.guna2Panel4.TabIndex = 8;
             // 
             // label1
@@ -476,7 +485,7 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(309, 18);
+            this.label1.Location = new System.Drawing.Point(302, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 50);
             this.label1.TabIndex = 3;
@@ -488,7 +497,7 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(270, 84);
+            this.label2.Location = new System.Drawing.Point(263, 84);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(135, 31);
             this.label2.TabIndex = 0;
@@ -502,7 +511,7 @@
             this.guna2Panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel5.Location = new System.Drawing.Point(0, 284);
             this.guna2Panel5.Name = "guna2Panel5";
-            this.guna2Panel5.Size = new System.Drawing.Size(668, 142);
+            this.guna2Panel5.Size = new System.Drawing.Size(654, 142);
             this.guna2Panel5.TabIndex = 8;
             // 
             // InactiveUserData
@@ -510,7 +519,7 @@
             this.InactiveUserData.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.InactiveUserData.AutoSize = true;
             this.InactiveUserData.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.InactiveUserData.Location = new System.Drawing.Point(309, 18);
+            this.InactiveUserData.Location = new System.Drawing.Point(302, 18);
             this.InactiveUserData.Name = "InactiveUserData";
             this.InactiveUserData.Size = new System.Drawing.Size(43, 50);
             this.InactiveUserData.TabIndex = 3;
@@ -522,12 +531,77 @@
             this.inActiveUserLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.inActiveUserLabel.AutoSize = true;
             this.inActiveUserLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inActiveUserLabel.Location = new System.Drawing.Point(270, 89);
+            this.inActiveUserLabel.Location = new System.Drawing.Point(263, 89);
             this.inActiveUserLabel.Name = "inActiveUserLabel";
             this.inActiveUserLabel.Size = new System.Drawing.Size(152, 31);
             this.inActiveUserLabel.TabIndex = 0;
             this.inActiveUserLabel.Text = "Inactive User";
             this.inActiveUserLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // guna2ShadowPanel1
+            // 
+            this.guna2ShadowPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2ShadowPanel1.Controls.Add(this.RolesPermissionDataGrid);
+            this.guna2ShadowPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.guna2ShadowPanel1.FillColor = System.Drawing.Color.White;
+            this.guna2ShadowPanel1.Location = new System.Drawing.Point(3, 3);
+            this.guna2ShadowPanel1.Name = "guna2ShadowPanel1";
+            this.guna2ShadowPanel1.Padding = new System.Windows.Forms.Padding(20);
+            this.guna2ShadowPanel1.ShadowColor = System.Drawing.Color.Black;
+            this.guna2ShadowPanel1.Size = new System.Drawing.Size(1284, 691);
+            this.guna2ShadowPanel1.TabIndex = 0;
+            // 
+            // RolesPermissionDataGrid
+            // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.RolesPermissionDataGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.RolesPermissionDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.RolesPermissionDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.RolesPermissionDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
+            this.RolesPermissionDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RolesPermissionDataGrid.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.RolesPermissionDataGrid.Location = new System.Drawing.Point(20, 20);
+            this.RolesPermissionDataGrid.Name = "RolesPermissionDataGrid";
+            this.RolesPermissionDataGrid.RowHeadersVisible = false;
+            this.RolesPermissionDataGrid.RowHeadersWidth = 51;
+            this.RolesPermissionDataGrid.RowTemplate.Height = 24;
+            this.RolesPermissionDataGrid.Size = new System.Drawing.Size(1244, 651);
+            this.RolesPermissionDataGrid.TabIndex = 0;
+            this.RolesPermissionDataGrid.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
+            this.RolesPermissionDataGrid.ThemeStyle.AlternatingRowsStyle.Font = null;
+            this.RolesPermissionDataGrid.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
+            this.RolesPermissionDataGrid.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
+            this.RolesPermissionDataGrid.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
+            this.RolesPermissionDataGrid.ThemeStyle.BackColor = System.Drawing.Color.White;
+            this.RolesPermissionDataGrid.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.RolesPermissionDataGrid.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.RolesPermissionDataGrid.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.RolesPermissionDataGrid.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RolesPermissionDataGrid.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
+            this.RolesPermissionDataGrid.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.RolesPermissionDataGrid.ThemeStyle.HeaderStyle.Height = 4;
+            this.RolesPermissionDataGrid.ThemeStyle.ReadOnly = false;
+            this.RolesPermissionDataGrid.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
+            this.RolesPermissionDataGrid.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.RolesPermissionDataGrid.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RolesPermissionDataGrid.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.RolesPermissionDataGrid.ThemeStyle.RowsStyle.Height = 24;
+            this.RolesPermissionDataGrid.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.RolesPermissionDataGrid.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
             // UserManagementForm
             // 
@@ -542,6 +616,7 @@
             this.UserManagementPanel.ResumeLayout(false);
             this.userManagementTabControl.ResumeLayout(false);
             this.userManagementTab.ResumeLayout(false);
+            this.rolesPermissionTab.ResumeLayout(false);
             this.userPanel.ResumeLayout(false);
             this.userPanel.PerformLayout();
             this.guna2Panel2.ResumeLayout(false);
@@ -553,6 +628,8 @@
             this.guna2Panel4.PerformLayout();
             this.guna2Panel5.ResumeLayout(false);
             this.guna2Panel5.PerformLayout();
+            this.guna2ShadowPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.RolesPermissionDataGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -590,5 +667,7 @@
         private Guna.UI2.WinForms.Guna2Panel guna2Panel4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel1;
+        private Guna.UI2.WinForms.Guna2DataGridView RolesPermissionDataGrid;
     }
 }

@@ -1,6 +1,9 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using PL_VehicleRental.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -8,16 +11,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-using MySql.Data.MySqlClient;
+using Guna.UI2.WinForms;
 
 namespace PL_VehicleRental.Forms
 {
     public partial class UserManagementForm : Form
     {
-         
+        string connString = ConfigurationManager.ConnectionStrings["MyDbConnection"].ConnectionString;
         public UserManagementForm()
         {
             InitializeComponent();
+
+            dgvRolesPermission.CellPainting -= dgvRolesPermission_CellPainting;
+            dgvRolesPermission.CellPainting += dgvRolesPermission_CellPainting;
+            dgvRolesPermission.CellClick -= dgvRolesPermission_CellClick;
+            dgvRolesPermission.CellClick += dgvRolesPermission_CellClick;
         }
 
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
@@ -27,89 +35,142 @@ namespace PL_VehicleRental.Forms
 
         private void UserManagementForm_Load(object sender, EventArgs e)
         {
-
+            LoadUsers();
+            LoadUsersData();
+            SetupActionsButtons();
+            CenterGridHeaders();
             //addBtn.BackColor = UITheme.PrimaryColor;
             statCard.Dock = DockStyle.Top;
             statCard.Height = 120;
             this.DoubleBuffered = true;
 
+            DataGridViewStyle.ApplyStandard(dgvRolesPermission);
+           
+            foreach (DataGridViewColumn col in dgvRolesPermission.Columns)
+            {
+                Console.WriteLine(col.Name);
+            }
         }
 
         private void clearBtn_Click(object sender, EventArgs e)
         {
-            firstNameTextBox.Clear();
-            lastNameTextBox.Clear();
+            fullNameTxt.Clear();
+            userNameTextBox.Clear();
             addressTextBox.Clear();
             roleCmb.StartIndex = 0;
             statusCmb.StartIndex = 0;
         }
 
-        private void addUser()
+        private void LoadUsersData()
         {
-           
+            string query = @"
+                             SELECT
+                                COUNT(*) AS Total,
+                                SUM(CASE WHEN status ='Active' THEN 1 ELSE 0 END) AS Active,
+                                SUM(CASE WHEN status ='Inactive' THEN 1 ELSE 0 END) AS Inactive
+                             FROM registeredUser";
+
+            using (MySqlConnection conn = new MySqlConnection(connString))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        lblTotalUsers.Text = reader["Total"].ToString();
+                        lblActiveUsers.Text = reader["Active"].ToString();
+                        lblInactiveUsers.Text = reader["Inactive"].ToString();
+                    }
+                }
+            }
+        }
+
+        private void LoadUsers()
+        {
+            DataTable dt = new DataTable();
+
+            using (MySqlConnection conn = new MySqlConnection(connString))
+            {
+                conn.Open();
+
+                string query = @"SELECT id AS ID, 
+                                        userName AS Username, 
+                                        fullName AS FullName,
+                                        address AS Address,
+                                        role As Role, 
+                                        status AS Status
+                                FROM registeredUser";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                {
+                    da.Fill(dt);
+                }
+            }
+            dgvRolesPermission.DataSource = dt;
         }
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            //string sql = "INSERT INTO registeredUser (firstName, lastName, address, role, status) VALUES (@firstName, @lastName, @address, @role, @status)";
+            string sql = "INSERT INTO registeredUser (userName, fullName, address, role, status) VALUES (@userName, @fullName, @address, @role, @status)";
 
-            //using (MySqlConnection conn = new MySqlConnection(connString))
-            //{
-            //    try
-            //    {
-            //        conn.Open();
+            using (MySqlConnection conn = new MySqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
 
-            //        string checkQuery = @"
-            //                            SELECT COUNT(*) 
-            //                            FROM registeredUser 
-            //                            WHERE firstName = @firstName 
-            //                            OR (firstName = @firstName AND lastName = @lastName)";
+                    string checkQuery = @"
+                                        SELECT COUNT(*) 
+                                        FROM registeredUser 
+                                        WHERE userName = @userName 
+                                        OR (fullName = @fullName AND userName = @userName)";
 
-            //        MySqlCommand checkCmd = new MySqlCommand(checkQuery, conn);
-            //        checkCmd.Parameters.AddWithValue("@firstName", firstNameTextBox.Text.Trim());
-            //        checkCmd.Parameters.AddWithValue("@lastName", lastNameTextBox.Text.Trim());
+                    MySqlCommand checkCmd = new MySqlCommand(checkQuery, conn);
+                    checkCmd.Parameters.AddWithValue("@userName", userNameTextBox.Text.Trim());
+                    checkCmd.Parameters.AddWithValue("@fullName", fullNameTxt.Text.Trim());
 
-            //        int exists = Convert.ToInt32(checkCmd.ExecuteScalar());
+                    int exists = Convert.ToInt32(checkCmd.ExecuteScalar());
 
-            //        if (exists > 0)
-            //        {
-            //            MessageBox.Show(
-            //                "Username or full name already exists.",
-            //                "Duplicate Entry",
-            //                MessageBoxButtons.OK,
-            //                MessageBoxIcon.Warning
-            //            );
-            //            return;
-            //        }
+                    if (exists > 0)
+                    {
+                        MessageBox.Show(
+                            "Username or full name already exists.",
+                            "Duplicate Entry",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning
+                        );
+                        return;
+                    }
 
-            //        MySqlCommand cmd = new MySqlCommand(sql, conn);
-            //        cmd.Parameters.AddWithValue("@firstName", firstNameTextBox.Text);
-            //        cmd.Parameters.AddWithValue("@lastName", lastNameTextBox.Text);
-            //        cmd.Parameters.AddWithValue("@address", addressTextBox.Text);
-            //        cmd.Parameters.AddWithValue("@role", roleCmb.Text);
-            //        cmd.Parameters.AddWithValue("@status", statusCmb.Text);
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@userName", userNameTextBox.Text);
+                    cmd.Parameters.AddWithValue("@fullName", fullNameTxt.Text);
+                    cmd.Parameters.AddWithValue("@address", addressTextBox.Text);
+                    cmd.Parameters.AddWithValue("@role", roleCmb.Text);
+                    cmd.Parameters.AddWithValue("@status", statusCmb.Text);
 
-            //        int result = cmd.ExecuteNonQuery();
+                    int result = cmd.ExecuteNonQuery();
 
-            //        if (result > 0)
-            //        {
-            //            MessageBox.Show("User Added Successfully");
-            //            //firstNameTextBox.Clear();
-            //            //lastNameTextBox.Clear();
-            //            //addressTextBox.Clear();
-            //            //roleCmb.StartIndex = 0;
-            //            //statusCmb.StartIndex = 0;
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show("Failed to add user.");
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show("Error:", ex.Message);
-            //    }
-            //}
+                    if (result > 0)
+                    {
+                        MessageBox.Show("User Added Successfully");
+                        //firstNameTextBox.Clear();
+                        //lastNameTextBox.Clear();
+                        //addressTextBox.Clear();
+                        //roleCmb.StartIndex = 0;
+                        //statusCmb.StartIndex = 0;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to add user.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error:", ex.Message);
+                }
+            }
         }
 
 
@@ -206,6 +267,111 @@ namespace PL_VehicleRental.Forms
         private void activeUserLabel_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dgvRolesPermission_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvRolesPermission_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvRolesPermission.Columns[e.ColumnIndex].Name != "Status")
+                return;
+
+            if (e.Value == null)
+                return;
+
+            string status = e.Value.ToString();
+
+            switch (status)
+            {
+                case "Active":
+                    e.CellStyle.ForeColor = Color.Green;
+                    e.CellStyle.Font = new Font(dgvRolesPermission.Font, FontStyle.Bold);
+                    break;
+
+                case "Inactive":
+                    e.CellStyle.ForeColor = Color.Red;
+                    break;
+
+                case "Suspended":
+                    e.CellStyle.ForeColor = Color.DarkOrange;
+                    break;
+            }
+        }
+
+        private void CenterGridHeaders()
+        {
+            dgvRolesPermission.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dgvRolesPermission.EnableHeadersVisualStyles = false;
+        }
+
+        private void SetupActionsButtons()
+        {
+            if (dgvRolesPermission.Columns["Actions"] == null)
+            {
+                DataGridViewTextBoxColumn actionsCol = new DataGridViewTextBoxColumn();
+                actionsCol.Name = "Actions";
+                actionsCol.HeaderText = "Actions";
+                actionsCol.ReadOnly = true;
+                actionsCol.Width = 150;
+                actionsCol.SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgvRolesPermission.Columns.Add(actionsCol);
+            }
+        }
+
+        private void dgvRolesPermission_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            if (dgvRolesPermission.Columns[e.ColumnIndex].Name == "Actions")
+            {
+                var cell = dgvRolesPermission.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
+                int padding = 5;
+                int buttonWidth = (cell.Width - 3 * padding) / 2;
+
+                Point clickPoint = dgvRolesPermission.PointToClient(Cursor.Position);
+                int relativeX = clickPoint.X - cell.Left;
+
+                if (relativeX <= buttonWidth)
+                {
+                    MessageBox.Show($"Edit clicked for row {e.RowIndex}");
+                }
+                else
+                {
+                    MessageBox.Show($"Delete clicked for row {e.RowIndex}");
+                }
+            }
+        }
+
+
+        // for edit, delete button on datagrid
+        private void dgvRolesPermission_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            if (dgvRolesPermission.Columns[e.ColumnIndex].Name == "Actions")
+            {
+                e.PaintBackground(e.ClipBounds, true);
+
+                int padding = 5;
+                int buttonWidth = (e.CellBounds.Width - 3 * padding) / 2;
+                int buttonHeight = e.CellBounds.Height - 2 * padding;
+
+                Rectangle editButton = new Rectangle(e.CellBounds.Left + padding, e.CellBounds.Top + padding, buttonWidth, buttonHeight);
+                Rectangle deleteButton = new Rectangle(e.CellBounds.Left + buttonWidth + 2 * padding, e.CellBounds.Top + padding, buttonWidth, buttonHeight);
+
+                Image editIcon = Properties.Resources.editIcon;
+                int ex = editButton.Left + (editButton.Width - editIcon.Width) / 2;
+                int ey = editButton.Top + (editButton.Height - editIcon.Height) / 2;
+                e.Graphics.DrawImage(editIcon, new Rectangle(ex, ey, editIcon.Width, editIcon.Height));
+                Image deleteIcon = Properties.Resources.deleteIcon;
+                int dx = deleteButton.Left + (deleteButton.Width - deleteIcon.Width) / 2;
+                int dy = deleteButton.Top + (deleteButton.Height - deleteIcon.Height) / 2;
+                e.Graphics.DrawImage(deleteIcon, new Rectangle(dx, dy, deleteIcon.Width, deleteIcon.Height));
+
+                e.Handled = true;
+            }
         }
     }
 }

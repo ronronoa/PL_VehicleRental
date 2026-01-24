@@ -11,5 +11,7 @@ namespace PL_VehicleRental.Forms
     public static class UITheme
     {
         public static readonly Color PrimaryColor = Color.FromArgb(33, 150, 243);
+
+        public static readonly Color ColumnHeaderColor = Color.FromArgb(63, 92, 136);
     }
 }

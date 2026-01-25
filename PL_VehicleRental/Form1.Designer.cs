@@ -1,6 +1,6 @@
 ﻿namespace PL_VehicleRental
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.sideBarPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.userBtn = new Guna.UI2.WinForms.Guna2Button();
@@ -132,7 +132,7 @@
             this.mainPanel.Size = new System.Drawing.Size(1124, 692);
             this.mainPanel.TabIndex = 6;
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -141,8 +141,9 @@
             this.Controls.Add(this.sideBarPanel);
             this.Controls.Add(this.headerPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "User Management";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.sideBarPanel.ResumeLayout(false);
             this.headerPanel.ResumeLayout(false);

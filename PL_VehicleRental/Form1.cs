@@ -11,11 +11,12 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Configuration;
+using System.Diagnostics;
 namespace PL_VehicleRental
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        //string connString = ConfigurationManager.ConnectionStrings["MyDbConnection"].ConnectionString;
+        string connString = ConfigurationManager.ConnectionStrings["MyDbConnection"].ConnectionString;
         private Form ActiveForm;
 
         private void Form1_Load(object sender, EventArgs e)
@@ -23,18 +24,18 @@ namespace PL_VehicleRental
             ActivateButton(sender, FormPageTitles.Test);
             LoadForm(new UserManagementForm());
 
-            //using (MySqlConnection conn = new MySqlConnection(connString))
-            //{
-            //    try
-            //    {
-            //        conn.Open();
-            //        MessageBox.Show("Connected Successfully");
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show("Error:" + ex.Message);
-            //    }
-            //}
+            using (MySqlConnection conn = new MySqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    Debug.WriteLine("Connected Successfully");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Error:" + ex.Message);
+                }
+            }
 
             this.WindowState = FormWindowState.Normal;
             this.MinimumSize = new Size(1100, 700);
@@ -84,7 +85,7 @@ namespace PL_VehicleRental
 
 
        
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }

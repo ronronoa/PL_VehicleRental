@@ -45,11 +45,6 @@ namespace PL_VehicleRental.Forms
             this.DoubleBuffered = true;
 
             DataGridViewStyle.ApplyStandard(dgvRolesPermission);
-           
-            foreach (DataGridViewColumn col in dgvRolesPermission.Columns)
-            {
-                Console.WriteLine(col.Name);
-            }
         }
 
         private void clearBtn_Click(object sender, EventArgs e)
@@ -68,7 +63,7 @@ namespace PL_VehicleRental.Forms
                                 COUNT(*) AS Total,
                                 SUM(CASE WHEN status ='Active' THEN 1 ELSE 0 END) AS Active,
                                 SUM(CASE WHEN status ='Inactive' THEN 1 ELSE 0 END) AS Inactive
-                             FROM registeredUser";
+                             FROM users";
 
             using (MySqlConnection conn = new MySqlConnection(connString))
             {
@@ -100,7 +95,7 @@ namespace PL_VehicleRental.Forms
                                         address AS Address,
                                         role As Role, 
                                         status AS Status
-                                FROM registeredUser";
+                                FROM users";
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
                 {
@@ -112,7 +107,7 @@ namespace PL_VehicleRental.Forms
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            string sql = "INSERT INTO registeredUser (userName, fullName, address, role, status) VALUES (@userName, @fullName, @address, @role, @status)";
+            string sql = "INSERT INTO users (userName, fullName, address, role, status) VALUES (@userName, @fullName, @address, @role, @status)";
 
             using (MySqlConnection conn = new MySqlConnection(connString))
             {
@@ -122,7 +117,7 @@ namespace PL_VehicleRental.Forms
 
                     string checkQuery = @"
                                         SELECT COUNT(*) 
-                                        FROM registeredUser 
+                                        FROM users 
                                         WHERE userName = @userName 
                                         OR (fullName = @fullName AND userName = @userName)";
 
@@ -155,6 +150,7 @@ namespace PL_VehicleRental.Forms
                     if (result > 0)
                     {
                         MessageBox.Show("User Added Successfully");
+                        LoadUsers();
                         //firstNameTextBox.Clear();
                         //lastNameTextBox.Clear();
                         //addressTextBox.Clear();
@@ -358,9 +354,11 @@ namespace PL_VehicleRental.Forms
                 int buttonWidth = (e.CellBounds.Width - 3 * padding) / 2;
                 int buttonHeight = e.CellBounds.Height - 2 * padding;
 
+                // editIcon, deleteIcon as button
                 Rectangle editButton = new Rectangle(e.CellBounds.Left + padding, e.CellBounds.Top + padding, buttonWidth, buttonHeight);
                 Rectangle deleteButton = new Rectangle(e.CellBounds.Left + buttonWidth + 2 * padding, e.CellBounds.Top + padding, buttonWidth, buttonHeight);
 
+                // icons
                 Image editIcon = Properties.Resources.editIcon;
                 int ex = editButton.Left + (editButton.Width - editIcon.Width) / 2;
                 int ey = editButton.Top + (editButton.Height - editIcon.Height) / 2;

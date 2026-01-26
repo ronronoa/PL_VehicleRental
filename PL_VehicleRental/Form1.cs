@@ -12,6 +12,7 @@ using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Configuration;
 using System.Diagnostics;
+
 namespace PL_VehicleRental
 {
     public partial class MainForm : Form
@@ -41,6 +42,7 @@ namespace PL_VehicleRental
             this.MinimumSize = new Size(1100, 700);
             this.AutoScaleMode = AutoScaleMode.Font;
             this.DoubleBuffered = true;
+            this.StartPosition = FormStartPosition.CenterScreen;
 
         }
 
@@ -78,6 +80,7 @@ namespace PL_VehicleRental
         {
             if(senderBtn != null)
             {
+
                 pageLabel.Text = pageTitle;
 
             }
@@ -133,6 +136,18 @@ namespace PL_VehicleRental
         }
 
         private void headerPanel_Paint(object sender, PaintEventArgs e)
+        {
+            int borderHeight = 1;
+            Color borderColor = Color.Gray;
+
+            using (Pen pen = new Pen(borderColor, borderHeight))
+            {
+                int y = headerPanel.Height - borderHeight;
+                e.Graphics.DrawLine(pen, 0, y, headerPanel.Width, y);
+            }
+        }
+
+        private void userLabelsHeader_Paint(object sender, PaintEventArgs e)
         {
             int borderHeight = 1;
             Color borderColor = Color.Gray;

@@ -138,6 +138,12 @@ namespace PL_VehicleRental.Forms
                         return;
                     }
 
+                    if (string.IsNullOrEmpty(fullNameTxt.Text) || string.IsNullOrEmpty(userNameTextBox.Text) || string.IsNullOrEmpty(addressTextBox.Text))
+                    {
+                        MessageBox.Show("All fields are required.", "Empty Fields", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@userName", userNameTextBox.Text);
                     cmd.Parameters.AddWithValue("@fullName", fullNameTxt.Text);
@@ -149,13 +155,14 @@ namespace PL_VehicleRental.Forms
 
                     if (result > 0)
                     {
-                        MessageBox.Show("User Added Successfully");
+                        MessageBox.Show("User Added Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadUsers();
-                        //firstNameTextBox.Clear();
-                        //lastNameTextBox.Clear();
-                        //addressTextBox.Clear();
-                        //roleCmb.StartIndex = 0;
-                        //statusCmb.StartIndex = 0;
+                        LoadUsersData();
+                        userNameTextBox.Clear();
+                        fullNameTxt.Clear();
+                        addressTextBox.Clear();
+                        roleCmb.StartIndex = 0;
+                        statusCmb.StartIndex = 0;
                     }
                     else
                     {
@@ -168,6 +175,119 @@ namespace PL_VehicleRental.Forms
                 }
             }
         }
+
+        private void dgvRolesPermission_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvRolesPermission.Columns[e.ColumnIndex].Name != "Status")
+                return;
+
+            if (e.Value == null)
+                return;
+
+            string status = e.Value.ToString();
+
+            switch (status)
+            {
+                case "Active":
+                    e.CellStyle.ForeColor = Color.Green;
+                    e.CellStyle.Font = new Font(dgvRolesPermission.Font, FontStyle.Bold);
+                    break;
+
+                case "Inactive":
+                    e.CellStyle.ForeColor = Color.Red;
+                    break;
+
+                case "Suspended":
+                    e.CellStyle.ForeColor = Color.DarkOrange;
+                    break;
+            }
+        }
+
+        private void CenterGridHeaders()
+        {
+            dgvRolesPermission.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dgvRolesPermission.EnableHeadersVisualStyles = false;
+        }
+
+        private void SetupActionsButtons()
+        {
+            if (dgvRolesPermission.Columns["Actions"] == null)
+            {
+                DataGridViewTextBoxColumn actionsCol = new DataGridViewTextBoxColumn();
+                actionsCol.Name = "Actions";
+                actionsCol.HeaderText = "Actions";
+                actionsCol.ReadOnly = true;
+                actionsCol.Width = 150;
+                actionsCol.SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgvRolesPermission.Columns.Add(actionsCol);
+            }
+        }
+
+        private void dgvRolesPermission_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            if (dgvRolesPermission.Columns[e.ColumnIndex].Name == "Actions")
+            {
+                var cell = dgvRolesPermission.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
+                int padding = 5;
+                int buttonWidth = (cell.Width - 3 * padding) / 2;
+
+                Point clickPoint = dgvRolesPermission.PointToClient(Cursor.Position);
+                int relativeX = clickPoint.X - cell.Left;
+
+                if (relativeX <= buttonWidth)
+                {
+                    MessageBox.Show($"Edit clicked for row {e.RowIndex}");
+                }
+                else
+                {
+                    MessageBox.Show($"Delete clicked for row {e.RowIndex}");
+                }
+            }
+        }
+
+
+        // for edit, delete button on datagrid
+        private void dgvRolesPermission_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            if (dgvRolesPermission.Columns[e.ColumnIndex].Name == "Actions")
+            {
+                e.PaintBackground(e.ClipBounds, true);
+
+                int padding = 5;
+                int buttonWidth = (e.CellBounds.Width - 3 * padding) / 2;
+                int buttonHeight = e.CellBounds.Height - 2 * padding;
+
+                // editIcon, deleteIcon as button
+                Rectangle editButton = new Rectangle(e.CellBounds.Left + padding, e.CellBounds.Top + padding, buttonWidth, buttonHeight);
+                Rectangle deleteButton = new Rectangle(e.CellBounds.Left + buttonWidth + 2 * padding, e.CellBounds.Top + padding, buttonWidth, buttonHeight);
+
+                Color editColor = Color.FromArgb(94, 148, 255);
+                Color deleteColor = Color.FromArgb(255, 77, 79);
+
+                using (SolidBrush editBrush = new SolidBrush(editColor))
+                    e.Graphics.FillRectangle(editBrush, editButton);
+
+                using (SolidBrush deleteBrush = new SolidBrush(deleteColor))
+                    e.Graphics.FillRectangle(deleteBrush, deleteButton);
+
+                // icons
+                Image editIcon = Properties.Resources.editIcon;
+                int ex = editButton.Left + (editButton.Width - editIcon.Width) / 2;
+                int ey = editButton.Top + (editButton.Height - editIcon.Height) / 2;
+                e.Graphics.DrawImage(editIcon, new Rectangle(ex, ey, editIcon.Width, editIcon.Height));
+
+                Image deleteIcon = Properties.Resources.deleteIcon;
+                int dx = deleteButton.Left + (deleteButton.Width - deleteIcon.Width) / 2;
+                int dy = deleteButton.Top + (deleteButton.Height - deleteIcon.Height) / 2;
+                e.Graphics.DrawImage(deleteIcon, new Rectangle(dx, dy, deleteIcon.Width, deleteIcon.Height));
+
+                e.Handled = true;
+            }
+        }
+
 
 
         private void guna2PictureBox1_Click(object sender, EventArgs e)
@@ -270,106 +390,9 @@ namespace PL_VehicleRental.Forms
 
         }
 
-        private void dgvRolesPermission_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void dgvRolesPermission_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvRolesPermission.Columns[e.ColumnIndex].Name != "Status")
-                return;
 
-            if (e.Value == null)
-                return;
-
-            string status = e.Value.ToString();
-
-            switch (status)
-            {
-                case "Active":
-                    e.CellStyle.ForeColor = Color.Green;
-                    e.CellStyle.Font = new Font(dgvRolesPermission.Font, FontStyle.Bold);
-                    break;
-
-                case "Inactive":
-                    e.CellStyle.ForeColor = Color.Red;
-                    break;
-
-                case "Suspended":
-                    e.CellStyle.ForeColor = Color.DarkOrange;
-                    break;
-            }
-        }
-
-        private void CenterGridHeaders()
-        {
-            dgvRolesPermission.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            dgvRolesPermission.EnableHeadersVisualStyles = false;
-        }
-
-        private void SetupActionsButtons()
-        {
-            if (dgvRolesPermission.Columns["Actions"] == null)
-            {
-                DataGridViewTextBoxColumn actionsCol = new DataGridViewTextBoxColumn();
-                actionsCol.Name = "Actions";
-                actionsCol.HeaderText = "Actions";
-                actionsCol.ReadOnly = true;
-                actionsCol.Width = 150;
-                actionsCol.SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgvRolesPermission.Columns.Add(actionsCol);
-            }
-        }
-
-        private void dgvRolesPermission_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-            if (dgvRolesPermission.Columns[e.ColumnIndex].Name == "Actions")
-            {
-                var cell = dgvRolesPermission.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
-                int padding = 5;
-                int buttonWidth = (cell.Width - 3 * padding) / 2;
-
-                Point clickPoint = dgvRolesPermission.PointToClient(Cursor.Position);
-                int relativeX = clickPoint.X - cell.Left;
-
-                if (relativeX <= buttonWidth)
-                {
-                    MessageBox.Show($"Edit clicked for row {e.RowIndex}");
-                }
-                else
-                {
-                    MessageBox.Show($"Delete clicked for row {e.RowIndex}");
-                }
-            }
-        }
-
-
-        // for edit, delete button on datagrid
-        private void dgvRolesPermission_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-            if (dgvRolesPermission.Columns[e.ColumnIndex].Name == "Actions")
-            {
-                e.PaintBackground(e.ClipBounds, true);
-
-                int padding = 5;
-                int buttonWidth = (e.CellBounds.Width - 3 * padding) / 2;
-                int buttonHeight = e.CellBounds.Height - 2 * padding;
-
-                // editIcon, deleteIcon as button
-                Rectangle editButton = new Rectangle(e.CellBounds.Left + padding, e.CellBounds.Top + padding, buttonWidth, buttonHeight);
-                Rectangle deleteButton = new Rectangle(e.CellBounds.Left + buttonWidth + 2 * padding, e.CellBounds.Top + padding, buttonWidth, buttonHeight);
-
-                // icons
-                Image editIcon = Properties.Resources.editIcon;
-                int ex = editButton.Left + (editButton.Width - editIcon.Width) / 2;
-                int ey = editButton.Top + (editButton.Height - editIcon.Height) / 2;
-                e.Graphics.DrawImage(editIcon, new Rectangle(ex, ey, editIcon.Width, editIcon.Height));
-                Image deleteIcon = Properties.Resources.deleteIcon;
-                int dx = deleteButton.Left + (deleteButton.Width - deleteIcon.Width) / 2;
-                int dy = deleteButton.Top + (deleteButton.Height - deleteIcon.Height) / 2;
-                e.Graphics.DrawImage(deleteIcon, new Rectangle(dx, dy, deleteIcon.Width, deleteIcon.Height));
-
-                e.Handled = true;
-            }
         }
     }
 }

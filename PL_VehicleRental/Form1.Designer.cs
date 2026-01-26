@@ -36,13 +36,18 @@
             this.guna2VSeparator1 = new Guna.UI2.WinForms.Guna2VSeparator();
             this.pageLabel = new System.Windows.Forms.Label();
             this.mainPanel = new Guna.UI2.WinForms.Guna2Panel();
+            this.lblloggedInUser = new System.Windows.Forms.Label();
+            this.lblRole = new System.Windows.Forms.Label();
+            this.guna2Shapes1 = new Guna.UI2.WinForms.Guna2Shapes();
+            this.userLabelsHeader = new Guna.UI2.WinForms.Guna2Panel();
             this.sideBarPanel.SuspendLayout();
             this.headerPanel.SuspendLayout();
+            this.userLabelsHeader.SuspendLayout();
             this.SuspendLayout();
             // 
             // sideBarPanel
             // 
-            this.sideBarPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.sideBarPanel.BackColor = System.Drawing.Color.Lavender;
             this.sideBarPanel.BorderColor = System.Drawing.Color.Gray;
             this.sideBarPanel.Controls.Add(this.guna2Button1);
             this.sideBarPanel.Controls.Add(this.userBtn);
@@ -92,12 +97,15 @@
             // 
             // headerPanel
             // 
+            this.headerPanel.BackColor = System.Drawing.Color.Lavender;
             this.headerPanel.BorderColor = System.Drawing.Color.Gray;
             this.headerPanel.Controls.Add(this.guna2VSeparator1);
             this.headerPanel.Controls.Add(this.pageLabel);
+            this.headerPanel.Controls.Add(this.userLabelsHeader);
             this.headerPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.headerPanel.Location = new System.Drawing.Point(0, 0);
             this.headerPanel.Name = "headerPanel";
+            this.headerPanel.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.headerPanel.Size = new System.Drawing.Size(1391, 80);
             this.headerPanel.TabIndex = 5;
             this.headerPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.headerPanel_Paint);
@@ -115,7 +123,7 @@
             // 
             this.pageLabel.AutoSize = true;
             this.pageLabel.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pageLabel.Location = new System.Drawing.Point(274, 22);
+            this.pageLabel.Location = new System.Drawing.Point(284, 22);
             this.pageLabel.Name = "pageLabel";
             this.pageLabel.Size = new System.Drawing.Size(191, 45);
             this.pageLabel.TabIndex = 3;
@@ -131,6 +139,53 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(1124, 692);
             this.mainPanel.TabIndex = 6;
+            // 
+            // lblloggedInUser
+            // 
+            this.lblloggedInUser.AutoSize = true;
+            this.lblloggedInUser.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblloggedInUser.Location = new System.Drawing.Point(27, 33);
+            this.lblloggedInUser.Name = "lblloggedInUser";
+            this.lblloggedInUser.Size = new System.Drawing.Size(67, 17);
+            this.lblloggedInUser.TabIndex = 4;
+            this.lblloggedInUser.Text = "John Doe";
+            // 
+            // lblRole
+            // 
+            this.lblRole.AutoSize = true;
+            this.lblRole.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRole.Location = new System.Drawing.Point(27, 50);
+            this.lblRole.Name = "lblRole";
+            this.lblRole.Size = new System.Drawing.Size(49, 17);
+            this.lblRole.TabIndex = 5;
+            this.lblRole.Text = "Admin";
+            // 
+            // guna2Shapes1
+            // 
+            this.guna2Shapes1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2Shapes1.LineEndCap = System.Drawing.Drawing2D.LineCap.Round;
+            this.guna2Shapes1.LineStartCap = System.Drawing.Drawing2D.LineCap.Round;
+            this.guna2Shapes1.Location = new System.Drawing.Point(115, 5);
+            this.guna2Shapes1.Name = "guna2Shapes1";
+            this.guna2Shapes1.PolygonSides = 100;
+            this.guna2Shapes1.PolygonSkip = 1;
+            this.guna2Shapes1.Rotate = 0F;
+            this.guna2Shapes1.Size = new System.Drawing.Size(73, 62);
+            this.guna2Shapes1.TabIndex = 0;
+            this.guna2Shapes1.Text = "guna2Shapes1";
+            this.guna2Shapes1.Zoom = 80;
+            // 
+            // userLabelsHeader
+            // 
+            this.userLabelsHeader.Controls.Add(this.guna2Shapes1);
+            this.userLabelsHeader.Controls.Add(this.lblRole);
+            this.userLabelsHeader.Controls.Add(this.lblloggedInUser);
+            this.userLabelsHeader.Dock = System.Windows.Forms.DockStyle.Right;
+            this.userLabelsHeader.Location = new System.Drawing.Point(1181, 0);
+            this.userLabelsHeader.Name = "userLabelsHeader";
+            this.userLabelsHeader.Size = new System.Drawing.Size(200, 80);
+            this.userLabelsHeader.TabIndex = 6;
+            this.userLabelsHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.userLabelsHeader_Paint);
             // 
             // MainForm
             // 
@@ -148,6 +203,8 @@
             this.sideBarPanel.ResumeLayout(false);
             this.headerPanel.ResumeLayout(false);
             this.headerPanel.PerformLayout();
+            this.userLabelsHeader.ResumeLayout(false);
+            this.userLabelsHeader.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -161,6 +218,10 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2Panel mainPanel;
         private Guna.UI2.WinForms.Guna2VSeparator guna2VSeparator1;
+        private System.Windows.Forms.Label lblloggedInUser;
+        private System.Windows.Forms.Label lblRole;
+        private Guna.UI2.WinForms.Guna2Shapes guna2Shapes1;
+        private Guna.UI2.WinForms.Guna2Panel userLabelsHeader;
     }
 }
 

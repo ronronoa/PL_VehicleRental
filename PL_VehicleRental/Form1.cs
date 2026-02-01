@@ -19,6 +19,7 @@ namespace PL_VehicleRental
     {
         string connString = ConfigurationManager.ConnectionStrings["MyDbConnection"].ConnectionString;
         private Form ActiveForm;
+        private Button currentBtn;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -76,13 +77,31 @@ namespace PL_VehicleRental
             childForm.Show();
         }
 
+        private void DisableButtons()
+        {
+            foreach (Control ctrl in sideBarPanel.Controls)
+            {
+                if (ctrl is Button btn)
+                {
+                    btn.BackColor = UITheme.inactiveColor;
+                    btn.ForeColor = Color.White;
+             
+                }
+            }
+        }
+
         private void ActivateButton(object senderBtn, string pageTitle)
         {
-            if(senderBtn != null)
+            if (senderBtn != null)
             {
-
                 pageLabel.Text = pageTitle;
-
+                //if (currentBtn != (Button)senderBtn)
+                //{
+                //    currentBtn = (Button)senderBtn;
+                //    currentBtn.BackColor = UITheme.activeColor;
+                //    currentBtn.ForeColor = Color.White;
+                //    currentBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                //}
             }
         }
 

@@ -36,12 +36,10 @@ namespace PL_VehicleRental.Forms
         private void UserManagementForm_Load(object sender, EventArgs e)
         {
             LoadUsers();
-            LoadUsersData();
+            //LoadUsersData();
             SetupActionsButtons();
             CenterGridHeaders();
             //addBtn.BackColor = UITheme.PrimaryColor;
-            statCard.Dock = DockStyle.Top;
-            statCard.Height = 120;
             this.DoubleBuffered = true;
 
             DataGridViewStyle.ApplyStandard(dgvRolesPermission);
@@ -49,37 +47,33 @@ namespace PL_VehicleRental.Forms
 
         private void clearBtn_Click(object sender, EventArgs e)
         {
-            fullNameTxt.Clear();
-            userNameTextBox.Clear();
-            addressTextBox.Clear();
-            roleCmb.StartIndex = 0;
-            statusCmb.StartIndex = 0;
+            
         }
 
-        private void LoadUsersData()
-        {
-            string query = @"
-                             SELECT
-                                COUNT(*) AS Total,
-                                SUM(CASE WHEN status ='Active' THEN 1 ELSE 0 END) AS Active,
-                                SUM(CASE WHEN status ='Inactive' THEN 1 ELSE 0 END) AS Inactive
-                             FROM users";
+        //private void LoadUsersData()
+        //{
+        //    string query = @"
+        //                     SELECT
+        //                        COUNT(*) AS Total,
+        //                        SUM(CASE WHEN status ='Active' THEN 1 ELSE 0 END) AS Active,
+        //                        SUM(CASE WHEN status ='Inactive' THEN 1 ELSE 0 END) AS Inactive
+        //                     FROM users";
 
-            using (MySqlConnection conn = new MySqlConnection(connString))
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-                using (MySqlDataReader reader = cmd.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        lblTotalUsers.Text = reader["Total"].ToString();
-                        lblActiveUsers.Text = reader["Active"].ToString();
-                        lblInactiveUsers.Text = reader["Inactive"].ToString();
-                    }
-                }
-            }
-        }
+        //    using (MySqlConnection conn = new MySqlConnection(connString))
+        //    {
+        //        conn.Open();
+        //        MySqlCommand cmd = new MySqlCommand(query, conn);
+        //        using (MySqlDataReader reader = cmd.ExecuteReader())
+        //        {
+        //            if (reader.Read())
+        //            {
+        //                lblTotalUsers.Text = reader["Total"].ToString();
+        //                lblActiveUsers.Text = reader["Active"].ToString();
+        //                lblInactiveUsers.Text = reader["Inactive"].ToString();
+        //            }
+        //        }
+        //    }
+        //}
 
         private void LoadUsers()
         {
@@ -107,73 +101,7 @@ namespace PL_VehicleRental.Forms
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            string sql = "INSERT INTO users (userName, fullName, address, role, status) VALUES (@userName, @fullName, @address, @role, @status)";
-
-            using (MySqlConnection conn = new MySqlConnection(connString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    string checkQuery = @"
-                                        SELECT COUNT(*) 
-                                        FROM users 
-                                        WHERE userName = @userName 
-                                        OR (fullName = @fullName AND userName = @userName)";
-
-                    MySqlCommand checkCmd = new MySqlCommand(checkQuery, conn);
-                    checkCmd.Parameters.AddWithValue("@userName", userNameTextBox.Text.Trim());
-                    checkCmd.Parameters.AddWithValue("@fullName", fullNameTxt.Text.Trim());
-
-                    int exists = Convert.ToInt32(checkCmd.ExecuteScalar());
-
-                    if (exists > 0)
-                    {
-                        MessageBox.Show(
-                            "Username or full name already exists.",
-                            "Duplicate Entry",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning
-                        );
-                        return;
-                    }
-
-                    if (string.IsNullOrEmpty(fullNameTxt.Text) || string.IsNullOrEmpty(userNameTextBox.Text) || string.IsNullOrEmpty(addressTextBox.Text))
-                    {
-                        MessageBox.Show("All fields are required.", "Empty Fields", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@userName", userNameTextBox.Text);
-                    cmd.Parameters.AddWithValue("@fullName", fullNameTxt.Text);
-                    cmd.Parameters.AddWithValue("@address", addressTextBox.Text);
-                    cmd.Parameters.AddWithValue("@role", roleCmb.Text);
-                    cmd.Parameters.AddWithValue("@status", statusCmb.Text);
-
-                    int result = cmd.ExecuteNonQuery();
-
-                    if (result > 0)
-                    {
-                        MessageBox.Show("User Added Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadUsers();
-                        LoadUsersData();
-                        userNameTextBox.Clear();
-                        fullNameTxt.Clear();
-                        addressTextBox.Clear();
-                        roleCmb.StartIndex = 0;
-                        statusCmb.StartIndex = 0;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Failed to add user.");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error:", ex.Message);
-                }
-            }
+            
         }
 
         private void dgvRolesPermission_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -393,6 +321,15 @@ namespace PL_VehicleRental.Forms
         private void dgvRolesPermission_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void btnUserForm_Click(object sender, EventArgs e)
+        {
+            frmAddUser form = new frmAddUser();
+
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.StartPosition = FormStartPosition.CenterParent;
+            form.ShowDialog();
         }
     }
 }

@@ -78,14 +78,16 @@
             // 
             // userBtn
             // 
+            this.userBtn.BackColor = System.Drawing.Color.Transparent;
             this.userBtn.BorderRadius = 2;
+            this.userBtn.BorderThickness = 1;
             this.userBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.userBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.userBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.userBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.userBtn.FillColor = System.Drawing.Color.Gray;
+            this.userBtn.FillColor = System.Drawing.Color.Transparent;
             this.userBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userBtn.ForeColor = System.Drawing.Color.White;
+            this.userBtn.ForeColor = System.Drawing.Color.Black;
             this.userBtn.Image = ((System.Drawing.Image)(resources.GetObject("userBtn.Image")));
             this.userBtn.ImageSize = new System.Drawing.Size(30, 30);
             this.userBtn.Location = new System.Drawing.Point(21, 86);

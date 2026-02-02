@@ -331,5 +331,19 @@ namespace PL_VehicleRental.Forms
             form.StartPosition = FormStartPosition.CenterParent;
             form.ShowDialog();
         }
+
+        private void headerLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnUserForm_Click_1(object sender, EventArgs e)
+        {
+            frmAddUser form = new frmAddUser();
+
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.StartPosition = FormStartPosition.CenterParent;
+            form.ShowDialog();
+        }
     }
 }

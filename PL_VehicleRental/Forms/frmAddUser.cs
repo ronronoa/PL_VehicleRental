@@ -97,5 +97,15 @@ namespace PL_VehicleRental.Forms
             roleCmb.StartIndex = 0;
             statusCmb.StartIndex = 0;
         }
+
+        private void headerLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exitBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

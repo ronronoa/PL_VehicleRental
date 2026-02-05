@@ -35,45 +35,24 @@ namespace PL_VehicleRental.Forms
 
         private void UserManagementForm_Load(object sender, EventArgs e)
         {
-            LoadUsers();
-            //LoadUsersData();
-            SetupActionsButtons();
-            CenterGridHeaders();
-            //addBtn.BackColor = UITheme.PrimaryColor;
-            this.DoubleBuffered = true;
+            rolesTablePanel.BackColor = SystemColors.Control;
+            rolesTablePanel.ForeColor = SystemColors.ControlText;
 
             DataGridViewStyle.ApplyStandard(dgvRolesPermission);
+
+            dgvRolesPermission.BackColor = Color.White;
+            dgvRolesPermission.ForeColor = Color.Black;
+            dgvRolesPermission.Font = new Font("Segoe UI Semibold", 10.5f);
+
+            LoadUsers();
+            SetupActionsButtons();
+            CenterGridHeaders();
         }
 
         private void clearBtn_Click(object sender, EventArgs e)
         {
             
         }
-
-        //private void LoadUsersData()
-        //{
-        //    string query = @"
-        //                     SELECT
-        //                        COUNT(*) AS Total,
-        //                        SUM(CASE WHEN status ='Active' THEN 1 ELSE 0 END) AS Active,
-        //                        SUM(CASE WHEN status ='Inactive' THEN 1 ELSE 0 END) AS Inactive
-        //                     FROM users";
-
-        //    using (MySqlConnection conn = new MySqlConnection(connString))
-        //    {
-        //        conn.Open();
-        //        MySqlCommand cmd = new MySqlCommand(query, conn);
-        //        using (MySqlDataReader reader = cmd.ExecuteReader())
-        //        {
-        //            if (reader.Read())
-        //            {
-        //                lblTotalUsers.Text = reader["Total"].ToString();
-        //                lblActiveUsers.Text = reader["Active"].ToString();
-        //                lblInactiveUsers.Text = reader["Inactive"].ToString();
-        //            }
-        //        }
-        //    }
-        //}
 
         private void LoadUsers()
         {
@@ -106,34 +85,12 @@ namespace PL_VehicleRental.Forms
 
         private void dgvRolesPermission_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dgvRolesPermission.Columns[e.ColumnIndex].Name != "Status")
-                return;
-
-            if (e.Value == null)
-                return;
-
-            string status = e.Value.ToString();
-
-            switch (status)
-            {
-                case "Active":
-                    e.CellStyle.ForeColor = Color.Green;
-                    e.CellStyle.Font = new Font(dgvRolesPermission.Font, FontStyle.Bold);
-                    break;
-
-                case "Inactive":
-                    e.CellStyle.ForeColor = Color.Red;
-                    break;
-
-                case "Suspended":
-                    e.CellStyle.ForeColor = Color.DarkOrange;
-                    break;
-            }
+            
         }
 
         private void CenterGridHeaders()
         {
-            dgvRolesPermission.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvRolesPermission.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
             dgvRolesPermission.EnableHeadersVisualStyles = false;
         }
@@ -356,6 +313,11 @@ namespace PL_VehicleRental.Forms
                 cp.ExStyle |= 0x02000000;
                 return cp;
             }
+        }
+
+        private void dgvRolesPermission_CellFormatting_1(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+
         }
     }
 }

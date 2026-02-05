@@ -143,7 +143,7 @@
             this.clearBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.clearBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearBtn.ForeColor = System.Drawing.Color.White;
-            this.clearBtn.Location = new System.Drawing.Point(183, 217);
+            this.clearBtn.Location = new System.Drawing.Point(181, 217);
             this.clearBtn.Name = "clearBtn";
             this.clearBtn.Size = new System.Drawing.Size(116, 45);
             this.clearBtn.TabIndex = 26;
@@ -162,8 +162,7 @@
             // 
             // addBtn
             // 
-            this.addBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.addBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.addBtn.BackColor = System.Drawing.Color.Transparent;
             this.addBtn.BorderColor = System.Drawing.Color.Transparent;
             this.addBtn.BorderRadius = 10;
@@ -176,10 +175,9 @@
             this.addBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addBtn.ForeColor = System.Drawing.Color.White;
             this.addBtn.Image = global::PL_VehicleRental.Properties.Resources.personAdd;
-            this.addBtn.Location = new System.Drawing.Point(305, 217);
+            this.addBtn.Location = new System.Drawing.Point(303, 217);
             this.addBtn.Name = "addBtn";
-            this.addBtn.Padding = new System.Windows.Forms.Padding(10);
-            this.addBtn.Size = new System.Drawing.Size(131, 45);
+            this.addBtn.Size = new System.Drawing.Size(140, 45);
             this.addBtn.TabIndex = 25;
             this.addBtn.Text = "Add User";
             this.addBtn.Click += new System.EventHandler(this.addBtn_Click_1);

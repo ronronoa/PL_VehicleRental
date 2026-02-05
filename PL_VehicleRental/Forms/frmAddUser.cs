@@ -107,5 +107,20 @@ namespace PL_VehicleRental.Forms
         {
             this.Close();
         }
+
+        private void addBtn_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        // Double buffer
+        protected override CreateParams CreateParams
+        {
+            get {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;
+                return cp;
+            }
+        }
     }
 }

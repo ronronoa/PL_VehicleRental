@@ -62,7 +62,7 @@ namespace PL_VehicleRental.Classes
                         e.CellStyle.SelectionBackColor = Color.FromArgb(200, 220, 200); // Green selection
                         e.CellStyle.SelectionForeColor = Color.FromArgb(60, 118, 61);
                     }
-                    else
+                    else if (status.Equals("Inactive", StringComparison.OrdinalIgnoreCase))
                     {
                         e.CellStyle.BackColor = Color.FromArgb(255, 243, 205); // Light yellow
                         e.CellStyle.ForeColor = Color.FromArgb(133, 100, 4);   // Dark yellow/brown text
@@ -70,8 +70,16 @@ namespace PL_VehicleRental.Classes
                         e.CellStyle.SelectionBackColor = Color.FromArgb(255, 230, 180); // Yellow selection
                         e.CellStyle.SelectionForeColor = Color.FromArgb(133, 100, 4);
                     }
+                    else
+                    {
+                        e.CellStyle.BackColor = Color.FromArgb(255, 0, 0); // Red
+                        e.CellStyle.ForeColor = Color.FromArgb(255, 160, 122);   // Crimson
+                        e.CellStyle.Font = new Font(dgv.Font, FontStyle.Bold);
+                        e.CellStyle.SelectionBackColor = Color.FromArgb(139, 0, 0); // Yellow selection
+                        e.CellStyle.SelectionForeColor = Color.FromArgb(255, 160, 122);
+                    }
 
-                    e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                        e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 }
             }
         }

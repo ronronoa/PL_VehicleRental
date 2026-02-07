@@ -15,12 +15,44 @@ namespace PL_VehicleRental.Forms
     public partial class frmAddUser : Form
     {
         string connString = ConfigurationManager.ConnectionStrings["MyDbConnection"].ConnectionString;
+
+        public event EventHandler UserAdded;
         public frmAddUser()
         {
             InitializeComponent();
         }
 
         private void addBtn_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void clearBtn_Click(object sender, EventArgs e)
+        {
+            fullNameTxt.Clear();
+            userNameTextBox.Clear();
+            addressTextBox.Clear();
+            roleCmb.StartIndex = 0;
+            statusCmb.StartIndex = 0;
+        }
+
+        private void headerLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exitBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void GetAllUsersData()
+        {
+            UserManagementForm userManagementForm = new UserManagementForm();
+            DataTable users = userManagementForm.LoadUsers();
+        }
+
+        private void addBtn_Click_1(object sender, EventArgs e)
         {
             string sql = "INSERT INTO users (userName, fullName, address, role, status) VALUES (@userName, @fullName, @address, @role, @status)";
 
@@ -76,6 +108,9 @@ namespace PL_VehicleRental.Forms
                         addressTextBox.Clear();
                         roleCmb.StartIndex = 0;
                         statusCmb.StartIndex = 0;
+
+                        OnUserAdded();
+                        this.Close();
                     }
                     else
                     {
@@ -89,28 +124,9 @@ namespace PL_VehicleRental.Forms
             }
         }
 
-        private void clearBtn_Click(object sender, EventArgs e)
+        protected virtual void OnUserAdded()
         {
-            fullNameTxt.Clear();
-            userNameTextBox.Clear();
-            addressTextBox.Clear();
-            roleCmb.StartIndex = 0;
-            statusCmb.StartIndex = 0;
-        }
-
-        private void headerLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void exitBtn_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void addBtn_Click_1(object sender, EventArgs e)
-        {
-
+            UserAdded?.Invoke(this, EventArgs.Empty);
         }
 
         // Double buffer

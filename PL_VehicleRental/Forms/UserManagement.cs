@@ -44,7 +44,13 @@ namespace PL_VehicleRental.Forms
             dgvRolesPermission.ForeColor = Color.Black;
             dgvRolesPermission.Font = new Font("Segoe UI Semibold", 10.5f);
 
-            LoadUsers();
+            RefreshUserData();
+        }
+
+        public void RefreshUserData()
+        {
+            DataTable users = LoadUsers();
+            dgvRolesPermission.DataSource = users;
             SetupActionsButtons();
             CenterGridHeaders();
         }
@@ -54,10 +60,10 @@ namespace PL_VehicleRental.Forms
             
         }
 
-        private void LoadUsers()
+        public DataTable LoadUsers()
         {
             DataTable dt = new DataTable();
-
+            
             using (MySqlConnection conn = new MySqlConnection(connString))
             {
                 conn.Open();
@@ -75,7 +81,7 @@ namespace PL_VehicleRental.Forms
                     da.Fill(dt);
                 }
             }
-            dgvRolesPermission.DataSource = dt;
+            return dt;
         }
 
         private void addBtn_Click(object sender, EventArgs e)
@@ -170,6 +176,36 @@ namespace PL_VehicleRental.Forms
                 e.Graphics.DrawImage(deleteIcon, new Rectangle(dx, dy, deleteIcon.Width, deleteIcon.Height));
 
                 e.Handled = true;
+            }
+        }
+
+        private void OpenAddUserForm()
+        {
+            frmAddUser form = new frmAddUser();
+
+            form.UserAdded += (sender, e) =>
+            {
+                this.RefreshUserData();
+            };
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.StartPosition = FormStartPosition.CenterParent;
+            form.ShowDialog();
+        }
+
+        private void btnUserForm_Click_1(object sender, EventArgs e)
+        {
+            OpenAddUserForm();
+        }
+
+
+        // Double buffer
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;
+                return cp;
             }
         }
 
@@ -280,39 +316,9 @@ namespace PL_VehicleRental.Forms
 
         }
 
-        private void btnUserForm_Click(object sender, EventArgs e)
-        {
-            frmAddUser form = new frmAddUser();
-
-            form.FormBorderStyle = FormBorderStyle.None;
-            form.StartPosition = FormStartPosition.CenterParent;
-            form.ShowDialog();
-        }
-
         private void headerLabel_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void btnUserForm_Click_1(object sender, EventArgs e)
-        {
-            frmAddUser form = new frmAddUser();
-
-            form.FormBorderStyle = FormBorderStyle.None;
-            form.StartPosition = FormStartPosition.CenterParent;
-            form.ShowDialog();
-        }
-
-
-        // Double buffer
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000;
-                return cp;
-            }
         }
 
         private void dgvRolesPermission_CellFormatting_1(object sender, DataGridViewCellFormattingEventArgs e)

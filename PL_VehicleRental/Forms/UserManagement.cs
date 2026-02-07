@@ -18,6 +18,13 @@ namespace PL_VehicleRental.Forms
     public partial class UserManagementForm : Form
     {
         string connString = ConfigurationManager.ConnectionStrings["MyDbConnection"].ConnectionString;
+
+        enum ActionButton
+        {
+            Info,
+            Edit,
+            Delete
+        }
         public UserManagementForm()
         {
             InitializeComponent();
@@ -94,6 +101,11 @@ namespace PL_VehicleRental.Forms
             
         }
 
+        private ActionButton? GetActionButton(DataGridView dgv, int row, int col)
+        {
+            return null;
+        }
+
         private void CenterGridHeaders()
         {
             dgvRolesPermission.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -118,24 +130,39 @@ namespace PL_VehicleRental.Forms
         private void dgvRolesPermission_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
+
             if (dgvRolesPermission.Columns[e.ColumnIndex].Name == "Actions")
             {
-                var cell = dgvRolesPermission.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
+                var cell = dgvRolesPermission.GetCellDisplayRectangle(
+                    e.ColumnIndex, e.RowIndex, false);
+
                 int padding = 5;
-                int buttonWidth = (cell.Width - 3 * padding) / 2;
+                int buttonCount = 3;
+
+                int totalPadding = padding * (buttonCount + 1);
+                int buttonWidth = (cell.Width - totalPadding) / buttonCount;
 
                 Point clickPoint = dgvRolesPermission.PointToClient(Cursor.Position);
                 int relativeX = clickPoint.X - cell.Left;
 
-                if (relativeX <= buttonWidth)
+                int infoStart = padding;
+                int editStart = infoStart + buttonWidth + padding;
+                int deleteStart = editStart + buttonWidth + padding;
+
+                if (relativeX >= infoStart && relativeX < infoStart + buttonWidth)
+                {
+                    MessageBox.Show($"Info clicked for row {e.RowIndex}");
+                }
+                else if (relativeX >= editStart && relativeX < editStart + buttonWidth)
                 {
                     MessageBox.Show($"Edit clicked for row {e.RowIndex}");
                 }
-                else
+                else if (relativeX >= deleteStart && relativeX < deleteStart + buttonWidth)
                 {
                     MessageBox.Show($"Delete clicked for row {e.RowIndex}");
                 }
             }
+
         }
 
 
@@ -143,42 +170,64 @@ namespace PL_VehicleRental.Forms
         private void dgvRolesPermission_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex < 0) return;
+
             if (dgvRolesPermission.Columns[e.ColumnIndex].Name == "Actions")
             {
                 e.PaintBackground(e.ClipBounds, true);
 
                 int padding = 5;
-                int buttonWidth = (e.CellBounds.Width - 3 * padding) / 2;
-                int buttonHeight = e.CellBounds.Height - 2 * padding;
+                int buttonCount = 3;
 
-                // editIcon, deleteIcon as button
-                Rectangle editButton = new Rectangle(e.CellBounds.Left + padding, e.CellBounds.Top + padding, buttonWidth, buttonHeight);
-                Rectangle deleteButton = new Rectangle(e.CellBounds.Left + buttonWidth + 2 * padding, e.CellBounds.Top + padding, buttonWidth, buttonHeight);
+                int totalPadding = padding * (buttonCount + 1);
+                int buttonWidth = (e.CellBounds.Width - totalPadding) / buttonCount;
+                int buttonHeight = e.CellBounds.Height - (padding * 2);
 
-                Color editColor = Color.FromArgb(94, 148, 255);
-                Color deleteColor = Color.FromArgb(255, 77, 79);
+                Rectangle infoButton = new Rectangle(
+                    e.CellBounds.Left + padding,
+                    e.CellBounds.Top + padding,
+                    buttonWidth,
+                    buttonHeight
+                );
 
-                using (SolidBrush editBrush = new SolidBrush(editColor))
+                Rectangle editButton = new Rectangle(
+                    infoButton.Right + padding,
+                    e.CellBounds.Top + padding,
+                    buttonWidth,
+                    buttonHeight
+                );
+
+                Rectangle deleteButton = new Rectangle(
+                    editButton.Right + padding,
+                    e.CellBounds.Top + padding,
+                    buttonWidth,
+                    buttonHeight
+                );
+
+                using (SolidBrush infoBrush = new SolidBrush(Color.FromArgb(250, 250, 250)))
+                    e.Graphics.FillRectangle(infoBrush, infoButton);
+
+                using (SolidBrush editBrush = new SolidBrush(Color.FromArgb(94, 148, 255)))
                     e.Graphics.FillRectangle(editBrush, editButton);
 
-                using (SolidBrush deleteBrush = new SolidBrush(deleteColor))
+                using (SolidBrush deleteBrush = new SolidBrush(Color.FromArgb(255, 77, 79)))
                     e.Graphics.FillRectangle(deleteBrush, deleteButton);
 
-                // icons
-                Image editIcon = Properties.Resources.editIcon;
-                int ex = editButton.Left + (editButton.Width - editIcon.Width) / 2;
-                int ey = editButton.Top + (editButton.Height - editIcon.Height) / 2;
-                e.Graphics.DrawImage(editIcon, new Rectangle(ex, ey, editIcon.Width, editIcon.Height));
-
-                Image deleteIcon = Properties.Resources.deleteIcon;
-                int dx = deleteButton.Left + (deleteButton.Width - deleteIcon.Width) / 2;
-                int dy = deleteButton.Top + (deleteButton.Height - deleteIcon.Height) / 2;
-                e.Graphics.DrawImage(deleteIcon, new Rectangle(dx, dy, deleteIcon.Width, deleteIcon.Height));
+                DrawCenteredIcon(e.Graphics, Properties.Resources.infoIcon, infoButton);
+                DrawCenteredIcon(e.Graphics, Properties.Resources.editIcon, editButton);
+                DrawCenteredIcon(e.Graphics, Properties.Resources.deleteIcon, deleteButton);
 
                 e.Handled = true;
             }
+
         }
 
+        private void DrawCenteredIcon(Graphics g, Image icon, Rectangle button)
+        {
+            int x = button.Left + (button.Width - icon.Width) / 2;
+            int y = button.Top + (button.Height - icon.Height) / 2;
+            g.DrawImage(icon, x, y, icon.Width, icon.Height);
+        }
+ 
         private void OpenAddUserForm()
         {
             frmAddUser form = new frmAddUser();

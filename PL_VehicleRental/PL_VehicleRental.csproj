@@ -129,6 +129,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\UserService.cs" />
+    <None Include="Resources\infoIcon.png" />
     <None Include="Resources\person_add_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" />
     <None Include="Resources\user-plus.png" />
     <None Include="Resources\trash.png" />

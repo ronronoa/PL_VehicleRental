@@ -103,6 +103,24 @@ namespace PL_VehicleRental.Forms
 
         private ActionButton? GetActionButton(DataGridView dgv, int row, int col)
         {
+            var cell = dgv.GetCellDisplayRectangle(col, row, false);
+
+            int padding = 5;
+            int buttonCount = 3;
+            int totalPadding = padding * (buttonCount + 1);
+            int buttonWidth = (cell.Width - totalPadding) / buttonCount;
+
+            Point click = dgv.PointToClient(Cursor.Position);
+            int x = click.X - cell.Left;
+
+            int infoStart = padding;
+            int editStart = infoStart + buttonWidth + padding;
+            int deleteStart = editStart + buttonWidth + padding;
+
+            if (x >= infoStart && x < infoStart + buttonWidth) return ActionButton.Info;
+            if (x >= editStart && x < editStart + buttonWidth) return ActionButton.Edit;
+            if (x >= deleteStart && x < deleteStart + buttonWidth) return ActionButton.Delete;
+
             return null;
         }
 
@@ -130,38 +148,21 @@ namespace PL_VehicleRental.Forms
         private void dgvRolesPermission_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
+            if (dgvRolesPermission.Columns[e.ColumnIndex].Name != "Actions") return;
 
-            if (dgvRolesPermission.Columns[e.ColumnIndex].Name == "Actions")
+            var action = GetActionButton(dgvRolesPermission, e.RowIndex, e.ColumnIndex);
+            if (action == null) return;
+
+            int roleId = Convert.ToInt32(dgvRolesPermission.Rows[e.RowIndex].Cells["id"].Value);
+
+            switch (action)
             {
-                var cell = dgvRolesPermission.GetCellDisplayRectangle(
-                    e.ColumnIndex, e.RowIndex, false);
-
-                int padding = 5;
-                int buttonCount = 3;
-
-                int totalPadding = padding * (buttonCount + 1);
-                int buttonWidth = (cell.Width - totalPadding) / buttonCount;
-
-                Point clickPoint = dgvRolesPermission.PointToClient(Cursor.Position);
-                int relativeX = clickPoint.X - cell.Left;
-
-                int infoStart = padding;
-                int editStart = infoStart + buttonWidth + padding;
-                int deleteStart = editStart + buttonWidth + padding;
-
-                if (relativeX >= infoStart && relativeX < infoStart + buttonWidth)
-                {
-                    MessageBox.Show($"Info clicked for row {e.RowIndex}");
-                }
-                else if (relativeX >= editStart && relativeX < editStart + buttonWidth)
-                {
-                    MessageBox.Show($"Edit clicked for row {e.RowIndex}");
-                }
-                else if (relativeX >= deleteStart && relativeX < deleteStart + buttonWidth)
-                {
-                    MessageBox.Show($"Delete clicked for row {e.RowIndex}");
-                }
+                case ActionButton.Info:
+                    using (var form = new frmInfo(roleId))
+                        form.ShowDialog();
+                    break;
             }
+            
 
         }
 

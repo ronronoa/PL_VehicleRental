@@ -35,11 +35,11 @@
             this.headerPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2VSeparator1 = new Guna.UI2.WinForms.Guna2VSeparator();
             this.pageLabel = new System.Windows.Forms.Label();
-            this.mainPanel = new Guna.UI2.WinForms.Guna2Panel();
-            this.lblloggedInUser = new System.Windows.Forms.Label();
-            this.lblRole = new System.Windows.Forms.Label();
-            this.guna2Shapes1 = new Guna.UI2.WinForms.Guna2Shapes();
             this.userLabelsHeader = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2Shapes1 = new Guna.UI2.WinForms.Guna2Shapes();
+            this.lblRole = new System.Windows.Forms.Label();
+            this.lblloggedInUser = new System.Windows.Forms.Label();
+            this.mainPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.sideBarPanel.SuspendLayout();
             this.headerPanel.SuspendLayout();
             this.userLabelsHeader.SuspendLayout();
@@ -131,36 +131,17 @@
             this.pageLabel.TabIndex = 3;
             this.pageLabel.Text = "Form Label";
             // 
-            // mainPanel
+            // userLabelsHeader
             // 
-            this.mainPanel.BorderColor = System.Drawing.Color.Black;
-            this.mainPanel.BorderRadius = 2;
-            this.mainPanel.BorderThickness = 2;
-            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainPanel.Location = new System.Drawing.Point(267, 80);
-            this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(1124, 692);
-            this.mainPanel.TabIndex = 6;
-            // 
-            // lblloggedInUser
-            // 
-            this.lblloggedInUser.AutoSize = true;
-            this.lblloggedInUser.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblloggedInUser.Location = new System.Drawing.Point(27, 33);
-            this.lblloggedInUser.Name = "lblloggedInUser";
-            this.lblloggedInUser.Size = new System.Drawing.Size(67, 17);
-            this.lblloggedInUser.TabIndex = 4;
-            this.lblloggedInUser.Text = "John Doe";
-            // 
-            // lblRole
-            // 
-            this.lblRole.AutoSize = true;
-            this.lblRole.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRole.Location = new System.Drawing.Point(27, 50);
-            this.lblRole.Name = "lblRole";
-            this.lblRole.Size = new System.Drawing.Size(49, 17);
-            this.lblRole.TabIndex = 5;
-            this.lblRole.Text = "Admin";
+            this.userLabelsHeader.Controls.Add(this.guna2Shapes1);
+            this.userLabelsHeader.Controls.Add(this.lblRole);
+            this.userLabelsHeader.Controls.Add(this.lblloggedInUser);
+            this.userLabelsHeader.Dock = System.Windows.Forms.DockStyle.Right;
+            this.userLabelsHeader.Location = new System.Drawing.Point(1181, 0);
+            this.userLabelsHeader.Name = "userLabelsHeader";
+            this.userLabelsHeader.Size = new System.Drawing.Size(200, 80);
+            this.userLabelsHeader.TabIndex = 6;
+            this.userLabelsHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.userLabelsHeader_Paint);
             // 
             // guna2Shapes1
             // 
@@ -177,17 +158,37 @@
             this.guna2Shapes1.Text = "guna2Shapes1";
             this.guna2Shapes1.Zoom = 80;
             // 
-            // userLabelsHeader
+            // lblRole
             // 
-            this.userLabelsHeader.Controls.Add(this.guna2Shapes1);
-            this.userLabelsHeader.Controls.Add(this.lblRole);
-            this.userLabelsHeader.Controls.Add(this.lblloggedInUser);
-            this.userLabelsHeader.Dock = System.Windows.Forms.DockStyle.Right;
-            this.userLabelsHeader.Location = new System.Drawing.Point(1181, 0);
-            this.userLabelsHeader.Name = "userLabelsHeader";
-            this.userLabelsHeader.Size = new System.Drawing.Size(200, 80);
-            this.userLabelsHeader.TabIndex = 6;
-            this.userLabelsHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.userLabelsHeader_Paint);
+            this.lblRole.AutoSize = true;
+            this.lblRole.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRole.Location = new System.Drawing.Point(27, 50);
+            this.lblRole.Name = "lblRole";
+            this.lblRole.Size = new System.Drawing.Size(49, 17);
+            this.lblRole.TabIndex = 5;
+            this.lblRole.Text = "Admin";
+            // 
+            // lblloggedInUser
+            // 
+            this.lblloggedInUser.AutoSize = true;
+            this.lblloggedInUser.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblloggedInUser.Location = new System.Drawing.Point(27, 33);
+            this.lblloggedInUser.Name = "lblloggedInUser";
+            this.lblloggedInUser.Size = new System.Drawing.Size(67, 17);
+            this.lblloggedInUser.TabIndex = 4;
+            this.lblloggedInUser.Text = "John Doe";
+            // 
+            // mainPanel
+            // 
+            this.mainPanel.BorderColor = System.Drawing.Color.Black;
+            this.mainPanel.BorderRadius = 2;
+            this.mainPanel.BorderThickness = 2;
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanel.Location = new System.Drawing.Point(267, 80);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(1124, 692);
+            this.mainPanel.TabIndex = 6;
+            this.mainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.mainPanel_Paint);
             // 
             // MainForm
             // 

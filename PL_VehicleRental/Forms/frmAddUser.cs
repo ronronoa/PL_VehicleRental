@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -9,54 +8,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySqlConnector;
+using PL_VehicleRental.Data;
 
 namespace PL_VehicleRental.Forms
 {
     public partial class frmAddUser : Form
     {
-        string connString = ConfigurationManager.ConnectionStrings["MyDbConnection"].ConnectionString;
-
         public event EventHandler UserAdded;
         public frmAddUser()
         {
             InitializeComponent();
         }
 
-        private void addBtn_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void clearBtn_Click(object sender, EventArgs e)
-        {
-            fullNameTxt.Clear();
-            userNameTextBox.Clear();
-            addressTextBox.Clear();
-            roleCmb.StartIndex = 0;
-            statusCmb.StartIndex = 0;
-        }
-
-        private void headerLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void exitBtn_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void GetAllUsersData()
-        {
-            UserManagementForm userManagementForm = new UserManagementForm();
-            DataTable users = userManagementForm.LoadUsers();
-        }
-
-        private void addBtn_Click_1(object sender, EventArgs e)
+        private void AddUsers()
         {
             string sql = "INSERT INTO users (userName, fullName, address, role, status) VALUES (@userName, @fullName, @address, @role, @status)";
 
-            using (MySqlConnection conn = new MySqlConnection(connString))
+            using (MySqlConnection conn = MySQLConnectionContext.Create())
             {
                 try
                 {
@@ -124,6 +93,35 @@ namespace PL_VehicleRental.Forms
             }
         }
 
+        private void addBtn_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void clearBtn_Click(object sender, EventArgs e)
+        {
+            fullNameTxt.Clear();
+            userNameTextBox.Clear();
+            addressTextBox.Clear();
+            roleCmb.StartIndex = 0;
+            statusCmb.StartIndex = 0;
+        }
+
+        private void headerLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exitBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void addBtn_Click_1(object sender, EventArgs e)
+        {
+            AddUsers();
+        }
+
         protected virtual void OnUserAdded()
         {
             UserAdded?.Invoke(this, EventArgs.Empty);
@@ -137,6 +135,15 @@ namespace PL_VehicleRental.Forms
                 cp.ExStyle |= 0x02000000;
                 return cp;
             }
+        }
+
+        private void clearBtn_Click_1(object sender, EventArgs e)
+        {
+            fullNameTxt.Clear();
+            userNameTextBox.Clear();
+            addressTextBox.Clear();
+            roleCmb.StartIndex = 0;
+            statusCmb.StartIndex = 0;
         }
     }
 }

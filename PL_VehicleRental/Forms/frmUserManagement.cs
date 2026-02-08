@@ -10,12 +10,22 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using Guna.UI2.WinForms;
+using MySqlConnector;
+using PL_VehicleRental.Classes;
+using PL_VehicleRental.Data;
+using VehicleManagementSystem.Dto;
 
 namespace PL_VehicleRental.Forms
 {
     public partial class UserManagementForm : Form
     {
-        //string connString = ConfigurationManager.ConnectionStrings["MyDbConnection"].ConnectionString;
+
+        enum ActionButton
+        {
+            Info,
+            Edit,
+            Delete,
+        }
         public UserManagementForm()
         {
             InitializeComponent();
@@ -33,145 +43,71 @@ namespace PL_VehicleRental.Forms
 
         private void UserManagementForm_Load(object sender, EventArgs e)
         {
-            LoadUsers();
-            LoadUsersData();
+
+            DataGridViewStyle.ApplyStandard(dgvRolesPermission);
+            RefreshUserData();
+
+        }
+
+        public void RefreshUserData()
+        {
+            DataTable users = LoadUsers();
+            dgvRolesPermission.DataSource = users;
             SetupActionsButtons();
             CenterGridHeaders();
-            //addBtn.BackColor = UITheme.PrimaryColor;
-            statCard.Dock = DockStyle.Top;
-            statCard.Height = 120;
-            this.DoubleBuffered = true;
 
-            //DataGridViewStyle.ApplyStandard(dgvRolesPermission);
         }
 
-        private void clearBtn_Click(object sender, EventArgs e)
+        private DataTable LoadUsers()
         {
-            fullNameTxt.Clear();
-            userNameTextBox.Clear();
-            addressTextBox.Clear();
-            roleCmb.StartIndex = 0;
-            statusCmb.StartIndex = 0;
-        }
+            DataTable dt = new DataTable();
 
-        private void LoadUsersData()
-        {
-            //string query = @"
-            //                 SELECT
-            //                    COUNT(*) AS Total,
-            //                    SUM(CASE WHEN status ='Active' THEN 1 ELSE 0 END) AS Active,
-            //                    SUM(CASE WHEN status ='Inactive' THEN 1 ELSE 0 END) AS Inactive
-            //                 FROM users";
+            using (MySqlConnection conn = MySQLConnectionContext.Create())
+            {
+                conn.Open();
 
-            //using (MySqlConnection conn = new MySqlConnection(connString))
-            //{
-            //    conn.Open();
-            //    MySqlCommand cmd = new MySqlCommand(query, conn);
-            //    using (MySqlDataReader reader = cmd.ExecuteReader())
-            //    {
-            //        if (reader.Read())
-            //        {
-            //            lblTotalUsers.Text = reader["Total"].ToString();
-            //            lblActiveUsers.Text = reader["Active"].ToString();
-            //            lblInactiveUsers.Text = reader["Inactive"].ToString();
-            //        }
-            //    }
-            //}
-        }
-
-        private void LoadUsers()
-        {
-            //DataTable dt = new DataTable();
-
-            //using (MySqlConnection conn = new MySqlConnection(connString))
-            //{
-            //    conn.Open();
-
-            //    string query = @"SELECT id AS ID, 
-            //                            userName AS Username, 
-            //                            fullName AS FullName,
-            //                            address AS Address,
-            //                            role As Role, 
-            //                            status AS Status
-            //                    FROM users";
-            //    using (MySqlCommand cmd = new MySqlCommand(query, conn))
-            //    using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
-            //    {
-            //        da.Fill(dt);
-            //    }
-            //}
-            //dgvRolesPermission.DataSource = dt;
+                string query = @"SELECT id AS ID, 
+                                        userName AS Username, 
+                                        fullName AS FullName,
+                                        address AS Address,
+                                        role As Role, 
+                                        status AS Status
+                                FROM users";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                {
+                    da.Fill(dt);
+                }
+            }
+            return dt;
         }
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            //string sql = "INSERT INTO users (userName, fullName, address, role, status) VALUES (@userName, @fullName, @address, @role, @status)";
+            
+        }
 
-            //using (MySqlConnection conn = new MySqlConnection(connString))
-            //{
-            //    try
-            //    {
-            //        conn.Open();
+        private ActionButton? GetActionButton(DataGridView dgv, int row, int col)
+        {
+            var cell = dgv.GetCellDisplayRectangle(col, row, false);
 
-            //        string checkQuery = @"
-            //                            SELECT COUNT(*) 
-            //                            FROM users 
-            //                            WHERE userName = @userName 
-            //                            OR (fullName = @fullName AND userName = @userName)";
+            int padding = 5;
+            int buttonCount = 3;
+            int totalPadding = padding * (buttonCount + 1);
+            int buttonWidth = (cell.Width - totalPadding) / buttonCount;
 
-            //        MySqlCommand checkCmd = new MySqlCommand(checkQuery, conn);
-            //        checkCmd.Parameters.AddWithValue("@userName", userNameTextBox.Text.Trim());
-            //        checkCmd.Parameters.AddWithValue("@fullName", fullNameTxt.Text.Trim());
+            Point click = dgv.PointToClient(Cursor.Position);
+            int x = click.X - cell.Left;
 
-            //        int exists = Convert.ToInt32(checkCmd.ExecuteScalar());
+            int infoStart = padding;
+            int editStart = infoStart + buttonWidth + padding;
+            int deleteStart = editStart + buttonWidth + padding;
 
-            //        if (exists > 0)
-            //        {
-            //            MessageBox.Show(
-            //                "Username or full name already exists.",
-            //                "Duplicate Entry",
-            //                MessageBoxButtons.OK,
-            //                MessageBoxIcon.Warning
-            //            );
-            //            return;
-            //        }
+            if (x >= infoStart && x < infoStart + buttonWidth) return ActionButton.Info;
+            if (x >= editStart && x < editStart + buttonWidth) return ActionButton.Edit;
+            if (x >= deleteStart && x < deleteStart + buttonWidth) return ActionButton.Delete;
 
-            //        if (string.IsNullOrEmpty(fullNameTxt.Text) || string.IsNullOrEmpty(userNameTextBox.Text) || string.IsNullOrEmpty(addressTextBox.Text))
-            //        {
-            //            MessageBox.Show("All fields are required.", "Empty Fields", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //            return;
-            //        }
-
-            //        MySqlCommand cmd = new MySqlCommand(sql, conn);
-            //        cmd.Parameters.AddWithValue("@userName", userNameTextBox.Text);
-            //        cmd.Parameters.AddWithValue("@fullName", fullNameTxt.Text);
-            //        cmd.Parameters.AddWithValue("@address", addressTextBox.Text);
-            //        cmd.Parameters.AddWithValue("@role", roleCmb.Text);
-            //        cmd.Parameters.AddWithValue("@status", statusCmb.Text);
-
-            //        int result = cmd.ExecuteNonQuery();
-
-            //        if (result > 0)
-            //        {
-            //            MessageBox.Show("User Added Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //            LoadUsers();
-            //            LoadUsersData();
-            //            userNameTextBox.Clear();
-            //            fullNameTxt.Clear();
-            //            addressTextBox.Clear();
-            //            roleCmb.StartIndex = 0;
-            //            statusCmb.StartIndex = 0;
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show("Failed to add user.");
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show("Error:", ex.Message);
-            //    }
-            //}
+            return null;
         }
 
         private void dgvRolesPermission_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -203,7 +139,7 @@ namespace PL_VehicleRental.Forms
 
         private void CenterGridHeaders()
         {
-            dgvRolesPermission.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvRolesPermission.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
             dgvRolesPermission.EnableHeadersVisualStyles = false;
         }
@@ -225,66 +161,86 @@ namespace PL_VehicleRental.Forms
         private void dgvRolesPermission_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            if (dgvRolesPermission.Columns[e.ColumnIndex].Name == "Actions")
+            if (dgvRolesPermission.Columns[e.ColumnIndex].Name != "Actions") return;
+
+            var action = GetActionButton(dgvRolesPermission, e.RowIndex, e.ColumnIndex);
+            if (action == null) return;
+
+            int userId = Convert.ToInt32(dgvRolesPermission.Rows[e.RowIndex].Cells["id"].Value);
+
+            switch (action)
             {
-                var cell = dgvRolesPermission.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
-                int padding = 5;
-                int buttonWidth = (cell.Width - 3 * padding) / 2;
-
-                Point clickPoint = dgvRolesPermission.PointToClient(Cursor.Position);
-                int relativeX = clickPoint.X - cell.Left;
-
-                if (relativeX <= buttonWidth)
-                {
-                    MessageBox.Show($"Edit clicked for row {e.RowIndex}");
-                }
-                else
-                {
-                    MessageBox.Show($"Delete clicked for row {e.RowIndex}");
-                }
+                case ActionButton.Info:
+                    using (var form = new frmInfo(userId))
+                    {
+                        form.FormBorderStyle = FormBorderStyle.None;
+                        form.StartPosition = FormStartPosition.CenterParent;
+                        form.ShowDialog();
+                    }
+                    break;
             }
         }
 
 
-        // for edit, delete button on datagrid
         private void dgvRolesPermission_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex < 0) return;
+
             if (dgvRolesPermission.Columns[e.ColumnIndex].Name == "Actions")
             {
                 e.PaintBackground(e.ClipBounds, true);
 
                 int padding = 5;
-                int buttonWidth = (e.CellBounds.Width - 3 * padding) / 2;
-                int buttonHeight = e.CellBounds.Height - 2 * padding;
+                int buttonCount = 3;
 
-                // editIcon, deleteIcon as button
-                Rectangle editButton = new Rectangle(e.CellBounds.Left + padding, e.CellBounds.Top + padding, buttonWidth, buttonHeight);
-                Rectangle deleteButton = new Rectangle(e.CellBounds.Left + buttonWidth + 2 * padding, e.CellBounds.Top + padding, buttonWidth, buttonHeight);
+                int totalPadding = padding * (buttonCount + 1);
+                int buttonWidth = (e.CellBounds.Width - totalPadding) / buttonCount;
+                int buttonHeight = e.CellBounds.Height - (padding * 2);
 
-                Color editColor = Color.FromArgb(94, 148, 255);
-                Color deleteColor = Color.FromArgb(255, 77, 79);
+                Rectangle infoButton = new Rectangle(
+                    e.CellBounds.Left + padding,
+                    e.CellBounds.Top + padding,
+                    buttonWidth,
+                    buttonHeight
+                );
 
-                using (SolidBrush editBrush = new SolidBrush(editColor))
+                Rectangle editButton = new Rectangle(
+                    infoButton.Right + padding,
+                    e.CellBounds.Top + padding,
+                    buttonWidth,
+                    buttonHeight
+                );
+
+                Rectangle deleteButton = new Rectangle(
+                    editButton.Right + padding,
+                    e.CellBounds.Top + padding,
+                    buttonWidth,
+                    buttonHeight
+                );
+
+                using (SolidBrush infoBrush = new SolidBrush(Color.FromArgb(250, 250, 250)))
+                    e.Graphics.FillRectangle(infoBrush, infoButton);
+
+                using (SolidBrush editBrush = new SolidBrush(Color.FromArgb(94, 148, 255)))
                     e.Graphics.FillRectangle(editBrush, editButton);
 
-                using (SolidBrush deleteBrush = new SolidBrush(deleteColor))
+                using (SolidBrush deleteBrush = new SolidBrush(Color.FromArgb(255, 77, 79)))
                     e.Graphics.FillRectangle(deleteBrush, deleteButton);
 
-                // icons
-                //Image editIcon = Properties.Resources.editIcon;
-                //int ex = editButton.Left + (editButton.Width - editIcon.Width) / 2;
-                //int ey = editButton.Top + (editButton.Height - editIcon.Height) / 2;
-                //e.Graphics.DrawImage(editIcon, new Rectangle(ex, ey, editIcon.Width, editIcon.Height));
-
-                //Image deleteIcon = Properties.Resources.deleteIcon;
-                //int dx = deleteButton.Left + (deleteButton.Width - deleteIcon.Width) / 2;
-                //int dy = deleteButton.Top + (deleteButton.Height - deleteIcon.Height) / 2;
-                //e.Graphics.DrawImage(deleteIcon, new Rectangle(dx, dy, deleteIcon.Width, deleteIcon.Height));
+                DrawCenteredIcon(e.Graphics, Properties.Resources.infoIcon, infoButton);
+                DrawCenteredIcon(e.Graphics, Properties.Resources.editIcon, editButton);
+                DrawCenteredIcon(e.Graphics, Properties.Resources.deleteIcon, deleteButton);
 
                 e.Handled = true;
             }
         }
+        private void DrawCenteredIcon(Graphics g, Image icon, Rectangle button)
+        {
+            int x = button.Left + (button.Width - icon.Width) / 2;
+            int y = button.Top + (button.Height - icon.Height) / 2;
+            g.DrawImage(icon, x, y, icon.Width, icon.Height);
+        }
+
 
 
 
@@ -391,6 +347,50 @@ namespace PL_VehicleRental.Forms
         private void dgvRolesPermission_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void btnUserForm_Click(object sender, EventArgs e)
+        {
+            frmAddUser form = new frmAddUser();
+
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.StartPosition = FormStartPosition.CenterParent;
+            form.ShowDialog();
+        }
+
+        private void headerLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OpenAddUserForm()
+        {
+            frmAddUser form = new frmAddUser();
+
+            form.UserAdded += (sender, e) =>
+            {
+                this.RefreshUserData();
+            };
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.StartPosition = FormStartPosition.CenterParent;
+            form.ShowDialog();
+        }
+
+        private void btnUserForm_Click_1(object sender, EventArgs e)
+        {
+            OpenAddUserForm();
+        }
+
+
+        // Double buffer
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;
+                return cp;
+            }
         }
     }
 }

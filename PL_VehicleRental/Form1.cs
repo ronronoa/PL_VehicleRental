@@ -177,5 +177,10 @@ namespace PL_VehicleRental
                 e.Graphics.DrawLine(pen, 0, y, headerPanel.Width, y);
             }
         }
+
+        private void mainPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PL_VehicleRental.Forms;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace PL_VehicleRental
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new UserManagementForm());
             //EncryptConnectionString();
         }
     }

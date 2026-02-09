@@ -26,6 +26,7 @@ namespace PL_VehicleRental.Forms
             Edit,
             Delete,
         }
+
         public UserManagementForm()
         {
             InitializeComponent();
@@ -41,44 +42,50 @@ namespace PL_VehicleRental.Forms
 
         }
 
-        private void UserManagementForm_Load(object sender, EventArgs e)
+        private async void UserManagementForm_Load(object sender, EventArgs e)
         {
 
             DataGridViewStyle.ApplyStandard(dgvRolesPermission);
-            RefreshUserData();
+            await RefreshUserDataAsync();
 
         }
-
-        public void RefreshUserData()
+        private async void UserManagementForm_Shown(object sender, EventArgs e)
         {
-            DataTable users = LoadUsers();
+            
+        }
+
+        public async Task RefreshUserDataAsync()
+        {
+            DataTable users = await GetUserAsync();
             dgvRolesPermission.DataSource = users;
             SetupActionsButtons();
             CenterGridHeaders();
 
         }
 
-        private DataTable LoadUsers()
+        private async Task<DataTable> GetUserAsync()
         {
+            const string query = @"
+                                   SELECT id AS ID,
+                                   userName AS USERNAME,
+                                   fullName AS FULLNAME,
+                                   address AS ADDRESS,
+                                   role AS ROLE,
+                                   status AS STATUS
+                                   FROM users";
+
             DataTable dt = new DataTable();
-
-            using (MySqlConnection conn = MySQLConnectionContext.Create())
+            using (var conn = MySQLConnectionContext.Create())
+                using (var cmd = new MySqlCommand(query, conn))
             {
-                conn.Open();
+                await conn.OpenAsync();
 
-                string query = @"SELECT id AS ID, 
-                                        userName AS Username, 
-                                        fullName AS FullName,
-                                        address AS Address,
-                                        role As Role, 
-                                        status AS Status
-                                FROM users";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                using (var reader = await cmd.ExecuteReaderAsync())
                 {
-                    da.Fill(dt);
+                    dt.Load(reader);
                 }
             }
+
             return dt;
         }
 
@@ -365,15 +372,17 @@ namespace PL_VehicleRental.Forms
 
         private void OpenAddUserForm()
         {
-            frmAddUser form = new frmAddUser();
-
-            form.UserAdded += (sender, e) =>
+            using (frmAddUser form = new frmAddUser())
             {
-                this.RefreshUserData();
-            };
-            form.FormBorderStyle = FormBorderStyle.None;
-            form.StartPosition = FormStartPosition.CenterParent;
-            form.ShowDialog();
+                form.UserAdded += async (sender, e) =>
+                {
+                    await RefreshUserDataAsync();
+                };
+
+                form.FormBorderStyle = FormBorderStyle.None;
+                form.StartPosition = FormStartPosition.CenterParent;
+                form.ShowDialog();
+            }
         }
 
         private void btnUserForm_Click_1(object sender, EventArgs e)
@@ -392,5 +401,6 @@ namespace PL_VehicleRental.Forms
                 return cp;
             }
         }
+
     }
 }

@@ -28,21 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserManagementForm));
             this.BackgroundPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.UserManagementPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.rolesTablePanel = new Guna.UI2.WinForms.Guna2Panel();
-            this.dgvRolesPermission = new Guna.UI2.WinForms.Guna2DataGridView();
             this.headerPanel = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.btnUserForm = new Guna.UI2.WinForms.Guna2Button();
             this.headerLabel = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowUsers = new System.Windows.Forms.FlowLayoutPanel();
             this.BackgroundPanel.SuspendLayout();
             this.UserManagementPanel.SuspendLayout();
             this.rolesTablePanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRolesPermission)).BeginInit();
             this.headerPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,7 +74,8 @@
             // 
             // rolesTablePanel
             // 
-            this.rolesTablePanel.Controls.Add(this.dgvRolesPermission);
+            this.rolesTablePanel.Controls.Add(this.flowUsers);
+            this.rolesTablePanel.Controls.Add(this.flowLayoutPanel1);
             this.rolesTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rolesTablePanel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rolesTablePanel.Location = new System.Drawing.Point(10, 110);
@@ -85,59 +83,6 @@
             this.rolesTablePanel.Padding = new System.Windows.Forms.Padding(10);
             this.rolesTablePanel.Size = new System.Drawing.Size(1280, 627);
             this.rolesTablePanel.TabIndex = 1;
-            // 
-            // dgvRolesPermission
-            // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.dgvRolesPermission.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRolesPermission.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvRolesPermission.ColumnHeadersHeight = 4;
-            this.dgvRolesPermission.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRolesPermission.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvRolesPermission.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvRolesPermission.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvRolesPermission.Location = new System.Drawing.Point(10, 10);
-            this.dgvRolesPermission.Name = "dgvRolesPermission";
-            this.dgvRolesPermission.RowHeadersVisible = false;
-            this.dgvRolesPermission.RowHeadersWidth = 51;
-            this.dgvRolesPermission.RowTemplate.Height = 24;
-            this.dgvRolesPermission.Size = new System.Drawing.Size(1260, 607);
-            this.dgvRolesPermission.TabIndex = 0;
-            this.dgvRolesPermission.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
-            this.dgvRolesPermission.ThemeStyle.AlternatingRowsStyle.Font = null;
-            this.dgvRolesPermission.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
-            this.dgvRolesPermission.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
-            this.dgvRolesPermission.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
-            this.dgvRolesPermission.ThemeStyle.BackColor = System.Drawing.Color.White;
-            this.dgvRolesPermission.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvRolesPermission.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            this.dgvRolesPermission.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvRolesPermission.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvRolesPermission.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.dgvRolesPermission.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            this.dgvRolesPermission.ThemeStyle.HeaderStyle.Height = 4;
-            this.dgvRolesPermission.ThemeStyle.ReadOnly = false;
-            this.dgvRolesPermission.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
-            this.dgvRolesPermission.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgvRolesPermission.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvRolesPermission.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.dgvRolesPermission.ThemeStyle.RowsStyle.Height = 24;
-            this.dgvRolesPermission.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvRolesPermission.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
             // headerPanel
             // 
@@ -189,6 +134,24 @@
             this.headerLabel.TabIndex = 3;
             this.headerLabel.Text = "User Management";
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(827, 115);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(8, 8);
+            this.flowLayoutPanel1.TabIndex = 0;
+            // 
+            // flowUsers
+            // 
+            this.flowUsers.AutoScroll = true;
+            this.flowUsers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowUsers.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowUsers.Location = new System.Drawing.Point(10, 10);
+            this.flowUsers.Name = "flowUsers";
+            this.flowUsers.Size = new System.Drawing.Size(1260, 607);
+            this.flowUsers.TabIndex = 1;
+            this.flowUsers.WrapContents = false;
+            // 
             // UserManagementForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -203,7 +166,6 @@
             this.BackgroundPanel.ResumeLayout(false);
             this.UserManagementPanel.ResumeLayout(false);
             this.rolesTablePanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRolesPermission)).EndInit();
             this.headerPanel.ResumeLayout(false);
             this.headerPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -215,9 +177,10 @@
         private Guna.UI2.WinForms.Guna2Panel BackgroundPanel;
         private Guna.UI2.WinForms.Guna2Panel UserManagementPanel;
         private Guna.UI2.WinForms.Guna2Panel rolesTablePanel;
-        private Guna.UI2.WinForms.Guna2DataGridView dgvRolesPermission;
         private Guna.UI2.WinForms.Guna2GradientPanel headerPanel;
         private System.Windows.Forms.Label headerLabel;
         private Guna.UI2.WinForms.Guna2Button btnUserForm;
+        private System.Windows.Forms.FlowLayoutPanel flowUsers;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

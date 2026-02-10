@@ -13,6 +13,7 @@ using Guna.UI2.WinForms;
 using MySqlConnector;
 using PL_VehicleRental.Classes;
 using PL_VehicleRental.Data;
+using PL_VehicleRental.UserControl;
 using VehicleManagementSystem.Dto;
 
 namespace PL_VehicleRental.Forms
@@ -30,11 +31,6 @@ namespace PL_VehicleRental.Forms
         public UserManagementForm()
         {
             InitializeComponent();
-
-            dgvRolesPermission.CellPainting -= dgvRolesPermission_CellPainting;
-            dgvRolesPermission.CellPainting += dgvRolesPermission_CellPainting;
-            dgvRolesPermission.CellClick -= dgvRolesPermission_CellClick;
-            dgvRolesPermission.CellClick += dgvRolesPermission_CellClick;
         }
 
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
@@ -45,7 +41,7 @@ namespace PL_VehicleRental.Forms
         private async void UserManagementForm_Load(object sender, EventArgs e)
         {
 
-            DataGridViewStyle.ApplyStandard(dgvRolesPermission);
+            
             await RefreshUserDataAsync();
 
         }
@@ -56,37 +52,58 @@ namespace PL_VehicleRental.Forms
 
         public async Task RefreshUserDataAsync()
         {
-            DataTable users = await GetUserAsync();
-            dgvRolesPermission.DataSource = users;
-            SetupActionsButtons();
-            CenterGridHeaders();
+            flowUsers.Controls.Clear();
 
+            var users = await GetUserAsync();
+
+            foreach (var user in users)
+            {
+                var item = new ucItemControl(user);
+
+                flowUsers.Controls.Add(item);
+            }
         }
 
-        private async Task<DataTable> GetUserAsync()
+        private async Task<List<UserInfoDto>> GetUserAsync()
         {
             const string query = @"
-                                   SELECT id AS ID,
-                                   userName AS USERNAME,
-                                   fullName AS FULLNAME,
-                                   address AS ADDRESS,
-                                   role AS ROLE,
-                                   status AS STATUS
+                                   SELECT id,
+                                   userName,
+                                   fullName,
+                                   address,
+                                   role,
+                                   status
                                    FROM users";
+            var users = new List<UserInfoDto>();
 
-            DataTable dt = new DataTable();
-            using (var conn = MySQLConnectionContext.Create())
-                using (var cmd = new MySqlCommand(query, conn))
+            using(var conn = MySQLConnectionContext.Create())
+                using (var cmd = new MySqlCommand())
             {
                 await conn.OpenAsync();
-
                 using (var reader = await cmd.ExecuteReaderAsync())
                 {
-                    dt.Load(reader);
+                    while (await reader.ReadAsync())
+                    {
+                        users.Add(new UserInfoDto
+                        {
+                            Id = reader.GetInt32("id"),
+                            UserName = reader.GetString("userName"),
+                            FullName = reader.GetString("fullName"),
+                            Address = reader.GetString("address"),
+                            Role = reader.GetString("role"),
+                            Status = reader.GetString("status"),
+                        });
+
+                    }
                 }
             }
 
-            return dt;
+            return users;
+        }
+
+        private void OpenInfo()
+        {
+            //frmInfo frm = new frmInfo(userId);
         }
 
         private void addBtn_Click(object sender, EventArgs e)
@@ -119,133 +136,30 @@ namespace PL_VehicleRental.Forms
 
         private void dgvRolesPermission_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dgvRolesPermission.Columns[e.ColumnIndex].Name != "Status")
-                return;
-
-            if (e.Value == null)
-                return;
-
-            string status = e.Value.ToString();
-
-            switch (status)
-            {
-                case "Active":
-                    e.CellStyle.ForeColor = Color.Green;
-                    e.CellStyle.Font = new Font(dgvRolesPermission.Font, FontStyle.Bold);
-                    break;
-
-                case "Inactive":
-                    e.CellStyle.ForeColor = Color.Red;
-                    break;
-
-                case "Suspended":
-                    e.CellStyle.ForeColor = Color.DarkOrange;
-                    break;
-            }
         }
 
         private void CenterGridHeaders()
         {
-            dgvRolesPermission.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-
-            dgvRolesPermission.EnableHeadersVisualStyles = false;
         }
 
         private void SetupActionsButtons()
         {
-            if (dgvRolesPermission.Columns["Actions"] == null)
-            {
-                DataGridViewTextBoxColumn actionsCol = new DataGridViewTextBoxColumn();
-                actionsCol.Name = "Actions";
-                actionsCol.HeaderText = "Actions";
-                actionsCol.ReadOnly = true;
-                actionsCol.Width = 150;
-                actionsCol.SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgvRolesPermission.Columns.Add(actionsCol);
-            }
+            
         }
 
         private void dgvRolesPermission_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return;
-            if (dgvRolesPermission.Columns[e.ColumnIndex].Name != "Actions") return;
-
-            var action = GetActionButton(dgvRolesPermission, e.RowIndex, e.ColumnIndex);
-            if (action == null) return;
-
-            int userId = Convert.ToInt32(dgvRolesPermission.Rows[e.RowIndex].Cells["id"].Value);
-
-            switch (action)
-            {
-                case ActionButton.Info:
-                    using (var form = new frmInfo(userId))
-                    {
-                        form.FormBorderStyle = FormBorderStyle.None;
-                        form.StartPosition = FormStartPosition.CenterParent;
-                        form.ShowDialog();
-                    }
-                    break;
-            }
+            
         }
 
 
         private void dgvRolesPermission_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.RowIndex < 0) return;
-
-            if (dgvRolesPermission.Columns[e.ColumnIndex].Name == "Actions")
-            {
-                e.PaintBackground(e.ClipBounds, true);
-
-                int padding = 5;
-                int buttonCount = 3;
-
-                int totalPadding = padding * (buttonCount + 1);
-                int buttonWidth = (e.CellBounds.Width - totalPadding) / buttonCount;
-                int buttonHeight = e.CellBounds.Height - (padding * 2);
-
-                Rectangle infoButton = new Rectangle(
-                    e.CellBounds.Left + padding,
-                    e.CellBounds.Top + padding,
-                    buttonWidth,
-                    buttonHeight
-                );
-
-                Rectangle editButton = new Rectangle(
-                    infoButton.Right + padding,
-                    e.CellBounds.Top + padding,
-                    buttonWidth,
-                    buttonHeight
-                );
-
-                Rectangle deleteButton = new Rectangle(
-                    editButton.Right + padding,
-                    e.CellBounds.Top + padding,
-                    buttonWidth,
-                    buttonHeight
-                );
-
-                using (SolidBrush infoBrush = new SolidBrush(Color.FromArgb(250, 250, 250)))
-                    e.Graphics.FillRectangle(infoBrush, infoButton);
-
-                using (SolidBrush editBrush = new SolidBrush(Color.FromArgb(94, 148, 255)))
-                    e.Graphics.FillRectangle(editBrush, editButton);
-
-                using (SolidBrush deleteBrush = new SolidBrush(Color.FromArgb(255, 77, 79)))
-                    e.Graphics.FillRectangle(deleteBrush, deleteButton);
-
-                DrawCenteredIcon(e.Graphics, Properties.Resources.infoIcon, infoButton);
-                DrawCenteredIcon(e.Graphics, Properties.Resources.editIcon, editButton);
-                DrawCenteredIcon(e.Graphics, Properties.Resources.deleteIcon, deleteButton);
-
-                e.Handled = true;
-            }
+            
         }
         private void DrawCenteredIcon(Graphics g, Image icon, Rectangle button)
         {
-            int x = button.Left + (button.Width - icon.Width) / 2;
-            int y = button.Top + (button.Height - icon.Height) / 2;
-            g.DrawImage(icon, x, y, icon.Width, icon.Height);
+            
         }
 
 

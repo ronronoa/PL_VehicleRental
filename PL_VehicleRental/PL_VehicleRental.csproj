@@ -150,6 +150,24 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="UserControl\ucHeaderTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucHeaderTab.Designer.cs">
+      <DependentUpon>ucHeaderTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucItemControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucItemControl.Designer.cs">
+      <DependentUpon>ucItemControl.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UserControl\ucHeaderTab.resx">
+      <DependentUpon>ucHeaderTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\ucItemControl.resx">
+      <DependentUpon>ucItemControl.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Resources\infoIcon.png" />
     <None Include="Resources\person_add_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" />
     <None Include="Resources\user-plus.png" />

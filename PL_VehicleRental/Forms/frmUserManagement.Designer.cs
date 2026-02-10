@@ -35,8 +35,8 @@
             this.headerPanel = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.btnUserForm = new Guna.UI2.WinForms.Guna2Button();
             this.headerLabel = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowUsers = new System.Windows.Forms.FlowLayoutPanel();
+            this.TableHeaderPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.BackgroundPanel.SuspendLayout();
             this.UserManagementPanel.SuspendLayout();
             this.rolesTablePanel.SuspendLayout();
@@ -75,7 +75,7 @@
             // rolesTablePanel
             // 
             this.rolesTablePanel.Controls.Add(this.flowUsers);
-            this.rolesTablePanel.Controls.Add(this.flowLayoutPanel1);
+            this.rolesTablePanel.Controls.Add(this.TableHeaderPanel);
             this.rolesTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rolesTablePanel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rolesTablePanel.Location = new System.Drawing.Point(10, 110);
@@ -134,23 +134,24 @@
             this.headerLabel.TabIndex = 3;
             this.headerLabel.Text = "User Management";
             // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(827, 115);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(8, 8);
-            this.flowLayoutPanel1.TabIndex = 0;
-            // 
             // flowUsers
             // 
             this.flowUsers.AutoScroll = true;
             this.flowUsers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowUsers.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowUsers.Location = new System.Drawing.Point(10, 10);
+            this.flowUsers.Location = new System.Drawing.Point(10, 110);
             this.flowUsers.Name = "flowUsers";
-            this.flowUsers.Size = new System.Drawing.Size(1260, 607);
+            this.flowUsers.Size = new System.Drawing.Size(1260, 507);
             this.flowUsers.TabIndex = 1;
             this.flowUsers.WrapContents = false;
+            // 
+            // TableHeaderPanel
+            // 
+            this.TableHeaderPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.TableHeaderPanel.Location = new System.Drawing.Point(10, 10);
+            this.TableHeaderPanel.Name = "TableHeaderPanel";
+            this.TableHeaderPanel.Size = new System.Drawing.Size(1260, 100);
+            this.TableHeaderPanel.TabIndex = 0;
             // 
             // UserManagementForm
             // 
@@ -181,6 +182,6 @@
         private System.Windows.Forms.Label headerLabel;
         private Guna.UI2.WinForms.Guna2Button btnUserForm;
         private System.Windows.Forms.FlowLayoutPanel flowUsers;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private Guna.UI2.WinForms.Guna2Panel TableHeaderPanel;
     }
 }

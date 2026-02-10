@@ -20,14 +20,6 @@ namespace PL_VehicleRental.Forms
 {
     public partial class UserManagementForm : Form
     {
-
-        enum ActionButton
-        {
-            Info,
-            Edit,
-            Delete,
-        }
-
         public UserManagementForm()
         {
             InitializeComponent();
@@ -41,8 +33,8 @@ namespace PL_VehicleRental.Forms
         private async void UserManagementForm_Load(object sender, EventArgs e)
         {
 
-            
             await RefreshUserDataAsync();
+            TableHeader();
 
         }
         private async void UserManagementForm_Shown(object sender, EventArgs e)
@@ -77,7 +69,7 @@ namespace PL_VehicleRental.Forms
             var users = new List<UserInfoDto>();
 
             using(var conn = MySQLConnectionContext.Create())
-                using (var cmd = new MySqlCommand())
+                using (var cmd = new MySqlCommand(query, conn))
             {
                 await conn.OpenAsync();
                 using (var reader = await cmd.ExecuteReaderAsync())
@@ -101,6 +93,12 @@ namespace PL_VehicleRental.Forms
             return users;
         }
 
+        private void TableHeader()
+        {
+            TableHeaderPanel.Height = 45;
+            TableHeaderPanel.BackColor = Color.White;
+        }
+
         private void OpenInfo()
         {
             //frmInfo frm = new frmInfo(userId);
@@ -109,29 +107,6 @@ namespace PL_VehicleRental.Forms
         private void addBtn_Click(object sender, EventArgs e)
         {
             
-        }
-
-        private ActionButton? GetActionButton(DataGridView dgv, int row, int col)
-        {
-            var cell = dgv.GetCellDisplayRectangle(col, row, false);
-
-            int padding = 5;
-            int buttonCount = 3;
-            int totalPadding = padding * (buttonCount + 1);
-            int buttonWidth = (cell.Width - totalPadding) / buttonCount;
-
-            Point click = dgv.PointToClient(Cursor.Position);
-            int x = click.X - cell.Left;
-
-            int infoStart = padding;
-            int editStart = infoStart + buttonWidth + padding;
-            int deleteStart = editStart + buttonWidth + padding;
-
-            if (x >= infoStart && x < infoStart + buttonWidth) return ActionButton.Info;
-            if (x >= editStart && x < editStart + buttonWidth) return ActionButton.Edit;
-            if (x >= deleteStart && x < deleteStart + buttonWidth) return ActionButton.Delete;
-
-            return null;
         }
 
         private void dgvRolesPermission_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

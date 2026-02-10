@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PL_VehicleRental.UI.Layout;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,7 +24,9 @@ namespace PL_VehicleRental.UserControl
             InitializeComponent();
             UserId = user.Id;
 
+            lblUserID.Text = Convert.ToString(user.Id);
             lblUsername.Text = user.UserName;
+            lblAddress.Text = user.Address;
             lblFullName.Text = user.FullName;
             lblRole.Text = user.Role;
             setStatus(user.Status);
@@ -52,9 +55,45 @@ namespace PL_VehicleRental.UserControl
             }
         }
 
+        private void BuildLayout()
+        {
+            var layout = new TableLayoutPanel
+            {
+                Dock = DockStyle.Fill,
+                ColumnCount = 6,
+                RowCount = 1,
+                BackColor = Color.White,
+                Padding = new Padding(8)
+            };
+            layout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.IdWidth));
+            layout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.UsernameWidth));
+            layout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.FullnameWidth));
+            layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+            layout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.RoleWidth));
+            layout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.StatusWidth));
+
+            AddCell(layout, lblUserID, 0);
+            AddCell(layout, lblUsername, 1);
+            AddCell(layout, lblFullName, 2);
+            AddCell(layout, lblAddress, 3);
+            AddCell(layout, lblRole, 4);
+            AddCell(layout, lblStatus, 5);
+
+            Controls.Clear();
+            Controls.Add(layout);
+        }
+
+        private void AddCell(TableLayoutPanel layout, Control control, int column)
+        {
+            control.Dock = DockStyle.Fill;
+            control.Margin = new Padding(6, 0, 6, 0);
+
+            layout.Controls.Add(control, column, 0);
+        }
+
         private void ucItemControl_Load(object sender, EventArgs e)
         {
-
+            BuildLayout();
         }
     }
 }

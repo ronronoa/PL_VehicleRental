@@ -150,6 +150,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="UI\Layout\UserTableLayout.cs" />
     <Compile Include="UserControl\ucHeaderTab.cs">
       <SubType>UserControl</SubType>
     </Compile>

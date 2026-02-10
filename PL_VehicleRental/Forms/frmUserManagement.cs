@@ -13,6 +13,7 @@ using Guna.UI2.WinForms;
 using MySqlConnector;
 using PL_VehicleRental.Classes;
 using PL_VehicleRental.Data;
+using PL_VehicleRental.UI.Layout;
 using PL_VehicleRental.UserControl;
 using VehicleManagementSystem.Dto;
 
@@ -23,6 +24,7 @@ namespace PL_VehicleRental.Forms
         public UserManagementForm()
         {
             InitializeComponent();
+            flowUsers.Resize += flowUsers_Resize;
         }
 
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
@@ -32,9 +34,9 @@ namespace PL_VehicleRental.Forms
 
         private async void UserManagementForm_Load(object sender, EventArgs e)
         {
-
-            await RefreshUserDataAsync();
             TableHeader();
+            FixHeaderScrollbarAlignment();
+            await RefreshUserDataAsync();
 
         }
         private async void UserManagementForm_Shown(object sender, EventArgs e)
@@ -53,6 +55,13 @@ namespace PL_VehicleRental.Forms
                 var item = new ucItemControl(user);
 
                 flowUsers.Controls.Add(item);
+                item.Width = flowUsers.ClientSize.Width;
+
+                flowUsers.WrapContents = false;
+                flowUsers.FlowDirection = FlowDirection.TopDown;
+                flowUsers.AutoScroll = true;
+                flowUsers.Padding = Padding.Empty;
+                flowUsers.Margin = Padding.Empty;
             }
         }
 
@@ -95,14 +104,65 @@ namespace PL_VehicleRental.Forms
 
         private void TableHeader()
         {
+            TableHeaderPanel.SuspendLayout();
+            TableHeaderPanel.Controls.Clear();
+
             TableHeaderPanel.Height = 45;
+            TableHeaderPanel.Dock = DockStyle.Top;
             TableHeaderPanel.BackColor = Color.White;
+
+            TableLayoutPanel headerLayout = new TableLayoutPanel
+            {
+                Dock = DockStyle.Fill,
+                ColumnCount = 6,
+                RowCount = 1
+            };
+
+            headerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.IdWidth));
+            headerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.UsernameWidth));
+            headerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.FullnameWidth));
+            headerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+            headerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.RoleWidth));
+            headerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.StatusWidth));
+
+            Label CreateHeader(string text)
+            {
+                return new Label
+                {
+                    Text = text,
+                    Dock = DockStyle.Fill,
+                    TextAlign = System.Drawing.ContentAlignment.MiddleLeft,
+                    Font = new Font("Segoe UI", 9.5f, FontStyle.Bold),
+                    ForeColor = Color.FromArgb(90, 90, 90),
+                    Padding = new Padding(10, 0, 0, 0)
+                };
+            }
+
+            headerLayout.Controls.Add(CreateHeader("ID"), 0, 0);
+            headerLayout.Controls.Add(CreateHeader("USERNAME"), 1, 0);
+            headerLayout.Controls.Add(CreateHeader("FULLNAME"), 2, 0);
+            headerLayout.Controls.Add(CreateHeader("ADDRESS"), 3, 0);
+            headerLayout.Controls.Add(CreateHeader("ROLE"), 4, 0);
+            headerLayout.Controls.Add(CreateHeader("STATUS"), 5, 0);
+
+            TableHeaderPanel.Controls.Add(headerLayout);
+            TableHeaderPanel.ResumeLayout();
         }
 
-        private void OpenInfo()
+        private void FixHeaderScrollbarAlignment()
         {
-            //frmInfo frm = new frmInfo(userId);
+            int scrollBarWidth = SystemInformation.VerticalScrollBarWidth;
+            TableHeaderPanel.Padding = new Padding(0, 0, scrollBarWidth, 0);
         }
+
+
+        //private void OpenInfo()
+        //{
+        //    using (frmInfo frm = new frmInfo(userId))
+        //    {
+        //        frm.ShowDialog(this);
+        //    }
+        //}
 
         private void addBtn_Click(object sender, EventArgs e)
         {
@@ -291,5 +351,10 @@ namespace PL_VehicleRental.Forms
             }
         }
 
+        private void flowUsers_Resize(object sender, EventArgs e)
+        {
+            foreach (Control c in flowUsers.Controls)
+                c.Width = flowUsers.ClientSize.Width;
+        }
     }
 }

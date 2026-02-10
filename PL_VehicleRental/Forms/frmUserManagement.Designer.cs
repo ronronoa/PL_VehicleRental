@@ -144,6 +144,7 @@
             this.flowUsers.Size = new System.Drawing.Size(1260, 507);
             this.flowUsers.TabIndex = 1;
             this.flowUsers.WrapContents = false;
+            this.flowUsers.Resize += new System.EventHandler(this.flowUsers_Resize);
             // 
             // TableHeaderPanel
             // 

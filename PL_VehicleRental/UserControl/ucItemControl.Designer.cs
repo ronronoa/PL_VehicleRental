@@ -102,7 +102,7 @@
             this.Controls.Add(this.lblFullName);
             this.Controls.Add(this.lblUsername);
             this.Name = "ucItemControl";
-            this.Size = new System.Drawing.Size(655, 54);
+            this.Size = new System.Drawing.Size(820, 54);
             this.Load += new System.EventHandler(this.ucItemControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -117,5 +117,6 @@
         private System.Windows.Forms.Label lblFullName;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblUserID;
+        private Guna.UI2.WinForms.Guna2Panel pnlActions;
     }
 }

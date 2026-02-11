@@ -8,10 +8,12 @@ namespace PL_VehicleRental.UI.Layout
 {
     public static class UserTableLayout
     {
-        public const int IdWidth = 60;
-        public const int UsernameWidth = 160;
-        public const int FullnameWidth = 200;
-        public const int RoleWidth = 120;
-        public const int StatusWidth = 100;
+        public static int IdWidth = 50;
+        public static int UsernameWidth = 120;
+        public static int FullnameWidth = 150;
+        public static int AddressWidth = 200;
+        public static int RoleWidth = 100;
+        public static int StatusWidth = 100;
+        public static int ActionWidth = 100;
     }
 }

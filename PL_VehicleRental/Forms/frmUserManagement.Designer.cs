@@ -122,7 +122,7 @@
             this.btnUserForm.Size = new System.Drawing.Size(202, 45);
             this.btnUserForm.TabIndex = 2;
             this.btnUserForm.Text = "Add User";
-            this.btnUserForm.Click += new System.EventHandler(this.btnUserForm_Click_1);
+            this.btnUserForm.Click += new System.EventHandler(this.btnUserForm_Click);
             // 
             // headerLabel
             // 

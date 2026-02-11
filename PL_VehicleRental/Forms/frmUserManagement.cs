@@ -37,16 +37,21 @@ namespace PL_VehicleRental.Forms
             TableHeader();
             FixHeaderScrollbarAlignment();
             await RefreshUserDataAsync();
-
         }
+
         private async void UserManagementForm_Shown(object sender, EventArgs e)
         {
-            
+
         }
 
         public async Task RefreshUserDataAsync()
         {
             flowUsers.Controls.Clear();
+            flowUsers.WrapContents = false;
+            flowUsers.FlowDirection = FlowDirection.TopDown;
+            flowUsers.AutoScroll = true;
+            flowUsers.Padding = Padding.Empty;
+            flowUsers.Margin = Padding.Empty;
 
             var users = await GetUserAsync();
 
@@ -57,11 +62,9 @@ namespace PL_VehicleRental.Forms
                 flowUsers.Controls.Add(item);
                 item.Width = flowUsers.ClientSize.Width;
 
-                flowUsers.WrapContents = false;
-                flowUsers.FlowDirection = FlowDirection.TopDown;
-                flowUsers.AutoScroll = true;
-                flowUsers.Padding = Padding.Empty;
-                flowUsers.Margin = Padding.Empty;
+                item.InfoClicked += (_, __) => OpenInfo(user.Id);
+                item.EditClicked += (_, __) => OpenEditForm(user.Id);
+                item.DeleteClicked += (_, __) => DeleteUser(user.Id, user.UserName);
             }
         }
 
@@ -77,8 +80,8 @@ namespace PL_VehicleRental.Forms
                                    FROM users";
             var users = new List<UserInfoDto>();
 
-            using(var conn = MySQLConnectionContext.Create())
-                using (var cmd = new MySqlCommand(query, conn))
+            using (var conn = MySQLConnectionContext.Create())
+            using (var cmd = new MySqlCommand(query, conn))
             {
                 await conn.OpenAsync();
                 using (var reader = await cmd.ExecuteReaderAsync())
@@ -110,12 +113,15 @@ namespace PL_VehicleRental.Forms
             TableHeaderPanel.Height = 45;
             TableHeaderPanel.Dock = DockStyle.Top;
             TableHeaderPanel.BackColor = Color.White;
+            TableHeaderPanel.Padding = new Padding(0, 5, 0, 5);
 
             TableLayoutPanel headerLayout = new TableLayoutPanel
             {
                 Dock = DockStyle.Fill,
-                ColumnCount = 6,
-                RowCount = 1
+                ColumnCount = 7,
+                RowCount = 1,
+                CellBorderStyle = TableLayoutPanelCellBorderStyle.None,
+                Margin = Padding.Empty
             };
 
             headerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.IdWidth));
@@ -124,6 +130,7 @@ namespace PL_VehicleRental.Forms
             headerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
             headerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.RoleWidth));
             headerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.StatusWidth));
+            headerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.ActionWidth));
 
             Label CreateHeader(string text)
             {
@@ -131,10 +138,10 @@ namespace PL_VehicleRental.Forms
                 {
                     Text = text,
                     Dock = DockStyle.Fill,
-                    TextAlign = System.Drawing.ContentAlignment.MiddleLeft,
+                    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
                     Font = new Font("Segoe UI", 9.5f, FontStyle.Bold),
-                    ForeColor = Color.FromArgb(90, 90, 90),
-                    Padding = new Padding(10, 0, 0, 0)
+                    Padding = new Padding(5, 0, 5, 0),
+                    Margin = new Padding(0)
                 };
             }
 
@@ -144,6 +151,16 @@ namespace PL_VehicleRental.Forms
             headerLayout.Controls.Add(CreateHeader("ADDRESS"), 3, 0);
             headerLayout.Controls.Add(CreateHeader("ROLE"), 4, 0);
             headerLayout.Controls.Add(CreateHeader("STATUS"), 5, 0);
+            headerLayout.Controls.Add(CreateHeader("ACTION"), 6, 0);
+
+            headerLayout.Paint += (sender, e) =>
+            {
+                ControlPaint.DrawBorder(e.Graphics, headerLayout.ClientRectangle,
+                    Color.Transparent, 0, ButtonBorderStyle.None,
+                    Color.Transparent, 0, ButtonBorderStyle.None,
+                    Color.Transparent, 0, ButtonBorderStyle.None,
+                    Color.FromArgb(230, 230, 230), 1, ButtonBorderStyle.Solid);
+            };
 
             TableHeaderPanel.Controls.Add(headerLayout);
             TableHeaderPanel.ResumeLayout();
@@ -155,163 +172,58 @@ namespace PL_VehicleRental.Forms
             TableHeaderPanel.Padding = new Padding(0, 0, scrollBarWidth, 0);
         }
 
-
-        //private void OpenInfo()
-        //{
-        //    using (frmInfo frm = new frmInfo(userId))
-        //    {
-        //        frm.ShowDialog(this);
-        //    }
-        //}
-
-        private void addBtn_Click(object sender, EventArgs e)
+        public void OpenInfo(int userId)
         {
-            
+            using (frmInfo frm = new frmInfo(userId))
+            {
+                frm.ShowDialog(this);
+            }
         }
 
-        private void dgvRolesPermission_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void OpenEditForm(int userId)
         {
+            MessageBox.Show($"Edit user with ID: {userId}", "Edit User",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // using (frmEditUser form = new frmEditUser(userId))
+            // {
+            //     form.UserUpdated += async (sender, e) =>
+            //     {
+            //         await RefreshUserDataAsync();
+            //     };
+            //     form.ShowDialog(this);
+            // }
         }
 
-        private void CenterGridHeaders()
+        private async void DeleteUser(int userId, string userName)
         {
-        }
+            var result = MessageBox.Show($"Are you sure you want to delete user '{userName}'?",
+                "Confirm Delete",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
 
-        private void SetupActionsButtons()
-        {
-            
-        }
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    // await DeleteUserFromDatabase(userId);
 
-        private void dgvRolesPermission_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
+                    MessageBox.Show($"User '{userName}' has been deleted.", "Success",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-
-        private void dgvRolesPermission_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-            
-        }
-        private void DrawCenteredIcon(Graphics g, Image icon, Rectangle button)
-        {
-            
-        }
-
-
-
-
-        private void guna2PictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void firstNameLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void firstNameTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lastNameLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lastNameTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void addressLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void addressTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void roleLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void roleCmb_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void statusLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void statusCmb_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void userPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void guna2Panel1_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void userManagementTab_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void totalUserData_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void totalUserLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void activeUserData_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void activeUserData_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void activeUserLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvRolesPermission_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dgvRolesPermission_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
+                    await RefreshUserDataAsync();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error deleting user: {ex.Message}", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void btnUserForm_Click(object sender, EventArgs e)
         {
-            frmAddUser form = new frmAddUser();
-
-            form.FormBorderStyle = FormBorderStyle.None;
-            form.StartPosition = FormStartPosition.CenterParent;
-            form.ShowDialog();
+            OpenAddUserForm();
         }
 
         private void headerLabel_Click(object sender, EventArgs e)
@@ -334,12 +246,6 @@ namespace PL_VehicleRental.Forms
             }
         }
 
-        private void btnUserForm_Click_1(object sender, EventArgs e)
-        {
-            OpenAddUserForm();
-        }
-
-
         // Double buffer
         protected override CreateParams CreateParams
         {
@@ -349,12 +255,22 @@ namespace PL_VehicleRental.Forms
                 cp.ExStyle |= 0x02000000;
                 return cp;
             }
-        }
+        }   
 
         private void flowUsers_Resize(object sender, EventArgs e)
         {
             foreach (Control c in flowUsers.Controls)
-                c.Width = flowUsers.ClientSize.Width;
+            {
+                if (c is ucItemControl itemControl)
+                {
+                    itemControl.Width = flowUsers.ClientSize.Width;
+                    itemControl.UpdateWidth(flowUsers.ClientSize.Width);
+                }
+                else
+                {
+                    c.Width = flowUsers.ClientSize.Width;
+                }
+            }
         }
     }
 }

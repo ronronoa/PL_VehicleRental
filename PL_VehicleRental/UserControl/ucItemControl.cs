@@ -79,16 +79,42 @@ namespace PL_VehicleRental.UserControl
             AddCell(layout, lblRole, 4);
             AddCell(layout, lblStatus, 5);
 
+            MakeRounded(lblStatus);
+
             Controls.Clear();
             Controls.Add(layout);
         }
 
-        private void AddCell(TableLayoutPanel layout, Control control, int column)
+        private void AddCell(TableLayoutPanel layout, Label label, int column)
         {
-            control.Dock = DockStyle.Fill;
-            control.Margin = new Padding(6, 0, 6, 0);
+            label.Dock = DockStyle.Fill;
+            label.Margin = new Padding(6, 0, 6, 0);
+            label.TextAlign = ContentAlignment.MiddleLeft;
 
-            layout.Controls.Add(control, column, 0);
+            layout.Controls.Add(label, column, 0);
+        }
+
+        private void MakeRounded(Label label)
+        {
+            label.AutoSize = false;
+            label.TextAlign = ContentAlignment.MiddleCenter;
+
+            label.Paint += (s, e) =>
+            {
+                var rect = label.ClientRectangle;
+                rect.Inflate(-1, -1);
+
+                using (var path = new System.Drawing.Drawing2D.GraphicsPath())
+                {
+                    path.AddArc(rect.X, rect.Y, 12, 12, 180, 90);
+                    path.AddArc(rect.Right - 12, rect.Y, 12, 12, 270, 90);
+                    path.AddArc(rect.Right - 12, rect.Bottom - 12, 12, 12, 0, 90);
+                    path.AddArc(rect.X, rect.Bottom - 12, 12, 12, 90, 90);
+                    path.CloseFigure();
+
+                    label.Region = new Region(path);
+                }
+            };
         }
 
         private void ucItemControl_Load(object sender, EventArgs e)

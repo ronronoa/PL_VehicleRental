@@ -43,7 +43,7 @@ namespace PL_VehicleRental.UserControl
             actionPanel = new Panel
             {
                 Dock = DockStyle.Fill,
-                BackColor = Color.Transparent
+                BackColor = Color.Transparent,
             };
 
             var btnInfo = CreateIconButton(
@@ -99,7 +99,7 @@ namespace PL_VehicleRental.UserControl
                 Size = new Size(32, 32),
                 BorderRadius = 6,
                 Image = icon,
-                ImageSize = new Size(16, 16),
+                ImageSize = new Size(18, 18),
                 FillColor = Color.Transparent,
                 HoverState =
                 {

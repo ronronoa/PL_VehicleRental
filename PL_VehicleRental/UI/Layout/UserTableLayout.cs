@@ -14,6 +14,6 @@ namespace PL_VehicleRental.UI.Layout
         public static int AddressWidth = 200;
         public static int RoleWidth = 100;
         public static int StatusWidth = 100;
-        public static int ActionWidth = 100;
+        public static int ActionWidth = 120;
     }
 }

@@ -71,33 +71,34 @@ namespace PL_VehicleRental.Forms
         private async Task<List<UserInfoDto>> GetUserAsync()
         {
             const string query = @"
-                                   SELECT id,
-                                   userName,
-                                   fullName,
-                                   address,
-                                   role,
-                                   status
-                                   FROM users";
+        SELECT id,
+               userName,
+               fullName,
+               address,
+               role,
+               status
+        FROM users";
+
             var users = new List<UserInfoDto>();
 
             using (var conn = MySQLConnectionContext.Create())
             using (var cmd = new MySqlCommand(query, conn))
             {
                 await conn.OpenAsync();
+
                 using (var reader = await cmd.ExecuteReaderAsync())
                 {
                     while (await reader.ReadAsync())
                     {
                         users.Add(new UserInfoDto
                         {
-                            Id = reader.GetInt32("id"),
-                            UserName = reader.GetString("userName"),
-                            FullName = reader.GetString("fullName"),
-                            Address = reader.GetString("address"),
-                            Role = reader.GetString("role"),
-                            Status = reader.GetString("status"),
+                        Id = reader.GetInt32("id"),
+                        UserName = reader.GetString("userName"),
+                        FullName = reader.GetString("fullName"),
+                        Address = reader.GetString("address"),
+                        Role = reader.GetString("role"),
+                        Status = reader.GetString("status")
                         });
-
                     }
                 }
             }

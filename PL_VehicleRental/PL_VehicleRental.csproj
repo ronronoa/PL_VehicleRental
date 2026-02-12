@@ -163,6 +163,7 @@
     <Compile Include="UserControl\ucItemControl.Designer.cs">
       <DependentUpon>ucItemControl.cs</DependentUpon>
     </Compile>
+    <None Include="Resources\searchIcon.png" />
     <EmbeddedResource Include="UserControl\ucHeaderTab.resx">
       <DependentUpon>ucHeaderTab.cs</DependentUpon>
     </EmbeddedResource>

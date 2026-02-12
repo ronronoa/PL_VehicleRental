@@ -34,6 +34,7 @@
             this.lblFullName = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblUserID = new System.Windows.Forms.Label();
+            this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.SuspendLayout();
             // 
             // lblStatus
@@ -91,6 +92,14 @@
             this.lblUserID.TabIndex = 5;
             this.lblUserID.Text = "ID";
             // 
+            // guna2Panel1
+            // 
+            this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
+            this.guna2Panel1.Name = "guna2Panel1";
+            this.guna2Panel1.Size = new System.Drawing.Size(820, 54);
+            this.guna2Panel1.TabIndex = 6;
+            // 
             // ucItemControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -101,6 +110,7 @@
             this.Controls.Add(this.lblAddress);
             this.Controls.Add(this.lblFullName);
             this.Controls.Add(this.lblUsername);
+            this.Controls.Add(this.guna2Panel1);
             this.Name = "ucItemControl";
             this.Size = new System.Drawing.Size(820, 54);
             this.Load += new System.EventHandler(this.ucItemControl_Load);
@@ -118,5 +128,6 @@
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblUserID;
         private Guna.UI2.WinForms.Guna2Panel pnlActions;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
     }
 }

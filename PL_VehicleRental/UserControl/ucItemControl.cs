@@ -21,9 +21,6 @@ namespace PL_VehicleRental.UserControl
         public event EventHandler EditClicked;
         public event EventHandler DeleteClicked;
 
-        private Guna2Button btnInfo;
-        private Guna2Button btnEdit;
-        private Guna2Button btnDelete;
         private Panel actionPanel;
 
         public ucItemControl(UserInfoDto user)
@@ -49,42 +46,17 @@ namespace PL_VehicleRental.UserControl
                 BackColor = Color.Transparent
             };
 
-            btnInfo = new Guna2Button
-            {
-                Text = "Info",
-                Font = new Font("Segoe UI Emoji", 9),
-                Size = new Size(30, 30),
-                BackColor = Color.FromArgb(240, 240, 240),
-                Cursor = Cursors.Hand,
-                Tag = "Info",
-                Margin = new Padding(2)
-            };
-            btnInfo.Click += BtnInfo_Click;
+            var btnInfo = CreateIconButton(
+                Properties.Resources.infoIcon, "View Info", (_, __) => InfoClicked?.Invoke(this, EventArgs.Empty)
+                );
 
-            btnEdit = new Guna2Button
-            {
-                Text = "Edit",
-                Font = new Font("Segoe UI Emoji", 9),
-                Size = new Size(30, 30),
-                BackColor = Color.FromArgb(240, 240, 240),
-                Cursor = Cursors.Hand,
-                Tag = "Edit",
-                Margin = new Padding(2)
-            };
-            btnEdit.Click += BtnEdit_Click;
+            var btnEdit = CreateIconButton(
+                Properties.Resources.editIcon, "Edit User", (_, __) => EditClicked?.Invoke(this, EventArgs.Empty)
+                );
 
-            btnDelete = new Guna2Button
-            {
-                Text = "Del",
-                Font = new Font("Segoe UI Emoji", 9),
-                Size = new Size(30, 30),
-                BackColor = Color.FromArgb(255, 240, 240),
-                ForeColor = Color.FromArgb(200, 0, 0),
-                Cursor = Cursors.Hand,
-                Tag = "Delete",
-                Margin = new Padding(2)
-            };
-            btnDelete.Click += BtnDelete_Click;
+            var btnDelete = CreateIconButton(
+                Properties.Resources.deleteIcon, "Delete User", (_, __) => DeleteClicked?.Invoke(this, EventArgs.Empty)
+                );
 
             var toolTip = new System.Windows.Forms.ToolTip();
             toolTip.SetToolTip(btnInfo, "View Details");
@@ -116,19 +88,50 @@ namespace PL_VehicleRental.UserControl
             actionPanel.Controls.Add(flowLayout);
         }
 
+        private Guna2Button CreateIconButton(
+            Image icon,
+            string tooltip,
+            EventHandler onClick,
+            bool isDanger = false)
+        {
+            var btn = new Guna2Button
+            {
+                Size = new Size(32, 32),
+                BorderRadius = 6,
+                Image = icon,
+                ImageSize = new Size(16, 16),
+                FillColor = Color.Transparent,
+                HoverState =
+                {
+                    FillColor = isDanger
+                ? Color.FromArgb(255, 235, 235)
+                : Color.FromArgb(235, 240, 255)
+                },
+
+                PressedColor = Color.Transparent,
+                Cursor = Cursors.Hand
+            };
+
+            btn.Click += onClick;
+
+            new System.Windows.Forms.ToolTip().SetToolTip(btn, tooltip);
+
+            return btn;
+        }
+
         private void BtnInfo_Click(object sender, EventArgs e)
         {
-            InfoClicked?.Invoke(this, EventArgs.Empty);
+            
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-            EditClicked?.Invoke(this, EventArgs.Empty);
+           
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            DeleteClicked?.Invoke(this, EventArgs.Empty);
+            
         }
 
         private void setStatus(string status)

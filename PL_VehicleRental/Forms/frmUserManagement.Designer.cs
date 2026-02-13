@@ -1,4 +1,7 @@
-﻿namespace PL_VehicleRental.Forms
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace PL_VehicleRental.Forms
 {
     partial class UserManagementForm
     {
@@ -31,6 +34,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserManagementForm));
             this.BackgroundPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.UserManagementPanel = new Guna.UI2.WinForms.Guna2Panel();
+            this.pnlOverlay = new Guna.UI2.WinForms.Guna2Panel();
+            this.progressBar = new Guna.UI2.WinForms.Guna2ProgressBar();
             this.rolesTablePanel = new Guna.UI2.WinForms.Guna2Panel();
             this.flowUsers = new System.Windows.Forms.FlowLayoutPanel();
             this.TableHeaderPanel = new Guna.UI2.WinForms.Guna2Panel();
@@ -40,6 +45,7 @@
             this.headerLabel = new System.Windows.Forms.Label();
             this.BackgroundPanel.SuspendLayout();
             this.UserManagementPanel.SuspendLayout();
+            this.pnlOverlay.SuspendLayout();
             this.rolesTablePanel.SuspendLayout();
             this.headerPanel.SuspendLayout();
             this.SuspendLayout();
@@ -75,8 +81,31 @@
             this.UserManagementPanel.Size = new System.Drawing.Size(975, 607);
             this.UserManagementPanel.TabIndex = 0;
             // 
+            // pnlOverlay
+            // 
+            this.pnlOverlay.Controls.Add(this.progressBar);
+            this.pnlOverlay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlOverlay.Location = new System.Drawing.Point(8, 89);
+            this.pnlOverlay.Name = "pnlOverlay";
+            this.pnlOverlay.Size = new System.Drawing.Size(943, 413);
+            this.pnlOverlay.TabIndex = 1;
+            // 
+            // progressBar
+            // 
+            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar.BorderRadius = 5;
+            this.progressBar.BorderThickness = 1;
+            this.progressBar.Location = new System.Drawing.Point(207, 170);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(525, 11);
+            this.progressBar.TabIndex = 0;
+            this.progressBar.Text = "guna2ProgressBar1";
+            this.progressBar.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            this.progressBar.ValueChanged += new System.EventHandler(this.progressBar_ValueChanged);
+            // 
             // rolesTablePanel
             // 
+            this.rolesTablePanel.Controls.Add(this.pnlOverlay);
             this.rolesTablePanel.Controls.Add(this.flowUsers);
             this.rolesTablePanel.Controls.Add(this.TableHeaderPanel);
             this.rolesTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -198,10 +227,12 @@
             this.Name = "UserManagementForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "User Management";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.Load += new System.EventHandler(this.UserManagementForm_Load);
             this.Shown += new System.EventHandler(this.UserManagementForm_Shown);
             this.BackgroundPanel.ResumeLayout(false);
             this.UserManagementPanel.ResumeLayout(false);
+            this.pnlOverlay.ResumeLayout(false);
             this.rolesTablePanel.ResumeLayout(false);
             this.headerPanel.ResumeLayout(false);
             this.headerPanel.PerformLayout();
@@ -220,5 +251,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowUsers;
         private Guna.UI2.WinForms.Guna2Panel TableHeaderPanel;
         private Guna.UI2.WinForms.Guna2TextBox txtSearch;
+        private Guna.UI2.WinForms.Guna2ProgressBar progressBar;
+        private Guna.UI2.WinForms.Guna2Panel pnlOverlay;
     }
 }

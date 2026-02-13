@@ -28,53 +28,52 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.pnlMain = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.progressBar = new Guna.UI2.WinForms.Guna2ProgressBar();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.exitBtn = new Guna.UI2.WinForms.Guna2Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.userImage = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.lblRole = new System.Windows.Forms.Label();
             this.label = new System.Windows.Forms.Label();
             this.txtAddress = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtFullName = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtUserName = new Guna.UI2.WinForms.Guna2TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
-            this.userImage = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.guna2GradientPanel1.SuspendLayout();
+            this.progressBar = new Guna.UI2.WinForms.Guna2ProgressBar();
+            this.pnlProgress = new Guna.UI2.WinForms.Guna2Panel();
+            this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userImage)).BeginInit();
+            this.pnlProgress.SuspendLayout();
             this.SuspendLayout();
             // 
-            // guna2GradientPanel1
+            // pnlMain
             // 
-            this.guna2GradientPanel1.BorderColor = System.Drawing.Color.Silver;
-            this.guna2GradientPanel1.BorderThickness = 2;
-            this.guna2GradientPanel1.Controls.Add(this.lblStatus);
-            this.guna2GradientPanel1.Controls.Add(this.progressBar);
-            this.guna2GradientPanel1.Controls.Add(this.label5);
-            this.guna2GradientPanel1.Controls.Add(this.label4);
-            this.guna2GradientPanel1.Controls.Add(this.label3);
-            this.guna2GradientPanel1.Controls.Add(this.exitBtn);
-            this.guna2GradientPanel1.Controls.Add(this.label2);
-            this.guna2GradientPanel1.Controls.Add(this.userImage);
-            this.guna2GradientPanel1.Controls.Add(this.lblRole);
-            this.guna2GradientPanel1.Controls.Add(this.label);
-            this.guna2GradientPanel1.Controls.Add(this.txtAddress);
-            this.guna2GradientPanel1.Controls.Add(this.txtFullName);
-            this.guna2GradientPanel1.Controls.Add(this.txtUserName);
-            this.guna2GradientPanel1.Controls.Add(this.label1);
-            this.guna2GradientPanel1.FillColor = System.Drawing.Color.White;
-            this.guna2GradientPanel1.Location = new System.Drawing.Point(0, -1);
-            this.guna2GradientPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.guna2GradientPanel1.Name = "guna2GradientPanel1";
-            this.guna2GradientPanel1.Padding = new System.Windows.Forms.Padding(8, 8, 8, 8);
-            this.guna2GradientPanel1.Size = new System.Drawing.Size(351, 420);
-            this.guna2GradientPanel1.TabIndex = 0;
-            this.guna2GradientPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2GradientPanel1_Paint);
+            this.pnlMain.BorderColor = System.Drawing.Color.Silver;
+            this.pnlMain.BorderThickness = 2;
+            this.pnlMain.Controls.Add(this.lblStatus);
+            this.pnlMain.Controls.Add(this.label5);
+            this.pnlMain.Controls.Add(this.label4);
+            this.pnlMain.Controls.Add(this.label3);
+            this.pnlMain.Controls.Add(this.exitBtn);
+            this.pnlMain.Controls.Add(this.label2);
+            this.pnlMain.Controls.Add(this.userImage);
+            this.pnlMain.Controls.Add(this.lblRole);
+            this.pnlMain.Controls.Add(this.label);
+            this.pnlMain.Controls.Add(this.txtAddress);
+            this.pnlMain.Controls.Add(this.txtFullName);
+            this.pnlMain.Controls.Add(this.txtUserName);
+            this.pnlMain.Controls.Add(this.label1);
+            this.pnlMain.FillColor = System.Drawing.Color.White;
+            this.pnlMain.Location = new System.Drawing.Point(0, -1);
+            this.pnlMain.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlMain.Size = new System.Drawing.Size(351, 420);
+            this.pnlMain.TabIndex = 0;
+            this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2GradientPanel1_Paint);
             // 
             // lblStatus
             // 
@@ -89,19 +88,6 @@
             this.lblStatus.Text = "label2";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblStatus.Click += new System.EventHandler(this.lblStatus_Click);
-            // 
-            // progressBar
-            // 
-            this.progressBar.Location = new System.Drawing.Point(0, 0);
-            this.progressBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.progressBar.Size = new System.Drawing.Size(351, 11);
-            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.progressBar.TabIndex = 13;
-            this.progressBar.Text = "guna2ProgressBar1";
-            this.progressBar.TextMode = Guna.UI2.WinForms.Enums.ProgressBarTextMode.Value;
-            this.progressBar.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             // 
             // label5
             // 
@@ -147,7 +133,7 @@
             this.exitBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.exitBtn.ForeColor = System.Drawing.Color.Black;
             this.exitBtn.Location = new System.Drawing.Point(316, 2);
-            this.exitBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.exitBtn.Margin = new System.Windows.Forms.Padding(2);
             this.exitBtn.Name = "exitBtn";
             this.exitBtn.Size = new System.Drawing.Size(34, 28);
             this.exitBtn.TabIndex = 9;
@@ -166,6 +152,19 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Status:";
             this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // userImage
+            // 
+            this.userImage.BackColor = System.Drawing.Color.Transparent;
+            this.userImage.FillColor = System.Drawing.Color.Gray;
+            this.userImage.ImageRotate = 0F;
+            this.userImage.Location = new System.Drawing.Point(128, 42);
+            this.userImage.Margin = new System.Windows.Forms.Padding(2);
+            this.userImage.Name = "userImage";
+            this.userImage.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.userImage.Size = new System.Drawing.Size(98, 106);
+            this.userImage.TabIndex = 6;
+            this.userImage.TabStop = false;
             // 
             // lblRole
             // 
@@ -265,46 +264,56 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "User Information";
             // 
-            // guna2Elipse1
+            // progressBar
             // 
-            this.guna2Elipse1.TargetControl = this;
+            this.progressBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressBar.Location = new System.Drawing.Point(0, 0);
+            this.progressBar.Margin = new System.Windows.Forms.Padding(2);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.progressBar.Size = new System.Drawing.Size(351, 10);
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar.TabIndex = 13;
+            this.progressBar.Text = "guna2ProgressBar1";
+            this.progressBar.TextMode = Guna.UI2.WinForms.Enums.ProgressBarTextMode.Value;
+            this.progressBar.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             // 
-            // userImage
+            // pnlProgress
             // 
-            this.userImage.BackColor = System.Drawing.Color.Transparent;
-            this.userImage.FillColor = System.Drawing.Color.Gray;
-            this.userImage.ImageRotate = 0F;
-            this.userImage.Location = new System.Drawing.Point(128, 42);
-            this.userImage.Margin = new System.Windows.Forms.Padding(2);
-            this.userImage.Name = "userImage";
-            this.userImage.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.userImage.Size = new System.Drawing.Size(98, 106);
-            this.userImage.TabIndex = 6;
-            this.userImage.TabStop = false;
+            this.pnlProgress.BackColor = System.Drawing.Color.Transparent;
+            this.pnlProgress.Controls.Add(this.progressBar);
+            this.pnlProgress.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlProgress.FillColor = System.Drawing.Color.Transparent;
+            this.pnlProgress.Location = new System.Drawing.Point(0, 0);
+            this.pnlProgress.Name = "pnlProgress";
+            this.pnlProgress.Size = new System.Drawing.Size(351, 10);
+            this.pnlProgress.TabIndex = 14;
             // 
             // frmInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(351, 420);
-            this.Controls.Add(this.guna2GradientPanel1);
+            this.Controls.Add(this.pnlProgress);
+            this.Controls.Add(this.pnlMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmInfo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmInfo";
             this.Load += new System.EventHandler(this.frmInfo_Load);
             this.Shown += new System.EventHandler(this.frmInfo_Shown);
-            this.guna2GradientPanel1.ResumeLayout(false);
-            this.guna2GradientPanel1.PerformLayout();
+            this.pnlMain.ResumeLayout(false);
+            this.pnlMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userImage)).EndInit();
+            this.pnlProgress.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel1;
+        private Guna.UI2.WinForms.Guna2GradientPanel pnlMain;
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2TextBox txtAddress;
         private Guna.UI2.WinForms.Guna2TextBox txtFullName;
@@ -317,8 +326,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private Guna.UI2.WinForms.Guna2ProgressBar progressBar;
         private Guna.UI2.WinForms.Guna2CirclePictureBox userImage;
-        private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
+        private Guna.UI2.WinForms.Guna2Panel pnlProgress;
+        private Guna.UI2.WinForms.Guna2ProgressBar progressBar;
     }
 }

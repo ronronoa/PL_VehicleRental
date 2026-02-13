@@ -1,4 +1,5 @@
 ﻿
+using Guna.UI2.WinForms;
 using MySqlConnector;
 using PL_VehicleRental.Data;
 using System;
@@ -37,11 +38,12 @@ namespace PL_VehicleRental.Forms
 
         }
 
+
         private void ToggleLoading(bool isLoading)
         {
             progressBar.Visible = isLoading;
 
-            this.Enabled = !isLoading;
+            pnlMain.Enabled = !isLoading;
         }
 
         private async Task LoadUserInfoAsync()
@@ -58,6 +60,7 @@ namespace PL_VehicleRental.Forms
 
             BindUser(user);
             ToggleLoading(false);
+            pnlProgress.Visible = false;
         }
 
         private async Task<UserInfoDto> GetUserByIdAsync(int userId)
@@ -136,7 +139,7 @@ namespace PL_VehicleRental.Forms
 
         private void frmInfo_Load(object sender, EventArgs e)
         {
-            
+         
         }
 
         private async void frmInfo_Shown(object sender, EventArgs e)

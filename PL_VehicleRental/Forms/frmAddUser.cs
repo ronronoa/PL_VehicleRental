@@ -29,7 +29,7 @@ namespace PL_VehicleRental.Forms
             {
                 try
                 {
-                    conn.Open();
+                   conn.Open();
 
                     string checkQuery = @"
                                         SELECT COUNT(*) 

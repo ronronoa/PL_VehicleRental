@@ -28,6 +28,16 @@ namespace PL_VehicleRental.Forms
             InitializeComponent();
             InitializeSearchDebounce();
             flowUsers.Resize += flowUsers_Resize;
+
+            pnlOverlay.Dock = DockStyle.Fill;
+            pnlOverlay.BackColor = Color.FromArgb(120, Color.White);
+            pnlOverlay.Visible = false;
+
+            progressBar.Style = ProgressBarStyle.Marquee;
+            progressBar.Dock = DockStyle.None;
+            progressBar.Location = new Point((pnlOverlay.Width - progressBar.Width) / 2,
+                                             (pnlOverlay.Height - progressBar.Height) / 2);
+            pnlOverlay.Controls.Add(progressBar);
         }
 
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
@@ -47,13 +57,21 @@ namespace PL_VehicleRental.Forms
 
         }
 
+        private void ToggleLoading(bool isLoading)
+        {
+            pnlOverlay.Visible = isLoading;
+            if (isLoading) pnlOverlay.BringToFront();
+        }
+
         public async Task RefreshUserDataAsync()
         {
+            ToggleLoading(true);
             flowUsers.Controls.Clear();
             ConfigureFlowLayout();
             _allUsers = await GetUserAsync();
 
             RenderUsers(_allUsers);
+            ToggleLoading(false);
         }
 
         private void RenderUsers(List<UserInfoDto> users)
@@ -323,5 +341,9 @@ namespace PL_VehicleRental.Forms
             }
         }
 
+        private void progressBar_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

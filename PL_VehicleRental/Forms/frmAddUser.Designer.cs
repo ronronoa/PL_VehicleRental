@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.guna2Separator2 = new Guna.UI2.WinForms.Guna2Separator();
@@ -53,11 +54,13 @@
             this.userNameTextBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.fullNameTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.guna2CustomGradientPanel2.SuspendLayout();
             this.guna2CustomGradientPanel1.SuspendLayout();
             this.personalInfoPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userImage)).BeginInit();
             this.guna2GradientPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // guna2CustomGradientPanel2
@@ -499,6 +502,10 @@
             this.guna2GradientPanel1.Size = new System.Drawing.Size(452, 599);
             this.guna2GradientPanel1.TabIndex = 0;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // frmAddUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -517,6 +524,7 @@
             this.personalInfoPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userImage)).EndInit();
             this.guna2GradientPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -548,5 +556,6 @@
         private Guna.UI2.WinForms.Guna2TextBox userNameTextBox;
         private Guna.UI2.WinForms.Guna2TextBox fullNameTxt;
         private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

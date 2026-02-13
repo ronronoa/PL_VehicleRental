@@ -32,6 +32,7 @@ namespace PL_VehicleRental.UserControl
             lblUsername.Text = user.UserName;
             lblAddress.Text = user.Address;
             lblFullName.Text = user.FullName;
+            lblEmail.Text = user.email;
             lblRole.Text = user.Role;
             setStatus(user.Status);
 
@@ -162,7 +163,7 @@ namespace PL_VehicleRental.UserControl
             var layout = new TableLayoutPanel
             {
                 Dock = DockStyle.Fill,
-                ColumnCount = 7,
+                ColumnCount = 8,
                 RowCount = 1,
                 Padding = new Padding(2),
                 BackColor = Color.White,
@@ -173,6 +174,7 @@ namespace PL_VehicleRental.UserControl
             layout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.IdWidth));
             layout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.UsernameWidth));
             layout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.FullnameWidth));
+            layout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.EmailWidth));
             layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
             layout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.RoleWidth));
             layout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.StatusWidth));
@@ -183,10 +185,11 @@ namespace PL_VehicleRental.UserControl
             AddCell(layout, lblUserID, 0);
             AddCell(layout, lblUsername, 1);
             AddCell(layout, lblFullName, 2);
-            AddCell(layout, lblAddress, 3);
-            AddCell(layout, lblRole, 4);
-            AddCell(layout, lblStatus, 5);
-            AddCell(layout, actionPanel, 6);
+            AddCell(layout, lblEmail, 3);
+            AddCell(layout, lblAddress, 4);
+            AddCell(layout, lblRole, 5);
+            AddCell(layout, lblStatus, 6);
+            AddCell(layout, actionPanel, 7);
 
             MakeRounded(lblStatus);
 

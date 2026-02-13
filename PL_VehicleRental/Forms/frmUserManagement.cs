@@ -21,6 +21,7 @@ namespace PL_VehicleRental.Forms
 {
     public partial class UserManagementForm : Form
     {
+        private List<UserInfoDto> _allUsers = new List<UserInfoDto>();
         public UserManagementForm()
         {
             InitializeComponent();
@@ -47,13 +48,15 @@ namespace PL_VehicleRental.Forms
         public async Task RefreshUserDataAsync()
         {
             flowUsers.Controls.Clear();
-            flowUsers.WrapContents = false;
-            flowUsers.FlowDirection = FlowDirection.TopDown;
-            flowUsers.AutoScroll = true;
-            flowUsers.Padding = Padding.Empty;
-            flowUsers.Margin = Padding.Empty;
+            ConfigureFlowLayout();
+            _allUsers = await GetUserAsync();
 
-            var users = await GetUserAsync();
+            RenderUsers(_allUsers);
+        }
+
+        private void RenderUsers(List<UserInfoDto> users)
+        {
+            flowUsers.Controls.Clear();
 
             foreach (var user in users)
             {
@@ -68,12 +71,22 @@ namespace PL_VehicleRental.Forms
             }
         }
 
+        private void ConfigureFlowLayout()
+        {
+            flowUsers.WrapContents = false;
+            flowUsers.FlowDirection = FlowDirection.TopDown;
+            flowUsers.AutoScroll = true;
+            flowUsers.Padding = Padding.Empty;
+            flowUsers.Margin = Padding.Empty;
+        }
+
         private async Task<List<UserInfoDto>> GetUserAsync()
         {
             const string query = @"
         SELECT id,
                userName,
                fullName,
+               email,
                address,
                role,
                status
@@ -95,6 +108,7 @@ namespace PL_VehicleRental.Forms
                         Id = reader.GetInt32("id"),
                         UserName = reader.GetString("userName"),
                         FullName = reader.GetString("fullName"),
+                        email = reader.GetString("email"),
                         Address = reader.GetString("address"),
                         Role = reader.GetString("role"),
                         Status = reader.GetString("status")
@@ -104,6 +118,21 @@ namespace PL_VehicleRental.Forms
             }
 
             return users;
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            string keyword = txtSearch.Text.ToLower();
+
+            var filtered = _allUsers
+                .Where(u =>
+                    (!string.IsNullOrEmpty(u.UserName) && u.UserName.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                    (!string.IsNullOrEmpty(u.FullName) && u.FullName.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                    (!string.IsNullOrEmpty(u.Address) && u.Address.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                    (!string.IsNullOrEmpty(u.email) && u.email.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0))
+                .ToList();
+
+            RenderUsers(filtered);
         }
 
         private void TableHeader()
@@ -119,7 +148,7 @@ namespace PL_VehicleRental.Forms
             TableLayoutPanel headerLayout = new TableLayoutPanel
             {
                 Dock = DockStyle.Fill,
-                ColumnCount = 7,
+                ColumnCount = 8,
                 RowCount = 1,
                 CellBorderStyle = TableLayoutPanelCellBorderStyle.None,
                 Margin = Padding.Empty
@@ -128,6 +157,7 @@ namespace PL_VehicleRental.Forms
             headerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.IdWidth));
             headerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.UsernameWidth));
             headerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.FullnameWidth));
+            headerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.EmailWidth));
             headerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
             headerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.RoleWidth));
             headerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.StatusWidth));
@@ -149,10 +179,11 @@ namespace PL_VehicleRental.Forms
             headerLayout.Controls.Add(CreateHeader("ID"), 0, 0);
             headerLayout.Controls.Add(CreateHeader("USERNAME"), 1, 0);
             headerLayout.Controls.Add(CreateHeader("FULLNAME"), 2, 0);
-            headerLayout.Controls.Add(CreateHeader("ADDRESS"), 3, 0);
-            headerLayout.Controls.Add(CreateHeader("ROLE"), 4, 0);
-            headerLayout.Controls.Add(CreateHeader("STATUS"), 5, 0);
-            headerLayout.Controls.Add(CreateHeader("ACTION"), 6, 0);
+            headerLayout.Controls.Add(CreateHeader("EMAIL"), 3, 0);
+            headerLayout.Controls.Add(CreateHeader("ADDRESS"), 4, 0);
+            headerLayout.Controls.Add(CreateHeader("ROLE"), 5, 0);
+            headerLayout.Controls.Add(CreateHeader("STATUS"), 6, 0);
+            headerLayout.Controls.Add(CreateHeader("ACTION"), 7, 0);
 
             headerLayout.Paint += (sender, e) =>
             {
@@ -274,9 +305,5 @@ namespace PL_VehicleRental.Forms
             }
         }
 
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
     }
 }

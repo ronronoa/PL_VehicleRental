@@ -22,9 +22,11 @@ namespace PL_VehicleRental.Forms
     public partial class UserManagementForm : Form
     {
         private List<UserInfoDto> _allUsers = new List<UserInfoDto>();
+        private System.Windows.Forms.Timer _searchTimer;
         public UserManagementForm()
         {
             InitializeComponent();
+            InitializeSearchDebounce();
             flowUsers.Resize += flowUsers_Resize;
         }
 
@@ -119,9 +121,24 @@ namespace PL_VehicleRental.Forms
 
             return users;
         }
+        
+        private void InitializeSearchDebounce()
+        {
+            _searchTimer = new System.Windows.Forms.Timer();
+            _searchTimer.Interval = 400;
+            _searchTimer.Tick += SearchTimer_Tick;
+        }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
+            _searchTimer.Stop();
+            _searchTimer.Start();
+        }
+
+        private void SearchTimer_Tick(object sender, EventArgs e)
+        {
+            _searchTimer.Stop();
+
             string keyword = txtSearch.Text.ToLower();
 
             var filtered = _allUsers
@@ -142,8 +159,8 @@ namespace PL_VehicleRental.Forms
 
             TableHeaderPanel.Height = 45;
             TableHeaderPanel.Dock = DockStyle.Top;
-            TableHeaderPanel.BackColor = Color.White;
-            TableHeaderPanel.Padding = new Padding(0, 5, 0, 5);
+            TableHeaderPanel.BackColor = Color.FromArgb(42, 132, 191);
+            TableHeaderPanel.Padding = new Padding(0, 10, 0, 10);
 
             TableLayoutPanel headerLayout = new TableLayoutPanel
             {
@@ -151,7 +168,7 @@ namespace PL_VehicleRental.Forms
                 ColumnCount = 8,
                 RowCount = 1,
                 CellBorderStyle = TableLayoutPanelCellBorderStyle.None,
-                Margin = Padding.Empty
+                Margin = Padding.Empty,
             };
 
             headerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.IdWidth));
@@ -172,7 +189,8 @@ namespace PL_VehicleRental.Forms
                     TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
                     Font = new Font("Segoe UI", 9.5f, FontStyle.Bold),
                     Padding = new Padding(5, 0, 5, 0),
-                    Margin = new Padding(0)
+                    Margin = new Padding(0),
+                    ForeColor = Color.White
                 };
             }
 

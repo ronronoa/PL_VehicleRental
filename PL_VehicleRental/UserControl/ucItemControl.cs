@@ -168,7 +168,6 @@ namespace PL_VehicleRental.UserControl
                 Padding = new Padding(2),
                 BackColor = Color.White,
                 Margin = new Padding(0, 1, 0, 1),
-                
             };
 
             layout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, UserTableLayout.IdWidth));
@@ -191,7 +190,7 @@ namespace PL_VehicleRental.UserControl
             AddCell(layout, lblStatus, 6);
             AddCell(layout, actionPanel, 7);
 
-            MakeRounded(lblStatus);
+            MakeRounded(lblStatus, lblStatus.Text == "Active");
 
             Controls.Clear();
             Controls.Add(layout);
@@ -217,7 +216,7 @@ namespace PL_VehicleRental.UserControl
 
             if (control is Label label)
             {
-                label.Font = new Font("Segoe UI", 9.5f, FontStyle.Bold);
+                label.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
 
                 switch (column)
                 {
@@ -225,6 +224,9 @@ namespace PL_VehicleRental.UserControl
                         label.TextAlign = ContentAlignment.MiddleCenter;
                         break;
                     case 1:
+                        label.TextAlign = ContentAlignment.MiddleCenter;
+                        label.Font = new Font("Segoe UI", 10f, FontStyle.Bold);
+                        break;
                     case 2:
                     case 3:
                         label.TextAlign = ContentAlignment.MiddleLeft;
@@ -242,12 +244,16 @@ namespace PL_VehicleRental.UserControl
             layout.Controls.Add(control, column, 0);
         }
 
-        private void MakeRounded(Label label)
+        private void MakeRounded(Label label, bool isActive)
         {
             label.AutoSize = false;
             label.Height = 28;
             label.Padding = new Padding(10, 4, 10, 4);
             label.TextAlign = ContentAlignment.MiddleCenter;
+            label.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
+
+            label.BackColor = isActive ? Color.FromArgb(220, 252, 231) : Color.FromArgb(254, 226, 226);
+            label.ForeColor = isActive ? Color.FromArgb(22, 163, 74) : Color.FromArgb(185, 28, 28);
 
             label.Paint += (s, e) =>
             {
@@ -256,7 +262,7 @@ namespace PL_VehicleRental.UserControl
 
                 using (var path = new System.Drawing.Drawing2D.GraphicsPath())
                 {
-                    int radius = 12;
+                    int radius = 13;
                     path.AddArc(rect.X, rect.Y, radius, radius, 180, 90);
                     path.AddArc(rect.Right - radius, rect.Y, radius, radius, 270, 90);
                     path.AddArc(rect.Right - radius, rect.Bottom - radius, radius, radius, 0, 90);

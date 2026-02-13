@@ -23,7 +23,7 @@ namespace PL_VehicleRental.Forms
 
         private void AddUsers()
         {
-            string sql = "INSERT INTO users (userName, fullName, address, role, status) VALUES (@userName, @fullName, @address, @role, @status)";
+            string sql = "INSERT INTO users (userName, fullName, email, address, role, status) VALUES (@userName, @fullName, @email, @address, @role, @status)";
 
             using (MySqlConnection conn = MySQLConnectionContext.Create())
             {
@@ -35,11 +35,12 @@ namespace PL_VehicleRental.Forms
                                         SELECT COUNT(*) 
                                         FROM users 
                                         WHERE userName = @userName 
-                                        OR (fullName = @fullName AND userName = @userName)";
+                                        OR (fullName = @fullName AND userName = @userName AND email = @email)";
 
                     MySqlCommand checkCmd = new MySqlCommand(checkQuery, conn);
                     checkCmd.Parameters.AddWithValue("@userName", userNameTextBox.Text.Trim());
                     checkCmd.Parameters.AddWithValue("@fullName", fullNameTxt.Text.Trim());
+                    checkCmd.Parameters.AddWithValue("@email", fullNameTxt.Text.Trim());
 
                     int exists = Convert.ToInt32(checkCmd.ExecuteScalar());
 
@@ -63,6 +64,7 @@ namespace PL_VehicleRental.Forms
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@userName", userNameTextBox.Text);
                     cmd.Parameters.AddWithValue("@fullName", fullNameTxt.Text);
+                    cmd.Parameters.AddWithValue("@email", emaiTxt.Text);
                     cmd.Parameters.AddWithValue("@address", addressTextBox.Text);
                     cmd.Parameters.AddWithValue("@role", roleCmb.Text);
                     cmd.Parameters.AddWithValue("@status", statusCmb.Text);

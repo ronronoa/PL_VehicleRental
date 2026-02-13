@@ -205,6 +205,16 @@ namespace PL_VehicleRental.UserControl
             control.Dock = DockStyle.Fill;
             control.Margin = Padding.Empty;
 
+            if (column == 8)
+            {
+                control.Dock = DockStyle.None;
+                control.Anchor = AnchorStyles.None;
+            }
+            else
+            {
+                control.Dock = DockStyle.Fill;
+            }
+
             if (control is Label label)
             {
                 label.Font = new Font("Segoe UI", 9.5f, FontStyle.Bold);
@@ -235,7 +245,9 @@ namespace PL_VehicleRental.UserControl
         private void MakeRounded(Label label)
         {
             label.AutoSize = false;
-            label.Dock= DockStyle.Fill;
+            label.Height = 28;
+            label.Padding = new Padding(10, 4, 10, 4);
+            label.TextAlign = ContentAlignment.MiddleCenter;
 
             label.Paint += (s, e) =>
             {

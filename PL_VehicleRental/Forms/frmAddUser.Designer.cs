@@ -196,7 +196,7 @@
             this.roleCmb.Name = "roleCmb";
             this.roleCmb.Size = new System.Drawing.Size(146, 36);
             this.roleCmb.StartIndex = 0;
-            this.roleCmb.TabIndex = 23;
+            this.roleCmb.TabIndex = 24;
             // 
             // statusLabel
             // 
@@ -298,7 +298,7 @@
             this.emaiTxt.PlaceholderText = "";
             this.emaiTxt.SelectedText = "";
             this.emaiTxt.Size = new System.Drawing.Size(171, 43);
-            this.emaiTxt.TabIndex = 36;
+            this.emaiTxt.TabIndex = 32;
             // 
             // imageLabel
             // 
@@ -430,7 +430,7 @@
             this.addressTextBox.PlaceholderText = "";
             this.addressTextBox.SelectedText = "";
             this.addressTextBox.Size = new System.Drawing.Size(202, 60);
-            this.addressTextBox.TabIndex = 32;
+            this.addressTextBox.TabIndex = 33;
             // 
             // userNameTextBox
             // 

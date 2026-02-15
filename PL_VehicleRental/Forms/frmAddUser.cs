@@ -10,26 +10,39 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySqlConnector;
 using PL_VehicleRental.Data;
+using PL_VehicleRental.Validation;
 
 namespace PL_VehicleRental.Forms
 {
     public partial class frmAddUser : Form
     {
         public event EventHandler UserAdded;
+        private Validator _validator;
         public frmAddUser()
         {
             InitializeComponent();
+            _validator = new Validator(errorProvider1);
         }
 
-        private void AddUsers()
+        private async Task AddUsersAsync()
         {
+            _validator.Clear();
+            _validator.Required(userNameTextBox, "Username is required.");
+            _validator.Required(fullNameTxt, "Full name is required.");
+            _validator.Required(emaiTxt, "Invalid email format.");
+            _validator.Required(addressTextBox, "Address is required.");
+            _validator.Required(roleCmb, "Select a role.");
+            _validator.Required(statusCmb, "Select a status");
+
+            if (!_validator.Validate()) return;
+
             string sql = "INSERT INTO users (userName, fullName, email, address, role, status) VALUES (@userName, @fullName, @email, @address, @role, @status)";
 
             using (MySqlConnection conn = MySQLConnectionContext.Create())
             {
                 try
                 {
-                   conn.Open();
+                   await conn.OpenAsync();
 
                     string checkQuery = @"
                                         SELECT COUNT(*) 
@@ -42,7 +55,7 @@ namespace PL_VehicleRental.Forms
                     checkCmd.Parameters.AddWithValue("@fullName", fullNameTxt.Text.Trim());
                     checkCmd.Parameters.AddWithValue("@email", fullNameTxt.Text.Trim());
 
-                    int exists = Convert.ToInt32(checkCmd.ExecuteScalar());
+                    int exists = Convert.ToInt32(await checkCmd.ExecuteScalarAsync());
 
                     if (exists > 0)
                     {
@@ -55,12 +68,6 @@ namespace PL_VehicleRental.Forms
                         return;
                     }
 
-                    if (string.IsNullOrEmpty(fullNameTxt.Text) || string.IsNullOrEmpty(userNameTextBox.Text) || string.IsNullOrEmpty(addressTextBox.Text))
-                    {
-                        MessageBox.Show("All fields are required.", "Empty Fields", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@userName", userNameTextBox.Text);
                     cmd.Parameters.AddWithValue("@fullName", fullNameTxt.Text);
@@ -69,7 +76,7 @@ namespace PL_VehicleRental.Forms
                     cmd.Parameters.AddWithValue("@role", roleCmb.Text);
                     cmd.Parameters.AddWithValue("@status", statusCmb.Text);
 
-                    int result = cmd.ExecuteNonQuery();
+                    int result = await cmd.ExecuteNonQueryAsync();
 
                     if (result > 0)
                     {
@@ -80,6 +87,7 @@ namespace PL_VehicleRental.Forms
                         roleCmb.StartIndex = 0;
                         statusCmb.StartIndex = 0;
 
+                        ClearFields();
                         OnUserAdded();
                         this.Close();
                     }
@@ -95,6 +103,15 @@ namespace PL_VehicleRental.Forms
             }
         }
 
+        private void ClearFields()
+        {
+            fullNameTxt.Clear();
+            userNameTextBox.Clear();
+            addressTextBox.Clear();
+            roleCmb.StartIndex = 0;
+            statusCmb.StartIndex = 0;
+        }
+
         private void addBtn_Click(object sender, EventArgs e)
         {
             
@@ -102,11 +119,7 @@ namespace PL_VehicleRental.Forms
 
         private void clearBtn_Click(object sender, EventArgs e)
         {
-            fullNameTxt.Clear();
-            userNameTextBox.Clear();
-            addressTextBox.Clear();
-            roleCmb.StartIndex = 0;
-            statusCmb.StartIndex = 0;
+            ClearFields();
         }
 
         private void headerLabel_Click(object sender, EventArgs e)
@@ -119,17 +132,15 @@ namespace PL_VehicleRental.Forms
             this.Close();
         }
 
-        private void addBtn_Click_1(object sender, EventArgs e)
+        private async void addBtn_Click_1(object sender, EventArgs e)
         {
-            AddUsers();
+            await AddUsersAsync();
         }
 
         protected virtual void OnUserAdded()
         {
             UserAdded?.Invoke(this, EventArgs.Empty);
         }
-
-        // Double buffer
         protected override CreateParams CreateParams
         {
             get {

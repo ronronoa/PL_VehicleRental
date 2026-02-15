@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using PL_VehicleRental.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -6,36 +7,30 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VehicleManagementSystem.Dto;
 
 namespace PL_VehicleRental.Services
 {
-    internal class UserService
+    public class UserService
     {
-        private string connString = ConfigurationManager.ConnectionStrings["MyDbConnection"].ConnectionString;
+        private readonly userRepository _repository;
 
-        public DataTable LoadUsers()
+        public UserService()
         {
-            DataTable dt = new DataTable();
+            _repository = new userRepository();
+        }
 
-            using (MySqlConnection conn = new MySqlConnection(connString))
-            {
-                conn.Open();
+        public async Task<(bool Success, string Message)> CreateUserAsync(UserInfoDto dto)
+        {
+            if (await _repository.UsernameExistsAsync(dto.UserName))
+                return (false, "Username already exists.");
 
-                string query = @"SELECT id AS ID, 
-                                    userName AS Username, 
-                                    fullName AS FullName,
-                                    address AS Address,
-                                    role As Role, 
-                                    status AS Status
-                            FROM users";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
-                {
-                    da.Fill(dt);
-                }
-            }
+            bool inserted = await _repository.InsertAsync(dto);
 
-            return dt;
+            if (!inserted)
+                return (false, "Failed to insert user.");
+
+            return (true, "User created successfully.");
         }
     }
 }

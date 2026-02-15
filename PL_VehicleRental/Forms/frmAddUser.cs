@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySqlConnector;
@@ -18,23 +19,19 @@ namespace PL_VehicleRental.Forms
     {
         public event EventHandler UserAdded;
         private Validator _validator;
+        private CancellationTokenSource _usernameCts;
+        private bool _isUsernameAvailable = false;
+        private bool _isSubmitting = false;
         public frmAddUser()
         {
             InitializeComponent();
             _validator = new Validator(errorProvider1);
+            userNameTextBox.TextChanged += userNameTextBox_TextChanged;
         }
 
         private async Task AddUsersAsync()
         {
-            _validator.Clear();
-            _validator.Required(userNameTextBox, "Username is required.");
-            _validator.Required(fullNameTxt, "Full name is required.");
-            _validator.Required(emaiTxt, "Invalid email format.");
-            _validator.Required(addressTextBox, "Address is required.");
-            _validator.Required(roleCmb, "Select a role.");
-            _validator.Required(statusCmb, "Select a status");
-
-            if (!_validator.Validate()) return;
+            
 
             string sql = "INSERT INTO users (userName, fullName, email, address, role, status) VALUES (@userName, @fullName, @email, @address, @role, @status)";
 
@@ -157,6 +154,20 @@ namespace PL_VehicleRental.Forms
             addressTextBox.Clear();
             roleCmb.StartIndex = 0;
             statusCmb.StartIndex = 0;
+        }
+
+        private void userNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            _usernameCts?.Cancel();
+            _usernameCts = new CancellationTokenSource();
+            var token = _usernameCts.Token;
+
+            string username = userNameTextBox.Text.Trim();
+
+            if(string.IsNullOrWhiteSpace(username))
+            {
+                errorProvider1.SetError(userNameTextBox, "Username is required");
+            }
         }
     }
 }

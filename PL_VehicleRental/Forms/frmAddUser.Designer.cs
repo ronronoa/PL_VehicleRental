@@ -459,6 +459,7 @@
             this.userNameTextBox.SelectedText = "";
             this.userNameTextBox.Size = new System.Drawing.Size(171, 43);
             this.userNameTextBox.TabIndex = 30;
+            this.userNameTextBox.TextChanged += new System.EventHandler(this.userNameTextBox_TextChanged);
             // 
             // fullNameTxt
             // 
@@ -504,6 +505,7 @@
             // 
             // errorProvider1
             // 
+            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
             // 
             // frmAddUser

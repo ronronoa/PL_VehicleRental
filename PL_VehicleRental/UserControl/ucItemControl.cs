@@ -32,7 +32,7 @@ namespace PL_VehicleRental.UserControl
             lblUsername.Text = user.UserName;
             lblAddress.Text = user.Address;
             lblFullName.Text = user.FullName;
-            lblEmail.Text = user.email;
+            lblEmail.Text = user.Email;
             lblRole.Text = user.Role;
             setStatus(user.Status);
 
@@ -135,29 +135,6 @@ namespace PL_VehicleRental.UserControl
             
         }
 
-        private void setStatus(string status)
-        {
-            lblStatus.Text = status;
-
-            switch (status)
-            {
-                case "Active":
-                    lblStatus.BackColor = Color.FromArgb(230, 255, 240);
-                    lblStatus.ForeColor = Color.Green;
-                    break;
-
-                case "Inactive":
-                    lblStatus.BackColor = Color.FromArgb(255, 235, 235);
-                    lblStatus.ForeColor = Color.Red;
-                    break;
-
-                case "Suspended":
-                    lblStatus.BackColor = Color.FromArgb(255, 244, 230);
-                    lblStatus.ForeColor = Color.DarkOrange;
-                    break;
-            }
-        }
-
         private void BuildLayout()
         {
             var layout = new TableLayoutPanel
@@ -252,9 +229,6 @@ namespace PL_VehicleRental.UserControl
             label.TextAlign = ContentAlignment.MiddleCenter;
             label.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
 
-            label.BackColor = isActive ? Color.FromArgb(220, 252, 231) : Color.FromArgb(254, 226, 226);
-            label.ForeColor = isActive ? Color.FromArgb(22, 163, 74) : Color.FromArgb(185, 28, 28);
-
             label.Paint += (s, e) =>
             {
                 var rect = label.ClientRectangle;
@@ -272,6 +246,29 @@ namespace PL_VehicleRental.UserControl
                     label.Region = new Region(path);
                 }
             };
+        }
+
+        private void setStatus(string status)
+        {
+            lblStatus.Text = status;
+
+            switch (status)
+            {
+                case "Active":
+                    lblStatus.BackColor = Color.FromArgb(230, 255, 240);
+                    lblStatus.ForeColor = Color.Green;
+                    break;
+
+                case "Inactive":
+                    lblStatus.BackColor = Color.FromArgb(255, 244, 230);
+                    lblStatus.ForeColor = Color.DarkOrange;
+                    break;
+
+                case "Suspended":
+                    lblStatus.BackColor = Color.FromArgb(255, 235, 235);
+                    lblStatus.ForeColor = Color.Red;
+                    break;
+            }
         }
 
         private void ucItemControl_Load(object sender, EventArgs e)

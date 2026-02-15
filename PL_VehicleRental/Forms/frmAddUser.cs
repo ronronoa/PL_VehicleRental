@@ -11,7 +11,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySqlConnector;
 using PL_VehicleRental.Data;
+using PL_VehicleRental.Services;
 using PL_VehicleRental.Validation;
+using VehicleManagementSystem.Dto;
 
 namespace PL_VehicleRental.Forms
 {
@@ -19,6 +21,7 @@ namespace PL_VehicleRental.Forms
     {
         public event EventHandler UserAdded;
         private Validator _validator;
+        private UserService _userService;
         private CancellationTokenSource _usernameCts;
         private bool _isUsernameAvailable = false;
         private bool _isSubmitting = false;
@@ -26,6 +29,7 @@ namespace PL_VehicleRental.Forms
         {
             InitializeComponent();
             _validator = new Validator(errorProvider1);
+            _userService = new UserService();
             userNameTextBox.TextChanged += userNameTextBox_TextChanged;
         }
 
@@ -131,7 +135,45 @@ namespace PL_VehicleRental.Forms
 
         private async void addBtn_Click_1(object sender, EventArgs e)
         {
-            await AddUsersAsync();
+            _validator.Clear();
+
+            _validator.Required(userNameTextBox, "Username is required");
+            _validator.Required(fullNameTxt, "Full name is required");
+            _validator.Required(addressTextBox, "Address is required");
+            _validator.IsEmail(emaiTxt, "Invalid email format");
+
+            if (!_validator.Validate())
+                return;
+
+            var dto = new UserInfoDto
+            {
+                UserName = userNameTextBox.Text.Trim(),
+                FullName = fullNameTxt.Text.Trim(),
+                Email = emaiTxt.Text.Trim(),
+                Address = addressTextBox.Text.Trim(),
+                Role = roleCmb.Text,
+                Status = statusCmb.Text
+            };
+
+            addBtn.Enabled = false;
+
+            var result = await _userService.CreateUserAsync(dto);
+
+            addBtn.Enabled = true;
+
+            if (!result.Success)
+            {
+                MessageBox.Show(result.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            MessageBox.Show(result.Message, "Success",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            ClearFields();
+            OnUserAdded();
+            Close();
         }
 
         protected virtual void OnUserAdded()

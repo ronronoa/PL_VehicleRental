@@ -23,7 +23,7 @@ namespace PL_VehicleRental.DAL.Repositories
                 {
                     cmd.Parameters.AddWithValue("@userName", username);
 
-                   int count = Convert.ToInt32(cmd.ExecuteScalarAsync());
+                   int count = Convert.ToInt32(await cmd.ExecuteScalarAsync());
                     return count > 0;
                 }
             }
@@ -41,7 +41,7 @@ namespace PL_VehicleRental.DAL.Repositories
                 {
                     cmd.Parameters.AddWithValue("@userName", dto.UserName);
                     cmd.Parameters.AddWithValue("@fullName", dto.FullName);
-                    cmd.Parameters.AddWithValue("@email", dto.email);
+                    cmd.Parameters.AddWithValue("@email", dto.Email);
                     cmd.Parameters.AddWithValue("@address", dto.Address);
                     cmd.Parameters.AddWithValue("@role", dto.Role);
                     cmd.Parameters.AddWithValue("@status", dto.Status);

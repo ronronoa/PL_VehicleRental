@@ -128,7 +128,7 @@ namespace PL_VehicleRental.Forms
                         Id = reader.GetInt32("id"),
                         UserName = reader.GetString("userName"),
                         FullName = reader.GetString("fullName"),
-                        email = reader.GetString("email"),
+                        Email = reader.GetString("email"),
                         Address = reader.GetString("address"),
                         Role = reader.GetString("role"),
                         Status = reader.GetString("status")
@@ -164,7 +164,7 @@ namespace PL_VehicleRental.Forms
                     (!string.IsNullOrEmpty(u.UserName) && u.UserName.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0) ||
                     (!string.IsNullOrEmpty(u.FullName) && u.FullName.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0) ||
                     (!string.IsNullOrEmpty(u.Address) && u.Address.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0) ||
-                    (!string.IsNullOrEmpty(u.email) && u.email.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0))
+                    (!string.IsNullOrEmpty(u.Email) && u.Email.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0))
                 .ToList();
 
             RenderUsers(filtered);

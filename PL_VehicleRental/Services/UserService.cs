@@ -32,5 +32,10 @@ namespace PL_VehicleRental.Services
 
             return (true, "User created successfully.");
         }
+
+        public async Task<bool> UsernameExistsAsync(string username)
+        {
+            return await _repository.UsernameExistsAsync(username);
+        }
     }
 }

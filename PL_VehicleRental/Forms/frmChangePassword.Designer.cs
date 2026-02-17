@@ -168,6 +168,7 @@
             this.Name = "frmChangePassword";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmChangePassword";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmChangePassword_FormClosing);
             this.pnlMain.ResumeLayout(false);
             this.pnlMain.PerformLayout();
             this.ResumeLayout(false);

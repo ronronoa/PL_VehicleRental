@@ -46,18 +46,22 @@ namespace PL_VehicleRental.Forms
                 MessageBox.Show("You are using a default password. Please change it before continuing.",
                                 "Security Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                var changePassForm = new frmChangePassword(user.UserName);
-                changePassForm.ShowDialog();
-
-                var updatedUser = await _repository.ValidateLoginAsync(username, passwordTxt.Text);
-                if(updatedUser == null || updatedUser.isDefaultPassword)
+                using (var changePassForm = new frmChangePassword(user.UserName))
                 {
-                    MessageBox.Show("Password was not changed. Please try again.", "Cancelled",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    changePassForm.ShowDialog();
                 }
 
-                user = updatedUser;
+                usernameTxt.Clear();
+                passwordTxt.Clear();
+                usernameTxt.Focus();
+
+                MessageBox.Show(
+                    "Password changed successfully. Please log in again using your new password.",
+                    "Login Required",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                return;
             }
 
             var mainForm = new UserManagementForm();

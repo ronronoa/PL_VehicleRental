@@ -31,7 +31,7 @@ namespace PL_VehicleRental
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UserManagementForm());
+            Application.Run(new frmLogin());
             //EncryptConnectionString();
         }
     }

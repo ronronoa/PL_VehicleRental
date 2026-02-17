@@ -55,6 +55,7 @@
             this.fullNameTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.passwordHelper = new System.Windows.Forms.HelpProvider();
             this.guna2CustomGradientPanel2.SuspendLayout();
             this.guna2CustomGradientPanel1.SuspendLayout();
             this.personalInfoPanel.SuspendLayout();
@@ -68,10 +69,10 @@
             this.guna2CustomGradientPanel2.Controls.Add(this.guna2CustomGradientPanel1);
             this.guna2CustomGradientPanel2.Controls.Add(this.personalInfoPanel);
             this.guna2CustomGradientPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.guna2CustomGradientPanel2.Location = new System.Drawing.Point(11, 10);
-            this.guna2CustomGradientPanel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.guna2CustomGradientPanel2.Location = new System.Drawing.Point(8, 8);
+            this.guna2CustomGradientPanel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
-            this.guna2CustomGradientPanel2.Size = new System.Drawing.Size(581, 717);
+            this.guna2CustomGradientPanel2.Size = new System.Drawing.Size(436, 583);
             this.guna2CustomGradientPanel2.TabIndex = 32;
             // 
             // guna2CustomGradientPanel1
@@ -89,10 +90,10 @@
             this.guna2CustomGradientPanel1.FillColor2 = System.Drawing.Color.Transparent;
             this.guna2CustomGradientPanel1.FillColor3 = System.Drawing.Color.Transparent;
             this.guna2CustomGradientPanel1.FillColor4 = System.Drawing.Color.Transparent;
-            this.guna2CustomGradientPanel1.Location = new System.Drawing.Point(0, 448);
-            this.guna2CustomGradientPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.guna2CustomGradientPanel1.Location = new System.Drawing.Point(0, 364);
+            this.guna2CustomGradientPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
-            this.guna2CustomGradientPanel1.Size = new System.Drawing.Size(581, 269);
+            this.guna2CustomGradientPanel1.Size = new System.Drawing.Size(436, 219);
             this.guna2CustomGradientPanel1.TabIndex = 31;
             // 
             // guna2Separator2
@@ -100,10 +101,10 @@
             this.guna2Separator2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2Separator2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Separator2.Location = new System.Drawing.Point(28, 37);
-            this.guna2Separator2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.guna2Separator2.Location = new System.Drawing.Point(21, 30);
+            this.guna2Separator2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.guna2Separator2.Name = "guna2Separator2";
-            this.guna2Separator2.Size = new System.Drawing.Size(537, 10);
+            this.guna2Separator2.Size = new System.Drawing.Size(403, 8);
             this.guna2Separator2.TabIndex = 31;
             // 
             // clearBtn
@@ -121,10 +122,10 @@
             this.clearBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.clearBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearBtn.ForeColor = System.Drawing.Color.White;
-            this.clearBtn.Location = new System.Drawing.Point(229, 217);
-            this.clearBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.clearBtn.Location = new System.Drawing.Point(172, 176);
+            this.clearBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.clearBtn.Name = "clearBtn";
-            this.clearBtn.Size = new System.Drawing.Size(191, 46);
+            this.clearBtn.Size = new System.Drawing.Size(143, 37);
             this.clearBtn.TabIndex = 26;
             this.clearBtn.Text = "Clear All";
             this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click_1);
@@ -134,7 +135,8 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(21, 2);
+            this.label1.Location = new System.Drawing.Point(16, 2);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(150, 25);
             this.label1.TabIndex = 30;
@@ -154,10 +156,10 @@
             this.addBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(132)))), ((int)(((byte)(191)))));
             this.addBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addBtn.ForeColor = System.Drawing.Color.White;
-            this.addBtn.Location = new System.Drawing.Point(425, 217);
-            this.addBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.addBtn.Location = new System.Drawing.Point(319, 176);
+            this.addBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(140, 46);
+            this.addBtn.Size = new System.Drawing.Size(105, 37);
             this.addBtn.TabIndex = 25;
             this.addBtn.Text = "Add User";
             this.addBtn.Click += new System.EventHandler(this.addBtn_Click_1);
@@ -169,7 +171,8 @@
             this.roleLabel.AutoSize = true;
             this.roleLabel.BackColor = System.Drawing.Color.Transparent;
             this.roleLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.roleLabel.Location = new System.Drawing.Point(24, 62);
+            this.roleLabel.Location = new System.Drawing.Point(18, 50);
+            this.roleLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.roleLabel.Name = "roleLabel";
             this.roleLabel.Size = new System.Drawing.Size(37, 17);
             this.roleLabel.TabIndex = 18;
@@ -192,10 +195,10 @@
             "Admin",
             "Staff",
             "Mechanic"});
-            this.roleCmb.Location = new System.Drawing.Point(27, 98);
-            this.roleCmb.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.roleCmb.Location = new System.Drawing.Point(20, 80);
+            this.roleCmb.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.roleCmb.Name = "roleCmb";
-            this.roleCmb.Size = new System.Drawing.Size(193, 36);
+            this.roleCmb.Size = new System.Drawing.Size(146, 36);
             this.roleCmb.StartIndex = 0;
             this.roleCmb.TabIndex = 24;
             this.roleCmb.SelectedIndexChanged += new System.EventHandler(this.roleCmb_SelectedIndexChanged);
@@ -207,7 +210,8 @@
             this.statusLabel.AutoSize = true;
             this.statusLabel.BackColor = System.Drawing.Color.Transparent;
             this.statusLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.statusLabel.Location = new System.Drawing.Point(273, 62);
+            this.statusLabel.Location = new System.Drawing.Point(205, 50);
+            this.statusLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(49, 17);
             this.statusLabel.TabIndex = 19;
@@ -229,10 +233,10 @@
             "Active",
             "Inactive",
             "Suspended"});
-            this.statusCmb.Location = new System.Drawing.Point(277, 98);
-            this.statusCmb.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.statusCmb.Location = new System.Drawing.Point(208, 80);
+            this.statusCmb.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.statusCmb.Name = "statusCmb";
-            this.statusCmb.Size = new System.Drawing.Size(227, 36);
+            this.statusCmb.Size = new System.Drawing.Size(171, 36);
             this.statusCmb.StartIndex = 0;
             this.statusCmb.TabIndex = 24;
             this.statusCmb.SelectedIndexChanged += new System.EventHandler(this.statusCmb_SelectedIndexChanged);
@@ -258,9 +262,9 @@
             this.personalInfoPanel.FillColor3 = System.Drawing.Color.Transparent;
             this.personalInfoPanel.FillColor4 = System.Drawing.Color.Transparent;
             this.personalInfoPanel.Location = new System.Drawing.Point(0, 0);
-            this.personalInfoPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.personalInfoPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.personalInfoPanel.Name = "personalInfoPanel";
-            this.personalInfoPanel.Size = new System.Drawing.Size(581, 448);
+            this.personalInfoPanel.Size = new System.Drawing.Size(436, 364);
             this.personalInfoPanel.TabIndex = 30;
             // 
             // lblEmail
@@ -270,7 +274,8 @@
             this.lblEmail.AutoSize = true;
             this.lblEmail.BackColor = System.Drawing.Color.Transparent;
             this.lblEmail.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmail.Location = new System.Drawing.Point(39, 311);
+            this.lblEmail.Location = new System.Drawing.Point(29, 253);
+            this.lblEmail.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(40, 17);
             this.lblEmail.TabIndex = 37;
@@ -293,12 +298,12 @@
             this.emaiTxt.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.emaiTxt.ForeColor = System.Drawing.Color.Black;
             this.emaiTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.emaiTxt.Location = new System.Drawing.Point(27, 322);
-            this.emaiTxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.emaiTxt.Location = new System.Drawing.Point(20, 262);
+            this.emaiTxt.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.emaiTxt.Name = "emaiTxt";
             this.emaiTxt.PlaceholderText = "";
             this.emaiTxt.SelectedText = "";
-            this.emaiTxt.Size = new System.Drawing.Size(228, 53);
+            this.emaiTxt.Size = new System.Drawing.Size(171, 43);
             this.emaiTxt.TabIndex = 32;
             this.emaiTxt.TextChanged += new System.EventHandler(this.emaiTxt_TextChanged);
             // 
@@ -308,7 +313,8 @@
             this.imageLabel.BackColor = System.Drawing.Color.Gray;
             this.imageLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.imageLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.imageLabel.Location = new System.Drawing.Point(245, 135);
+            this.imageLabel.Location = new System.Drawing.Point(184, 110);
+            this.imageLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.imageLabel.Name = "imageLabel";
             this.imageLabel.Size = new System.Drawing.Size(47, 19);
             this.imageLabel.TabIndex = 35;
@@ -318,11 +324,11 @@
             // 
             this.userImage.FillColor = System.Drawing.Color.Gray;
             this.userImage.ImageRotate = 0F;
-            this.userImage.Location = new System.Drawing.Point(215, 86);
-            this.userImage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.userImage.Location = new System.Drawing.Point(161, 70);
+            this.userImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.userImage.Name = "userImage";
             this.userImage.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.userImage.Size = new System.Drawing.Size(123, 113);
+            this.userImage.Size = new System.Drawing.Size(92, 92);
             this.userImage.TabIndex = 34;
             this.userImage.TabStop = false;
             // 
@@ -336,10 +342,10 @@
             this.exitBtn.FillColor = System.Drawing.Color.Transparent;
             this.exitBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exitBtn.ForeColor = System.Drawing.Color.Black;
-            this.exitBtn.Location = new System.Drawing.Point(536, 0);
-            this.exitBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.exitBtn.Location = new System.Drawing.Point(402, 0);
+            this.exitBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.exitBtn.Name = "exitBtn";
-            this.exitBtn.Size = new System.Drawing.Size(45, 34);
+            this.exitBtn.Size = new System.Drawing.Size(34, 28);
             this.exitBtn.TabIndex = 30;
             this.exitBtn.Text = "X";
             this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
@@ -349,10 +355,10 @@
             this.guna2Separator1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2Separator1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Separator1.Location = new System.Drawing.Point(27, 71);
-            this.guna2Separator1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.guna2Separator1.Location = new System.Drawing.Point(20, 58);
+            this.guna2Separator1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.guna2Separator1.Name = "guna2Separator1";
-            this.guna2Separator1.Size = new System.Drawing.Size(539, 10);
+            this.guna2Separator1.Size = new System.Drawing.Size(404, 8);
             this.guna2Separator1.TabIndex = 29;
             // 
             // headerLabel
@@ -360,7 +366,8 @@
             this.headerLabel.AutoSize = true;
             this.headerLabel.BackColor = System.Drawing.Color.Transparent;
             this.headerLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.headerLabel.Location = new System.Drawing.Point(20, 37);
+            this.headerLabel.Location = new System.Drawing.Point(15, 30);
+            this.headerLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.headerLabel.Name = "headerLabel";
             this.headerLabel.Size = new System.Drawing.Size(201, 25);
             this.headerLabel.TabIndex = 28;
@@ -373,7 +380,8 @@
             this.addressLabel.AutoSize = true;
             this.addressLabel.BackColor = System.Drawing.Color.Transparent;
             this.addressLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.addressLabel.Location = new System.Drawing.Point(296, 311);
+            this.addressLabel.Location = new System.Drawing.Point(222, 253);
+            this.addressLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.addressLabel.Name = "addressLabel";
             this.addressLabel.Size = new System.Drawing.Size(57, 17);
             this.addressLabel.TabIndex = 29;
@@ -386,7 +394,8 @@
             this.fullNameLabel.AutoSize = true;
             this.fullNameLabel.BackColor = System.Drawing.Color.Transparent;
             this.fullNameLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.fullNameLabel.Location = new System.Drawing.Point(296, 217);
+            this.fullNameLabel.Location = new System.Drawing.Point(222, 176);
+            this.fullNameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.fullNameLabel.Name = "fullNameLabel";
             this.fullNameLabel.Size = new System.Drawing.Size(69, 17);
             this.fullNameLabel.TabIndex = 28;
@@ -399,7 +408,8 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(39, 217);
+            this.label3.Location = new System.Drawing.Point(29, 176);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 17);
             this.label3.TabIndex = 33;
@@ -421,12 +431,12 @@
             this.addressTextBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.addressTextBox.ForeColor = System.Drawing.Color.Black;
             this.addressTextBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.addressTextBox.Location = new System.Drawing.Point(277, 322);
-            this.addressTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.addressTextBox.Location = new System.Drawing.Point(208, 262);
+            this.addressTextBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.addressTextBox.Name = "addressTextBox";
             this.addressTextBox.PlaceholderText = "";
             this.addressTextBox.SelectedText = "";
-            this.addressTextBox.Size = new System.Drawing.Size(269, 74);
+            this.addressTextBox.Size = new System.Drawing.Size(202, 60);
             this.addressTextBox.TabIndex = 33;
             this.addressTextBox.TextChanged += new System.EventHandler(this.addressTextBox_TextChanged);
             // 
@@ -447,12 +457,12 @@
             this.userNameTextBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.userNameTextBox.ForeColor = System.Drawing.Color.Black;
             this.userNameTextBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.userNameTextBox.Location = new System.Drawing.Point(27, 230);
-            this.userNameTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.userNameTextBox.Location = new System.Drawing.Point(20, 187);
+            this.userNameTextBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.userNameTextBox.Name = "userNameTextBox";
             this.userNameTextBox.PlaceholderText = "";
             this.userNameTextBox.SelectedText = "";
-            this.userNameTextBox.Size = new System.Drawing.Size(228, 53);
+            this.userNameTextBox.Size = new System.Drawing.Size(171, 43);
             this.userNameTextBox.TabIndex = 30;
             this.userNameTextBox.TextChanged += new System.EventHandler(this.userNameTextBox_TextChanged);
             // 
@@ -473,12 +483,12 @@
             this.fullNameTxt.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.fullNameTxt.ForeColor = System.Drawing.Color.Black;
             this.fullNameTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.fullNameTxt.Location = new System.Drawing.Point(277, 230);
-            this.fullNameTxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.fullNameTxt.Location = new System.Drawing.Point(208, 187);
+            this.fullNameTxt.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.fullNameTxt.Name = "fullNameTxt";
             this.fullNameTxt.PlaceholderText = "";
             this.fullNameTxt.SelectedText = "";
-            this.fullNameTxt.Size = new System.Drawing.Size(269, 53);
+            this.fullNameTxt.Size = new System.Drawing.Size(202, 43);
             this.fullNameTxt.TabIndex = 31;
             this.fullNameTxt.TextChanged += new System.EventHandler(this.fullNameTxt_TextChanged);
             // 
@@ -493,10 +503,10 @@
             this.guna2GradientPanel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(232)))));
             this.guna2GradientPanel1.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.guna2GradientPanel1.Location = new System.Drawing.Point(0, 0);
-            this.guna2GradientPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.guna2GradientPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.guna2GradientPanel1.Name = "guna2GradientPanel1";
-            this.guna2GradientPanel1.Padding = new System.Windows.Forms.Padding(11, 10, 11, 10);
-            this.guna2GradientPanel1.Size = new System.Drawing.Size(603, 737);
+            this.guna2GradientPanel1.Padding = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.guna2GradientPanel1.Size = new System.Drawing.Size(452, 599);
             this.guna2GradientPanel1.TabIndex = 0;
             // 
             // errorProvider1
@@ -506,12 +516,12 @@
             // 
             // frmAddUser
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(603, 737);
+            this.ClientSize = new System.Drawing.Size(452, 599);
             this.Controls.Add(this.guna2GradientPanel1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frmAddUser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAddUser";
@@ -555,5 +565,6 @@
         private Guna.UI2.WinForms.Guna2TextBox fullNameTxt;
         private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.HelpProvider passwordHelper;
     }
 }

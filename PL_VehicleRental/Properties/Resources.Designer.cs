@@ -63,6 +63,16 @@ namespace PL_VehicleRental.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap closeIcon {
+            get {
+                object obj = ResourceManager.GetObject("closeIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap deleteIcon {
             get {
                 object obj = ResourceManager.GetObject("deleteIcon", resourceCulture);
@@ -93,9 +103,29 @@ namespace PL_VehicleRental.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap passwordIcon {
+            get {
+                object obj = ResourceManager.GetObject("passwordIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap personAdd {
             get {
                 object obj = ResourceManager.GetObject("personAdd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap personIcon {
+            get {
+                object obj = ResourceManager.GetObject("personIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

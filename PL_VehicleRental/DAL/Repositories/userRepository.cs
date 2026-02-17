@@ -68,18 +68,18 @@ namespace PL_VehicleRental.DAL.Repositories
             }
         }
 
-        public async Task<UserInfoDto> ValidateLoginAsync(string username, string password)
+        public async Task<UserInfoDto> ValidateLoginAsync(string usernameOrEmail, string password)
         {
             using (var conn = MySQLConnectionContext.Create())
             {
                 await conn.OpenAsync();
 
                 const string sql = @"SELECT userName, fullName, email, address, role, status, passwordHash, isDefaultPassword
-                                     FROM users WHERE userName = @userName AND status = 'Active'";
+                                     FROM users WHERE (userName = @input OR email = @input) AND status = 'Active'";
 
                 using (var cmd = new MySqlCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@userName", username);
+                    cmd.Parameters.AddWithValue("@input", usernameOrEmail);
 
                     using (var reader = await cmd.ExecuteReaderAsync())
                     {

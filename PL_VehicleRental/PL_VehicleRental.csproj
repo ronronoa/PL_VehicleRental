@@ -132,6 +132,12 @@
     <Compile Include="Forms\frmAddUser.Designer.cs">
       <DependentUpon>frmAddUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmChangePassword.Designer.cs">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,6 +180,9 @@
       <DependentUpon>ucItemControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Validation\Validator.cs" />
+    <None Include="Resources\passwordIcon.png" />
+    <None Include="Resources\personIcon.png" />
+    <None Include="Resources\closeIcon.png" />
     <None Include="Resources\searchIcon.png" />
     <EmbeddedResource Include="Forms\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>

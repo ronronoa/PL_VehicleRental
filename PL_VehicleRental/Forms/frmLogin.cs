@@ -46,7 +46,7 @@ namespace PL_VehicleRental.Forms
                 MessageBox.Show("You are using a default password. Please change it before continuing.",
                                 "Security Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                var changePassForm = new frmChangePassword();
+                var changePassForm = new frmChangePassword(user.UserName);
                 changePassForm.ShowDialog();
 
                 var updatedUser = await _repository.ValidateLoginAsync(username, passwordTxt.Text);

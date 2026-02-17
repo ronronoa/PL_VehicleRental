@@ -149,6 +149,8 @@ namespace PL_VehicleRental.Forms
                 _validator.Required(addressTextBox, "Address is required");
                 _validator.IsEmail(emaiTxt, "Invalid email format");
 
+                _validator.Custom(userNameTextBox, () => userNameTextBox.Text.Length >= 5, "Username must be at least 5 characters");
+
                 if (!_validator.Validate() || !_isUsernameAvailable) return;
 
                 var dto = new UserInfoDto

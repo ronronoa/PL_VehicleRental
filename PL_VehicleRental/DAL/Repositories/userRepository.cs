@@ -103,5 +103,24 @@ namespace PL_VehicleRental.DAL.Repositories
                     
             }
         }
+
+        public async Task<bool> ChangePasswordAsync(string username, string newPassword)
+        {
+            using (var conn = MySQLConnectionContext.Create())
+            {
+                await conn.OpenAsync();
+
+                const string sql = @"UPDATE users SET passwordHash = @hash, isDefaultPassword = 0 
+                                     WHERE userName = @userName";
+
+                using (var cmd = new MySqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@hash", PasswordHelper.HashPassword(newPassword));
+                    cmd.Parameters.AddWithValue("@userName", username);
+
+                    return await cmd.ExecuteNonQueryAsync() > 0;
+                }
+            }
+        }
     }
 }

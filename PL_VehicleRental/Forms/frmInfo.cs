@@ -101,7 +101,7 @@ namespace PL_VehicleRental.Forms
         {
             txtUserName.Text = user.UserName;
             txtFullName.Text = user.FullName;
-            txtAddress.Text = user.Address;
+            lblAddress.Text = user.Address;
             lblRole.Text = user.Role;
             lblStatus.Text = user.Status;
         }
@@ -147,7 +147,6 @@ namespace PL_VehicleRental.Forms
            await LoadUserInfoAsync();
             txtUserName.ReadOnly = true;
             txtFullName.ReadOnly = true;
-            txtAddress.ReadOnly = true;
 
             SetUserStatus(lblStatus, _userStatus);
         }

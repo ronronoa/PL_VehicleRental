@@ -16,5 +16,10 @@ namespace PL_VehicleRental.Forms
         {
             InitializeComponent();
         }
+
+        private void cancelBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

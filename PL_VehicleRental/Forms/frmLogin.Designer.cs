@@ -35,12 +35,13 @@
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.lblLogin = new System.Windows.Forms.Label();
             this.btnLogin = new Guna.UI2.WinForms.Guna2Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.eyeBtn = new Guna.UI2.WinForms.Guna2Button();
             this.exitBtn = new Guna.UI2.WinForms.Guna2Button();
             this.usernameTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.passwordTxt = new Guna.UI2.WinForms.Guna2TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.pnlBase.SuspendLayout();
             this.pnlLogo.SuspendLayout();
             this.guna2Panel1.SuspendLayout();
@@ -89,12 +90,13 @@
             // guna2Panel1
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2Panel1.Controls.Add(this.eyeBtn);
+            this.guna2Panel1.Controls.Add(this.passwordTxt);
             this.guna2Panel1.Controls.Add(this.label2);
             this.guna2Panel1.Controls.Add(this.exitBtn);
             this.guna2Panel1.Controls.Add(this.lblLogin);
             this.guna2Panel1.Controls.Add(this.btnLogin);
             this.guna2Panel1.Controls.Add(this.usernameTxt);
-            this.guna2Panel1.Controls.Add(this.passwordTxt);
             this.guna2Panel1.CustomBorderColor = System.Drawing.Color.Silver;
             this.guna2Panel1.CustomBorderThickness = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -135,6 +137,20 @@
             this.btnLogin.Text = "Login";
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.Gainsboro;
+            this.label2.Location = new System.Drawing.Point(43, 83);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(214, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Enter your credentials to access the system.";
+            // 
+            // guna2Elipse1
+            // 
+            this.guna2Elipse1.TargetControl = this;
+            // 
             // guna2PictureBox1
             // 
             this.guna2PictureBox1.ImageRotate = 0F;
@@ -144,6 +160,22 @@
             this.guna2PictureBox1.Size = new System.Drawing.Size(249, 206);
             this.guna2PictureBox1.TabIndex = 0;
             this.guna2PictureBox1.TabStop = false;
+            // 
+            // eyeBtn
+            // 
+            this.eyeBtn.BackColor = System.Drawing.Color.White;
+            this.eyeBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.eyeBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.eyeBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.eyeBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.eyeBtn.FillColor = System.Drawing.Color.Transparent;
+            this.eyeBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.eyeBtn.ForeColor = System.Drawing.Color.White;
+            this.eyeBtn.Image = global::PL_VehicleRental.Properties.Resources.showPassIcon;
+            this.eyeBtn.Location = new System.Drawing.Point(234, 160);
+            this.eyeBtn.Name = "eyeBtn";
+            this.eyeBtn.Size = new System.Drawing.Size(32, 23);
+            this.eyeBtn.TabIndex = 6;
             // 
             // exitBtn
             // 
@@ -186,6 +218,7 @@
             // 
             // passwordTxt
             // 
+            this.passwordTxt.BackColor = System.Drawing.SystemColors.Control;
             this.passwordTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.passwordTxt.DefaultText = "";
             this.passwordTxt.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -197,27 +230,13 @@
             this.passwordTxt.ForeColor = System.Drawing.Color.Gray;
             this.passwordTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.passwordTxt.IconLeft = global::PL_VehicleRental.Properties.Resources.passwordIcon;
-            this.passwordTxt.Location = new System.Drawing.Point(46, 163);
+            this.passwordTxt.Location = new System.Drawing.Point(46, 157);
             this.passwordTxt.Margin = new System.Windows.Forms.Padding(2);
             this.passwordTxt.Name = "passwordTxt";
             this.passwordTxt.PlaceholderText = "Password";
             this.passwordTxt.SelectedText = "";
             this.passwordTxt.Size = new System.Drawing.Size(222, 29);
             this.passwordTxt.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label2.Location = new System.Drawing.Point(43, 83);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(214, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Enter your credentials to access the system.";
-            // 
-            // guna2Elipse1
-            // 
-            this.guna2Elipse1.TargetControl = this;
             // 
             // frmLogin
             // 
@@ -254,5 +273,6 @@
         private Guna.UI2.WinForms.Guna2Button exitBtn;
         private System.Windows.Forms.Label label2;
         private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
+        private Guna.UI2.WinForms.Guna2Button eyeBtn;
     }
 }

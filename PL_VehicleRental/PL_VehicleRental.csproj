@@ -180,10 +180,14 @@
       <DependentUpon>ucItemControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Validation\Validator.cs" />
+    <None Include="Resources\showPassIcon.png" />
     <None Include="Resources\passwordIcon.png" />
     <None Include="Resources\personIcon.png" />
     <None Include="Resources\closeIcon.png" />
     <None Include="Resources\searchIcon.png" />
+    <EmbeddedResource Include="Forms\frmChangePassword.resx">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>

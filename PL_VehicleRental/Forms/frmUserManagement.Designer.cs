@@ -43,11 +43,17 @@ namespace PL_VehicleRental.Forms
             this.txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
             this.btnUserForm = new Guna.UI2.WinForms.Guna2Button();
             this.headerLabel = new System.Windows.Forms.Label();
+            this.pnlPagination = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnPrev = new Guna.UI2.WinForms.Guna2Button();
+            this.lblPageInfo = new System.Windows.Forms.Label();
+            this.btnNext = new Guna.UI2.WinForms.Guna2Button();
+            this.cboPageSize = new Guna.UI2.WinForms.Guna2ComboBox();
             this.BackgroundPanel.SuspendLayout();
             this.UserManagementPanel.SuspendLayout();
             this.rolesTablePanel.SuspendLayout();
             this.pnlOverlay.SuspendLayout();
             this.headerPanel.SuspendLayout();
+            this.pnlPagination.SuspendLayout();
             this.SuspendLayout();
             // 
             // BackgroundPanel
@@ -83,6 +89,7 @@ namespace PL_VehicleRental.Forms
             // 
             // rolesTablePanel
             // 
+            this.rolesTablePanel.Controls.Add(this.pnlPagination);
             this.rolesTablePanel.Controls.Add(this.pnlOverlay);
             this.rolesTablePanel.Controls.Add(this.flowUsers);
             this.rolesTablePanel.Controls.Add(this.TableHeaderPanel);
@@ -100,7 +107,7 @@ namespace PL_VehicleRental.Forms
             this.pnlOverlay.Controls.Add(this.progressBar);
             this.pnlOverlay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlOverlay.Location = new System.Drawing.Point(11, 110);
-            this.pnlOverlay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlOverlay.Margin = new System.Windows.Forms.Padding(4);
             this.pnlOverlay.Name = "pnlOverlay";
             this.pnlOverlay.Size = new System.Drawing.Size(1256, 507);
             this.pnlOverlay.TabIndex = 1;
@@ -111,7 +118,7 @@ namespace PL_VehicleRental.Forms
             this.progressBar.BorderRadius = 5;
             this.progressBar.BorderThickness = 1;
             this.progressBar.Location = new System.Drawing.Point(276, 208);
-            this.progressBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.progressBar.Margin = new System.Windows.Forms.Padding(4);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(699, 14);
             this.progressBar.TabIndex = 0;
@@ -177,7 +184,7 @@ namespace PL_VehicleRental.Forms
             this.txtSearch.IconLeft = global::PL_VehicleRental.Properties.Resources.searchIcon;
             this.txtSearch.IconLeftOffset = new System.Drawing.Point(5, 0);
             this.txtSearch.Location = new System.Drawing.Point(735, 30);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PlaceholderText = "Search user...";
             this.txtSearch.SelectedText = "";
@@ -219,6 +226,75 @@ namespace PL_VehicleRental.Forms
             this.headerLabel.TabIndex = 3;
             this.headerLabel.Text = "User Management";
             // 
+            // pnlPagination
+            // 
+            this.pnlPagination.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlPagination.Controls.Add(this.btnNext);
+            this.pnlPagination.Controls.Add(this.btnPrev);
+            this.pnlPagination.Controls.Add(this.lblPageInfo);
+            this.pnlPagination.Controls.Add(this.cboPageSize);
+            this.pnlPagination.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlPagination.Location = new System.Drawing.Point(11, 573);
+            this.pnlPagination.Name = "pnlPagination";
+            this.pnlPagination.Padding = new System.Windows.Forms.Padding(8, 6, 8, 6);
+            this.pnlPagination.Size = new System.Drawing.Size(1256, 44);
+            this.pnlPagination.TabIndex = 1;
+            // 
+            // btnPrev
+            // 
+            this.btnPrev.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnPrev.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnPrev.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnPrev.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnPrev.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnPrev.ForeColor = System.Drawing.Color.White;
+            this.btnPrev.Location = new System.Drawing.Point(421, 6);
+            this.btnPrev.Name = "btnPrev";
+            this.btnPrev.Size = new System.Drawing.Size(45, 30);
+            this.btnPrev.TabIndex = 0;
+            this.btnPrev.Text = "<";
+            this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
+            // 
+            // lblPageInfo
+            // 
+            this.lblPageInfo.Location = new System.Drawing.Point(472, 8);
+            this.lblPageInfo.Name = "lblPageInfo";
+            this.lblPageInfo.Size = new System.Drawing.Size(65, 30);
+            this.lblPageInfo.TabIndex = 1;
+            this.lblPageInfo.Text = "label1";
+            this.lblPageInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnNext
+            // 
+            this.btnNext.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnNext.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnNext.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnNext.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnNext.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnNext.ForeColor = System.Drawing.Color.White;
+            this.btnNext.Location = new System.Drawing.Point(606, 6);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(45, 30);
+            this.btnNext.TabIndex = 2;
+            this.btnNext.Text = ">";
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // cboPageSize
+            // 
+            this.cboPageSize.BackColor = System.Drawing.Color.Transparent;
+            this.cboPageSize.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboPageSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboPageSize.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cboPageSize.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cboPageSize.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cboPageSize.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.cboPageSize.ItemHeight = 30;
+            this.cboPageSize.Location = new System.Drawing.Point(539, 5);
+            this.cboPageSize.Name = "cboPageSize";
+            this.cboPageSize.Size = new System.Drawing.Size(51, 36);
+            this.cboPageSize.TabIndex = 3;
+            this.cboPageSize.SelectedIndexChanged += new System.EventHandler(this.cboPageSize_SelectedIndexChanged);
+            // 
             // UserManagementForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -237,6 +313,7 @@ namespace PL_VehicleRental.Forms
             this.pnlOverlay.ResumeLayout(false);
             this.headerPanel.ResumeLayout(false);
             this.headerPanel.PerformLayout();
+            this.pnlPagination.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -254,5 +331,10 @@ namespace PL_VehicleRental.Forms
         private Guna.UI2.WinForms.Guna2TextBox txtSearch;
         private Guna.UI2.WinForms.Guna2ProgressBar progressBar;
         private Guna.UI2.WinForms.Guna2Panel pnlOverlay;
+        private Guna.UI2.WinForms.Guna2Panel pnlPagination;
+        private Label lblPageInfo;
+        private Guna.UI2.WinForms.Guna2Button btnPrev;
+        private Guna.UI2.WinForms.Guna2Button btnNext;
+        private Guna.UI2.WinForms.Guna2ComboBox cboPageSize;
     }
 }

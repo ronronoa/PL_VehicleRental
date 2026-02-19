@@ -22,7 +22,14 @@ namespace PL_VehicleRental.Forms
     public partial class UserManagementForm : Form
     {
         private List<UserInfoDto> _allUsers = new List<UserInfoDto>();
+        private List<UserInfoDto> _filteredUsers = new List<UserInfoDto>();
         private System.Windows.Forms.Timer _searchTimer;
+
+        private int _currentPage = 1;
+        private const int PageSize = 10;
+        private int TotalPages => Math.Max(1, (int)Math.Ceiling(_filteredUsers.Count / (double)PageSize));
+
+
         public UserManagementForm()
         {
             InitializeComponent();
@@ -40,6 +47,67 @@ namespace PL_VehicleRental.Forms
             pnlOverlay.Controls.Add(progressBar);
         }
 
+        private int CurrentPageSize => cboPageSize?.SelectedItem is int v ? v : PageSize;
+
+        private void ApplyFilterAndRender(string keyword)
+        {
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                _filteredUsers = new List<UserInfoDto>(_allUsers);
+            } else
+            {
+                _filteredUsers = _allUsers
+                .Where(u =>
+                    (!string.IsNullOrEmpty(u.UserName) && u.UserName.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                    (!string.IsNullOrEmpty(u.FullName) && u.FullName.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                    (!string.IsNullOrEmpty(u.Address) && u.Address.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                    (!string.IsNullOrEmpty(u.Email) && u.Email.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0))
+                .ToList();
+            }
+
+            _currentPage = 1;
+            RenderCurrentPage();
+        }
+
+        private void RenderCurrentPage()
+        {
+            int PageSize = CurrentPageSize;
+            if (_currentPage < 1) _currentPage = 1;
+            if (_currentPage > TotalPages) _currentPage = TotalPages;
+
+            var pageItems = _filteredUsers
+                .Skip((_currentPage - 1) * PageSize)
+                .Take(PageSize)
+                .ToList();
+
+            flowUsers.Controls.Clear();
+            foreach (var user in pageItems)
+            {
+                var item = new ucItemControl(user);
+                flowUsers.Controls.Add(item);
+                item.Width = flowUsers.ClientSize.Width;
+
+                item.InfoClicked += (_, __) => OpenInfo(user.Id);
+                item.EditClicked += (_, __) => OpenEditForm(user.Id);
+                item.DeleteClicked += (_, __) => DeleteUser(user.Id, user.UserName);
+            }
+
+            UpdatePaginationControls();
+        }
+
+        private void UpdatePaginationControls()
+        {
+            int start = _filteredUsers.Count == 0 ? 0 : (_currentPage - 1) * CurrentPageSize;
+            int end = Math.Min(_currentPage * CurrentPageSize, _filteredUsers.Count);
+
+            lblPageInfo.Text = $"{start} - {end} of {_filteredUsers.Count}";
+            btnPrev.Enabled = _currentPage > 1;
+            btnNext.Enabled = _currentPage < TotalPages;
+
+            btnPrev.BackColor = btnPrev.Enabled ? Color.FromArgb(42, 132, 191) : Color.FromArgb(180, 180, 180);
+            btnNext.BackColor = btnNext.Enabled ? Color.FromArgb(42, 132, 191) : Color.FromArgb(180, 180, 180);
+        }
+
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -49,10 +117,11 @@ namespace PL_VehicleRental.Forms
         {
             TableHeader();
             FixHeaderScrollbarAlignment();
+            cboPageSize.SelectedItem = PageSize;
             await RefreshUserDataAsync();
         }
 
-        private async void UserManagementForm_Shown(object sender, EventArgs e)
+        private void UserManagementForm_Shown(object sender, EventArgs e)
         {
 
         }
@@ -69,8 +138,8 @@ namespace PL_VehicleRental.Forms
             flowUsers.Controls.Clear();
             ConfigureFlowLayout();
             _allUsers = await GetUserAsync();
-
-            RenderUsers(_allUsers);
+            ApplyFilterAndRender(txtSearch.Text);
+            
             ToggleLoading(false);
         }
 
@@ -344,6 +413,24 @@ namespace PL_VehicleRental.Forms
         private void progressBar_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnPrev_Click(object sender, EventArgs e)
+        { 
+            _currentPage--;
+            RenderCurrentPage();
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            _currentPage++;
+            RenderCurrentPage();
+        }
+
+        private void cboPageSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _currentPage = 1;
+            RenderCurrentPage();
         }
     }
 }

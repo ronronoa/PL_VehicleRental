@@ -20,6 +20,10 @@ namespace PL_VehicleRental.Forms
             _repository = new userRepository();
         }
 
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+            passwordTxt.UseSystemPasswordChar = true;
+        }
         private async void btnLogin_Click(object sender, EventArgs e)
         {
             var username = usernameTxt.Text.Trim();
@@ -72,6 +76,21 @@ namespace PL_VehicleRental.Forms
         private void exitBtn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void chkShowPassword_CheckedChanged(object sender, EventArgs e)
+        {
+            passwordTxt.UseSystemPasswordChar = !chkShowPassword.Checked;
+        }
+
+        private void chkShowPassword_MouseDown(object sender, MouseEventArgs e)
+        {
+            //passwordTxt.UseSystemPasswordChar = false;
+        }
+
+        private void chkShowPassword_MouseUp(object sender, MouseEventArgs e)
+        {
+            //passwordTxt.UseSystemPasswordChar = true;
         }
     }
 }

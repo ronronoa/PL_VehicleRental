@@ -29,23 +29,24 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
             this.pnlBase = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.pnlLogo = new Guna.UI2.WinForms.Guna2Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.passwordTxt = new Guna.UI2.WinForms.Guna2TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.exitBtn = new Guna.UI2.WinForms.Guna2Button();
             this.lblLogin = new System.Windows.Forms.Label();
             this.btnLogin = new Guna.UI2.WinForms.Guna2Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
-            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.eyeBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.exitBtn = new Guna.UI2.WinForms.Guna2Button();
             this.usernameTxt = new Guna.UI2.WinForms.Guna2TextBox();
-            this.passwordTxt = new Guna.UI2.WinForms.Guna2TextBox();
+            this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
+            this.chkShowPassword = new Guna.UI2.WinForms.Guna2ImageCheckBox();
             this.pnlBase.SuspendLayout();
             this.pnlLogo.SuspendLayout();
-            this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
+            this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlBase
@@ -57,7 +58,7 @@
             this.pnlBase.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(132)))), ((int)(((byte)(191)))));
             this.pnlBase.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(167)))), ((int)(((byte)(161)))));
             this.pnlBase.Location = new System.Drawing.Point(0, 0);
-            this.pnlBase.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlBase.Margin = new System.Windows.Forms.Padding(2);
             this.pnlBase.Name = "pnlBase";
             this.pnlBase.Size = new System.Drawing.Size(632, 331);
             this.pnlBase.TabIndex = 0;
@@ -69,7 +70,7 @@
             this.pnlLogo.Controls.Add(this.guna2PictureBox1);
             this.pnlLogo.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLogo.Location = new System.Drawing.Point(0, 0);
-            this.pnlLogo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlLogo.Margin = new System.Windows.Forms.Padding(2);
             this.pnlLogo.Name = "pnlLogo";
             this.pnlLogo.Size = new System.Drawing.Size(318, 331);
             this.pnlLogo.TabIndex = 4;
@@ -87,10 +88,20 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "LOGO";
             // 
+            // guna2PictureBox1
+            // 
+            this.guna2PictureBox1.ImageRotate = 0F;
+            this.guna2PictureBox1.Location = new System.Drawing.Point(37, 51);
+            this.guna2PictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.guna2PictureBox1.Name = "guna2PictureBox1";
+            this.guna2PictureBox1.Size = new System.Drawing.Size(249, 206);
+            this.guna2PictureBox1.TabIndex = 0;
+            this.guna2PictureBox1.TabStop = false;
+            // 
             // guna2Panel1
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Panel1.Controls.Add(this.eyeBtn);
+            this.guna2Panel1.Controls.Add(this.chkShowPassword);
             this.guna2Panel1.Controls.Add(this.passwordTxt);
             this.guna2Panel1.Controls.Add(this.label2);
             this.guna2Panel1.Controls.Add(this.exitBtn);
@@ -101,10 +112,59 @@
             this.guna2Panel1.CustomBorderThickness = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.guna2Panel1.Location = new System.Drawing.Point(317, 0);
-            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(2);
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(315, 331);
             this.guna2Panel1.TabIndex = 3;
+            // 
+            // passwordTxt
+            // 
+            this.passwordTxt.BackColor = System.Drawing.SystemColors.Control;
+            this.passwordTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.passwordTxt.DefaultText = "";
+            this.passwordTxt.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.passwordTxt.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.passwordTxt.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.passwordTxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.passwordTxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.passwordTxt.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.passwordTxt.ForeColor = System.Drawing.Color.Gray;
+            this.passwordTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.passwordTxt.IconLeft = global::PL_VehicleRental.Properties.Resources.passwordIcon;
+            this.passwordTxt.Location = new System.Drawing.Point(46, 157);
+            this.passwordTxt.Margin = new System.Windows.Forms.Padding(2);
+            this.passwordTxt.Name = "passwordTxt";
+            this.passwordTxt.PlaceholderText = "Password";
+            this.passwordTxt.SelectedText = "";
+            this.passwordTxt.Size = new System.Drawing.Size(222, 29);
+            this.passwordTxt.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.Gainsboro;
+            this.label2.Location = new System.Drawing.Point(43, 83);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(214, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Enter your credentials to access the system.";
+            // 
+            // exitBtn
+            // 
+            this.exitBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.exitBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.exitBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.exitBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.exitBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.exitBtn.FillColor = System.Drawing.Color.Transparent;
+            this.exitBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.exitBtn.ForeColor = System.Drawing.Color.White;
+            this.exitBtn.Image = global::PL_VehicleRental.Properties.Resources.closeIcon;
+            this.exitBtn.Location = new System.Drawing.Point(277, 3);
+            this.exitBtn.Name = "exitBtn";
+            this.exitBtn.Size = new System.Drawing.Size(35, 26);
+            this.exitBtn.TabIndex = 4;
+            this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
             // 
             // lblLogin
             // 
@@ -130,69 +190,12 @@
             this.btnLogin.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.Color.White;
             this.btnLogin.Location = new System.Drawing.Point(92, 220);
-            this.btnLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(2);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(135, 37);
             this.btnLogin.TabIndex = 2;
             this.btnLogin.Text = "Login";
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label2.Location = new System.Drawing.Point(43, 83);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(214, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Enter your credentials to access the system.";
-            // 
-            // guna2Elipse1
-            // 
-            this.guna2Elipse1.TargetControl = this;
-            // 
-            // guna2PictureBox1
-            // 
-            this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(37, 51);
-            this.guna2PictureBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(249, 206);
-            this.guna2PictureBox1.TabIndex = 0;
-            this.guna2PictureBox1.TabStop = false;
-            // 
-            // eyeBtn
-            // 
-            this.eyeBtn.BackColor = System.Drawing.Color.White;
-            this.eyeBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.eyeBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.eyeBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.eyeBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.eyeBtn.FillColor = System.Drawing.Color.Transparent;
-            this.eyeBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.eyeBtn.ForeColor = System.Drawing.Color.White;
-            this.eyeBtn.Image = global::PL_VehicleRental.Properties.Resources.showPassIcon;
-            this.eyeBtn.Location = new System.Drawing.Point(234, 160);
-            this.eyeBtn.Name = "eyeBtn";
-            this.eyeBtn.Size = new System.Drawing.Size(32, 23);
-            this.eyeBtn.TabIndex = 6;
-            // 
-            // exitBtn
-            // 
-            this.exitBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.exitBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.exitBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.exitBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.exitBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.exitBtn.FillColor = System.Drawing.Color.Transparent;
-            this.exitBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.exitBtn.ForeColor = System.Drawing.Color.White;
-            this.exitBtn.Image = global::PL_VehicleRental.Properties.Resources.closeIcon;
-            this.exitBtn.Location = new System.Drawing.Point(277, 3);
-            this.exitBtn.Name = "exitBtn";
-            this.exitBtn.Size = new System.Drawing.Size(35, 26);
-            this.exitBtn.TabIndex = 4;
-            this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
             // 
             // usernameTxt
             // 
@@ -216,27 +219,24 @@
             this.usernameTxt.Size = new System.Drawing.Size(222, 29);
             this.usernameTxt.TabIndex = 0;
             // 
-            // passwordTxt
+            // guna2Elipse1
             // 
-            this.passwordTxt.BackColor = System.Drawing.SystemColors.Control;
-            this.passwordTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.passwordTxt.DefaultText = "";
-            this.passwordTxt.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.passwordTxt.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.passwordTxt.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.passwordTxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.passwordTxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.passwordTxt.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.passwordTxt.ForeColor = System.Drawing.Color.Gray;
-            this.passwordTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.passwordTxt.IconLeft = global::PL_VehicleRental.Properties.Resources.passwordIcon;
-            this.passwordTxt.Location = new System.Drawing.Point(46, 157);
-            this.passwordTxt.Margin = new System.Windows.Forms.Padding(2);
-            this.passwordTxt.Name = "passwordTxt";
-            this.passwordTxt.PlaceholderText = "Password";
-            this.passwordTxt.SelectedText = "";
-            this.passwordTxt.Size = new System.Drawing.Size(222, 29);
-            this.passwordTxt.TabIndex = 1;
+            this.guna2Elipse1.TargetControl = this;
+            // 
+            // chkShowPassword
+            // 
+            this.chkShowPassword.BackColor = System.Drawing.Color.White;
+            this.chkShowPassword.CheckedState.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image")));
+            this.chkShowPassword.Image = global::PL_VehicleRental.Properties.Resources.showPassIcon;
+            this.chkShowPassword.ImageOffset = new System.Drawing.Point(0, 0);
+            this.chkShowPassword.ImageRotate = 0F;
+            this.chkShowPassword.Location = new System.Drawing.Point(240, 160);
+            this.chkShowPassword.Name = "chkShowPassword";
+            this.chkShowPassword.Size = new System.Drawing.Size(24, 24);
+            this.chkShowPassword.TabIndex = 6;
+            this.chkShowPassword.CheckedChanged += new System.EventHandler(this.chkShowPassword_CheckedChanged);
+            this.chkShowPassword.MouseDown += new System.Windows.Forms.MouseEventHandler(this.chkShowPassword_MouseDown);
+            this.chkShowPassword.MouseUp += new System.Windows.Forms.MouseEventHandler(this.chkShowPassword_MouseUp);
             // 
             // frmLogin
             // 
@@ -245,16 +245,17 @@
             this.ClientSize = new System.Drawing.Size(632, 331);
             this.Controls.Add(this.pnlBase);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmLogin";
+            this.Load += new System.EventHandler(this.frmLogin_Load);
             this.pnlBase.ResumeLayout(false);
             this.pnlLogo.ResumeLayout(false);
             this.pnlLogo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -273,6 +274,6 @@
         private Guna.UI2.WinForms.Guna2Button exitBtn;
         private System.Windows.Forms.Label label2;
         private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
-        private Guna.UI2.WinForms.Guna2Button eyeBtn;
+        private Guna.UI2.WinForms.Guna2ImageCheckBox chkShowPassword;
     }
 }

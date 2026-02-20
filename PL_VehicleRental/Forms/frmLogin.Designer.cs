@@ -35,6 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.chkShowPassword = new Guna.UI2.WinForms.Guna2ImageCheckBox();
             this.passwordTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.exitBtn = new Guna.UI2.WinForms.Guna2Button();
@@ -42,7 +43,6 @@
             this.btnLogin = new Guna.UI2.WinForms.Guna2Button();
             this.usernameTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
-            this.chkShowPassword = new Guna.UI2.WinForms.Guna2ImageCheckBox();
             this.pnlBase.SuspendLayout();
             this.pnlLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
@@ -116,6 +116,21 @@
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(315, 331);
             this.guna2Panel1.TabIndex = 3;
+            // 
+            // chkShowPassword
+            // 
+            this.chkShowPassword.BackColor = System.Drawing.Color.White;
+            this.chkShowPassword.CheckedState.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image")));
+            this.chkShowPassword.Image = global::PL_VehicleRental.Properties.Resources.showPassIcon;
+            this.chkShowPassword.ImageOffset = new System.Drawing.Point(0, 0);
+            this.chkShowPassword.ImageRotate = 0F;
+            this.chkShowPassword.Location = new System.Drawing.Point(240, 160);
+            this.chkShowPassword.Name = "chkShowPassword";
+            this.chkShowPassword.Size = new System.Drawing.Size(24, 24);
+            this.chkShowPassword.TabIndex = 6;
+            this.chkShowPassword.CheckedChanged += new System.EventHandler(this.chkShowPassword_CheckedChanged);
+            this.chkShowPassword.MouseDown += new System.Windows.Forms.MouseEventHandler(this.chkShowPassword_MouseDown);
+            this.chkShowPassword.MouseUp += new System.Windows.Forms.MouseEventHandler(this.chkShowPassword_MouseUp);
             // 
             // passwordTxt
             // 
@@ -223,21 +238,6 @@
             // 
             this.guna2Elipse1.TargetControl = this;
             // 
-            // chkShowPassword
-            // 
-            this.chkShowPassword.BackColor = System.Drawing.Color.White;
-            this.chkShowPassword.CheckedState.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image")));
-            this.chkShowPassword.Image = global::PL_VehicleRental.Properties.Resources.showPassIcon;
-            this.chkShowPassword.ImageOffset = new System.Drawing.Point(0, 0);
-            this.chkShowPassword.ImageRotate = 0F;
-            this.chkShowPassword.Location = new System.Drawing.Point(240, 160);
-            this.chkShowPassword.Name = "chkShowPassword";
-            this.chkShowPassword.Size = new System.Drawing.Size(24, 24);
-            this.chkShowPassword.TabIndex = 6;
-            this.chkShowPassword.CheckedChanged += new System.EventHandler(this.chkShowPassword_CheckedChanged);
-            this.chkShowPassword.MouseDown += new System.Windows.Forms.MouseEventHandler(this.chkShowPassword_MouseDown);
-            this.chkShowPassword.MouseUp += new System.Windows.Forms.MouseEventHandler(this.chkShowPassword_MouseUp);
-            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -250,6 +250,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmLogin";
             this.Load += new System.EventHandler(this.frmLogin_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmLogin_KeyDown);
             this.pnlBase.ResumeLayout(false);
             this.pnlLogo.ResumeLayout(false);
             this.pnlLogo.PerformLayout();

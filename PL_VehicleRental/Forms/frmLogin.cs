@@ -18,6 +18,7 @@ namespace PL_VehicleRental.Forms
         {
             InitializeComponent();
             _repository = new userRepository();
+            this.AcceptButton = btnLogin;
         }
 
         private void frmLogin_Load(object sender, EventArgs e)
@@ -91,6 +92,11 @@ namespace PL_VehicleRental.Forms
         private void chkShowPassword_MouseUp(object sender, MouseEventArgs e)
         {
             //passwordTxt.UseSystemPasswordChar = true;
+        }
+
+        private void frmLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+            
         }
     }
 }

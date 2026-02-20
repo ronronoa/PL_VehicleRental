@@ -26,8 +26,8 @@ namespace PL_VehicleRental.Forms
         private System.Windows.Forms.Timer _searchTimer;
 
         private int _currentPage = 1;
-        private const int PageSize = 10;
-        private int TotalPages => Math.Max(1, (int)Math.Ceiling(_filteredUsers.Count / (double)PageSize));
+        private int _pageSize = 10;
+        private int _totalPages = 1;
 
 
         public UserManagementForm()
@@ -47,40 +47,15 @@ namespace PL_VehicleRental.Forms
             pnlOverlay.Controls.Add(progressBar);
         }
 
-        private int CurrentPageSize => cboPageSize?.SelectedItem is int v ? v : PageSize;
-
-        private void ApplyFilterAndRender(string keyword)
-        {
-            if (string.IsNullOrWhiteSpace(keyword))
-            {
-                _filteredUsers = new List<UserInfoDto>(_allUsers);
-            } else
-            {
-                _filteredUsers = _allUsers
-                .Where(u =>
-                    (!string.IsNullOrEmpty(u.UserName) && u.UserName.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0) ||
-                    (!string.IsNullOrEmpty(u.FullName) && u.FullName.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0) ||
-                    (!string.IsNullOrEmpty(u.Address) && u.Address.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0) ||
-                    (!string.IsNullOrEmpty(u.Email) && u.Email.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0))
-                .ToList();
-            }
-
-            _currentPage = 1;
-            RenderCurrentPage();
-        }
-
         private void RenderCurrentPage()
         {
-            int PageSize = CurrentPageSize;
-            if (_currentPage < 1) _currentPage = 1;
-            if (_currentPage > TotalPages) _currentPage = TotalPages;
+            flowUsers.Controls.Clear();
 
-            var pageItems = _filteredUsers
-                .Skip((_currentPage - 1) * PageSize)
-                .Take(PageSize)
+            var pageItems = _allUsers
+                .Skip((_currentPage - 1) * _pageSize)
+                .Take(_pageSize)
                 .ToList();
 
-            flowUsers.Controls.Clear();
             foreach (var user in pageItems)
             {
                 var item = new ucItemControl(user);
@@ -97,15 +72,10 @@ namespace PL_VehicleRental.Forms
 
         private void UpdatePaginationControls()
         {
-            int start = _filteredUsers.Count == 0 ? 0 : (_currentPage - 1) * CurrentPageSize;
-            int end = Math.Min(_currentPage * CurrentPageSize, _filteredUsers.Count);
+            lblPageInfo.Text = $"Page {_currentPage} of {_totalPages}";
 
-            lblPageInfo.Text = $"{start} - {end} of {_filteredUsers.Count}";
             btnPrev.Enabled = _currentPage > 1;
-            btnNext.Enabled = _currentPage < TotalPages;
-
-            btnPrev.BackColor = btnPrev.Enabled ? Color.FromArgb(42, 132, 191) : Color.FromArgb(180, 180, 180);
-            btnNext.BackColor = btnNext.Enabled ? Color.FromArgb(42, 132, 191) : Color.FromArgb(180, 180, 180);
+            btnNext.Enabled = _currentPage < _totalPages;
         }
 
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
@@ -117,7 +87,6 @@ namespace PL_VehicleRental.Forms
         {
             TableHeader();
             FixHeaderScrollbarAlignment();
-            cboPageSize.SelectedItem = PageSize;
             await RefreshUserDataAsync();
         }
 
@@ -129,7 +98,14 @@ namespace PL_VehicleRental.Forms
         private void ToggleLoading(bool isLoading)
         {
             pnlOverlay.Visible = isLoading;
-            if (isLoading) pnlOverlay.BringToFront();
+            if (isLoading)
+            {
+                pnlOverlay.BringToFront();
+            } else
+            {
+                pnlOverlay.Visible = false;
+            }
+            
         }
 
         public async Task RefreshUserDataAsync()
@@ -138,7 +114,9 @@ namespace PL_VehicleRental.Forms
             flowUsers.Controls.Clear();
             ConfigureFlowLayout();
             _allUsers = await GetUserAsync();
-            ApplyFilterAndRender(txtSearch.Text);
+            _totalPages = (int)Math.Ceiling((double)_allUsers.Count / _pageSize);
+            _currentPage = 1;
+            RenderCurrentPage();
             
             ToggleLoading(false);
         }
@@ -431,6 +409,19 @@ namespace PL_VehicleRental.Forms
         {
             _currentPage = 1;
             RenderCurrentPage();
+        }
+
+        private void UserManagementForm_Resize(object sender, EventArgs e)
+        {
+        }
+
+        private void rolesTablePanel_Resize(object sender, EventArgs e)
+        {
+        }
+
+        private void pnlOverlay_Resize(object sender, EventArgs e)
+        {
+            
         }
     }
 }

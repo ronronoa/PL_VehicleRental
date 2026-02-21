@@ -12,6 +12,7 @@ using System.Windows.Forms.VisualStyles;
 using Guna.UI2.WinForms;
 using MySqlConnector;
 using PL_VehicleRental.Classes;
+using PL_VehicleRental.DAL.Repositories;
 using PL_VehicleRental.Data;
 using PL_VehicleRental.UI.Layout;
 using PL_VehicleRental.UserControl;
@@ -21,13 +22,14 @@ namespace PL_VehicleRental.Forms
 {
     public partial class UserManagementForm : Form
     {
-        private List<UserInfoDto> _allUsers = new List<UserInfoDto>();
-        private List<UserInfoDto> _filteredUsers = new List<UserInfoDto>();
         private System.Windows.Forms.Timer _searchTimer;
 
         private int _currentPage = 1;
         private int _pageSize = 10;
         private int _totalPages = 1;
+        private string currentSearch = "";
+
+        private readonly userRepository _repository = new userRepository();
 
 
         public UserManagementForm()
@@ -47,18 +49,21 @@ namespace PL_VehicleRental.Forms
             pnlOverlay.Controls.Add(progressBar);
         }
 
-        private void RenderCurrentPage()
+        private async Task LoadPageAsync()
         {
+            ToggleLoading(true);
+
+            var result = await _repository.GetPagedUsersAsync(
+                currentSearch,
+                _currentPage,
+                _pageSize);
+
             flowUsers.Controls.Clear();
 
-            var pageItems = _allUsers
-                .Skip((_currentPage - 1) * _pageSize)
-                .Take(_pageSize)
-                .ToList();
-
-            foreach (var user in pageItems)
+            foreach (var user in result.Users)
             {
                 var item = new ucItemControl(user);
+
                 flowUsers.Controls.Add(item);
                 item.Width = flowUsers.ClientSize.Width;
 
@@ -67,15 +72,14 @@ namespace PL_VehicleRental.Forms
                 item.DeleteClicked += (_, __) => DeleteUser(user.Id, user.UserName);
             }
 
-            UpdatePaginationControls();
-        }
+            _totalPages = (int)Math.Ceiling((double)result.TotalCount / _pageSize);
 
-        private void UpdatePaginationControls()
-        {
             lblPageInfo.Text = $"Page {_currentPage} of {_totalPages}";
 
             btnPrev.Enabled = _currentPage > 1;
             btnNext.Enabled = _currentPage < _totalPages;
+
+            ToggleLoading(false);
         }
 
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
@@ -87,9 +91,7 @@ namespace PL_VehicleRental.Forms
         {
             TableHeader();
             FixHeaderScrollbarAlignment();
-            await RefreshUserDataAsync();
-            MessageBox.Show(flowUsers.VerticalScroll.Visible.ToString());
-            pnlOverlay.BackColor = Color.Red;
+            await LoadPageAsync();
         }
 
         private void UserManagementForm_Shown(object sender, EventArgs e)
@@ -109,85 +111,6 @@ namespace PL_VehicleRental.Forms
             }
             
         }
-
-        public async Task RefreshUserDataAsync()
-        {
-            ToggleLoading(true);
-            flowUsers.Controls.Clear();
-            ConfigureFlowLayout();
-            _allUsers = await GetUserAsync();
-            _totalPages = (int)Math.Ceiling((double)_allUsers.Count / _pageSize);
-            _currentPage = 1;
-            RenderCurrentPage();
-            
-            ToggleLoading(false);
-        }
-
-        private void RenderUsers(List<UserInfoDto> users)
-        {
-            flowUsers.Controls.Clear();
-
-            foreach (var user in users)
-            {
-                var item = new ucItemControl(user);
-
-                flowUsers.Controls.Add(item);
-                item.Width = flowUsers.ClientSize.Width;
-
-                item.InfoClicked += (_, __) => OpenInfo(user.Id);
-                item.EditClicked += (_, __) => OpenEditForm(user.Id);
-                item.DeleteClicked += (_, __) => DeleteUser(user.Id, user.UserName);
-            }
-        }
-
-        private void ConfigureFlowLayout()
-        {
-            flowUsers.WrapContents = false;
-            flowUsers.FlowDirection = FlowDirection.TopDown;
-            flowUsers.AutoScroll = true;
-            flowUsers.Padding = Padding.Empty;
-            flowUsers.Margin = Padding.Empty;
-        }
-
-        private async Task<List<UserInfoDto>> GetUserAsync()
-        {
-            const string query = @"
-        SELECT id,
-               userName,
-               fullName,
-               email,
-               address,
-               role,
-               status
-        FROM users ORDER BY created_at DESC";
-
-            var users = new List<UserInfoDto>();
-
-            using (var conn = MySQLConnectionContext.Create())
-            using (var cmd = new MySqlCommand(query, conn))
-            {
-                await conn.OpenAsync();
-
-                using (var reader = await cmd.ExecuteReaderAsync())
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        users.Add(new UserInfoDto
-                        {
-                        Id = reader.GetInt32("id"),
-                        UserName = reader.GetString("userName"),
-                        FullName = reader.GetString("fullName"),
-                        Email = reader.GetString("email"),
-                        Address = reader.GetString("address"),
-                        Role = reader.GetString("role"),
-                        Status = reader.GetString("status")
-                        });
-                    }
-                }
-            }
-
-            return users;
-        }
         
         private void InitializeSearchDebounce()
         {
@@ -202,21 +125,14 @@ namespace PL_VehicleRental.Forms
             _searchTimer.Start();
         }
 
-        private void SearchTimer_Tick(object sender, EventArgs e)
+        private async void SearchTimer_Tick(object sender, EventArgs e)
         {
             _searchTimer.Stop();
 
-            string keyword = txtSearch.Text.ToLower();
+            currentSearch = txtSearch.Text.Trim();
+            _currentPage = 1;
 
-            var filtered = _allUsers
-                .Where(u =>
-                    (!string.IsNullOrEmpty(u.UserName) && u.UserName.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0) ||
-                    (!string.IsNullOrEmpty(u.FullName) && u.FullName.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0) ||
-                    (!string.IsNullOrEmpty(u.Address) && u.Address.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0) ||
-                    (!string.IsNullOrEmpty(u.Email) && u.Email.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0))
-                .ToList();
-
-            RenderUsers(filtered);
+            await LoadPageAsync();
         }
 
         private void TableHeader()
@@ -328,7 +244,7 @@ namespace PL_VehicleRental.Forms
                     MessageBox.Show($"User '{userName}' has been deleted.", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    await RefreshUserDataAsync();
+                    await LoadPageAsync();
                 }
                 catch (Exception ex)
                 {
@@ -354,7 +270,7 @@ namespace PL_VehicleRental.Forms
             {
                 form.UserAdded += async (sender, e) =>
                 {
-                    await RefreshUserDataAsync();
+                    await LoadPageAsync();
                 };
 
                 form.FormBorderStyle = FormBorderStyle.None;
@@ -395,22 +311,28 @@ namespace PL_VehicleRental.Forms
 
         }
 
-        private void btnPrev_Click(object sender, EventArgs e)
+        private async void btnPrev_Click(object sender, EventArgs e)
         { 
-            _currentPage--;
-            RenderCurrentPage();
+            if (_currentPage > 1)
+            {
+                _currentPage--;
+                await LoadPageAsync();
+            }
+            
         }
 
-        private void btnNext_Click(object sender, EventArgs e)
+        private async void btnNext_Click(object sender, EventArgs e)
         {
-            _currentPage++;
-            RenderCurrentPage();
+            if (_currentPage < _totalPages)
+            {
+                _currentPage++;
+                await LoadPageAsync();
+            }
         }
 
         private void cboPageSize_SelectedIndexChanged(object sender, EventArgs e)
         {
             _currentPage = 1;
-            RenderCurrentPage();
         }
 
         private void UserManagementForm_Resize(object sender, EventArgs e)

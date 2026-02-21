@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MySqlConnector;
 using VehicleManagementSystem.Dto;
 using System.Security.Cryptography;
+using Org.BouncyCastle.Bcpg;
 
 namespace PL_VehicleRental.DAL.Repositories
 {
@@ -121,6 +122,67 @@ namespace PL_VehicleRental.DAL.Repositories
                     return await cmd.ExecuteNonQueryAsync() > 0;
                 }
             }
+        }
+
+        public async Task<(List<UserInfoDto> Users, int TotalCount)> GetPagedUsersAsync(string search, int pageNumber, int pageSize)
+        {
+            var users = new List<UserInfoDto>();
+            int totalCount = 0;
+
+            using (MySqlConnection conn = MySQLConnectionContext.Create())
+            {
+                await conn.OpenAsync();
+
+                string searchParam = $"%{search}%";
+
+                string countQuery = @"
+                                    SELECT COUNT(*) 
+                                    FROM users WHERE userName LIKE @Search
+                                      OR fullName LIKE @Search
+                                      OR email LIKE @Search
+                                      OR address LIKE @Search";
+
+                using (var countCmd = new MySqlCommand(countQuery, conn))
+                {
+                    countCmd.Parameters.AddWithValue("@Search", searchParam);
+                    totalCount = Convert.ToInt32(await countCmd.ExecuteScalarAsync());
+                }
+
+                string dataQuery = @"
+                SELECT id, userName, fullName, email, address, role, status 
+                FROM users 
+                WHERE userName LIKE @Search
+                   OR fullName LIKE @Search
+                   OR email LIKE @Search
+                   OR address LIKE @Search
+                ORDER BY created_at DESC LIMIT @PageSize OFFSET @Offset";
+
+                using (var cmd = new MySqlCommand(dataQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Search", searchParam);
+                    cmd.Parameters.AddWithValue("PageSize", pageSize);
+                    cmd.Parameters.AddWithValue("Offset", (pageNumber - 1) * pageSize);
+
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            users.Add(new UserInfoDto
+                            {
+                                Id = reader.GetInt32("id"),
+                                UserName = reader.GetString("userName"),
+                                FullName = reader.GetString("fullName"),
+                                Email = reader.GetString("email"),
+                                Address = reader.GetString("address"),
+                                Role = reader.GetString("role"),
+                                Status = reader.GetString("status")
+                            });
+                        }
+                    }
+                }
+            }
+
+            return (users, totalCount);
         }
     }
 }

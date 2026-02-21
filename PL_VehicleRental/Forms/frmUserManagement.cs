@@ -88,6 +88,8 @@ namespace PL_VehicleRental.Forms
             TableHeader();
             FixHeaderScrollbarAlignment();
             await RefreshUserDataAsync();
+            MessageBox.Show(flowUsers.VerticalScroll.Visible.ToString());
+            pnlOverlay.BackColor = Color.Red;
         }
 
         private void UserManagementForm_Shown(object sender, EventArgs e)
@@ -157,7 +159,7 @@ namespace PL_VehicleRental.Forms
                address,
                role,
                status
-        FROM users";
+        FROM users ORDER BY created_at DESC";
 
             var users = new List<UserInfoDto>();
 

@@ -41,9 +41,11 @@ namespace PL_VehicleRental.Forms
             pnlOverlay.Dock = DockStyle.Fill;
             pnlOverlay.BackColor = Color.FromArgb(120, Color.White);
             pnlOverlay.Visible = false;
+            progressBar.Anchor = AnchorStyles.None;
 
             progressBar.Style = ProgressBarStyle.Marquee;
             progressBar.Dock = DockStyle.None;
+            progressBar.Size = new Size(150, 10);
             progressBar.Location = new Point((pnlOverlay.Width - progressBar.Width) / 2,
                                              (pnlOverlay.Height - progressBar.Height) / 2);
             pnlOverlay.Controls.Add(progressBar);
@@ -177,7 +179,7 @@ namespace PL_VehicleRental.Forms
                 };
             }
 
-            headerLayout.Controls.Add(CreateHeader("ID"), 0, 0);
+            headerLayout.Controls.Add(CreateHeader("USER ID"), 0, 0);
             headerLayout.Controls.Add(CreateHeader("USERNAME"), 1, 0);
             headerLayout.Controls.Add(CreateHeader("FULLNAME"), 2, 0);
             headerLayout.Controls.Add(CreateHeader("EMAIL"), 3, 0);

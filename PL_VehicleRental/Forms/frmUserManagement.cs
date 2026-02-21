@@ -215,17 +215,10 @@ namespace PL_VehicleRental.Forms
 
         private void OpenEditForm(int userId)
         {
-            MessageBox.Show($"Edit user with ID: {userId}", "Edit User",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            // using (frmEditUser form = new frmEditUser(userId))
-            // {
-            //     form.UserUpdated += async (sender, e) =>
-            //     {
-            //         await RefreshUserDataAsync();
-            //     };
-            //     form.ShowDialog(this);
-            // }
+            using (frmEdit form = new frmEdit(userId))
+            {
+                form.ShowDialog(this);
+            }
         }
 
         private async void DeleteUser(int userId, string userName)

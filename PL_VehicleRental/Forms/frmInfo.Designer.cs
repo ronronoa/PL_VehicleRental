@@ -41,14 +41,14 @@
             this.txtFullName = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtUserName = new Guna.UI2.WinForms.Guna2TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.progressBar = new Guna.UI2.WinForms.Guna2ProgressBar();
-            this.pnlProgress = new Guna.UI2.WinForms.Guna2Panel();
             this.pnlAddress = new Guna.UI2.WinForms.Guna2Panel();
             this.lblAddress = new System.Windows.Forms.Label();
+            this.progressBar = new Guna.UI2.WinForms.Guna2ProgressBar();
+            this.pnlProgress = new Guna.UI2.WinForms.Guna2Panel();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userImage)).BeginInit();
-            this.pnlProgress.SuspendLayout();
             this.pnlAddress.SuspendLayout();
+            this.pnlProgress.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMain
@@ -68,12 +68,13 @@
             this.pnlMain.Controls.Add(this.txtUserName);
             this.pnlMain.Controls.Add(this.label1);
             this.pnlMain.Controls.Add(this.pnlAddress);
+            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.FillColor = System.Drawing.Color.White;
-            this.pnlMain.Location = new System.Drawing.Point(0, -1);
+            this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Padding = new System.Windows.Forms.Padding(11, 10, 11, 10);
-            this.pnlMain.Size = new System.Drawing.Size(468, 517);
+            this.pnlMain.Size = new System.Drawing.Size(468, 505);
             this.pnlMain.TabIndex = 0;
             this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2GradientPanel1_Paint);
             // 
@@ -238,6 +239,24 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "User Information";
             // 
+            // pnlAddress
+            // 
+            this.pnlAddress.Controls.Add(this.lblAddress);
+            this.pnlAddress.Location = new System.Drawing.Point(21, 305);
+            this.pnlAddress.Name = "pnlAddress";
+            this.pnlAddress.Size = new System.Drawing.Size(435, 78);
+            this.pnlAddress.TabIndex = 13;
+            // 
+            // lblAddress
+            // 
+            this.lblAddress.AutoSize = true;
+            this.lblAddress.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold);
+            this.lblAddress.Location = new System.Drawing.Point(14, 32);
+            this.lblAddress.Name = "lblAddress";
+            this.lblAddress.Size = new System.Drawing.Size(47, 19);
+            this.lblAddress.TabIndex = 0;
+            this.lblAddress.Text = "label6";
+            // 
             // progressBar
             // 
             this.progressBar.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -259,34 +278,16 @@
             this.pnlProgress.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlProgress.FillColor = System.Drawing.Color.Transparent;
             this.pnlProgress.Location = new System.Drawing.Point(0, 0);
-            this.pnlProgress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlProgress.Margin = new System.Windows.Forms.Padding(4);
             this.pnlProgress.Name = "pnlProgress";
             this.pnlProgress.Size = new System.Drawing.Size(468, 12);
             this.pnlProgress.TabIndex = 14;
-            // 
-            // pnlAddress
-            // 
-            this.pnlAddress.Controls.Add(this.lblAddress);
-            this.pnlAddress.Location = new System.Drawing.Point(21, 305);
-            this.pnlAddress.Name = "pnlAddress";
-            this.pnlAddress.Size = new System.Drawing.Size(435, 78);
-            this.pnlAddress.TabIndex = 13;
-            // 
-            // lblAddress
-            // 
-            this.lblAddress.AutoSize = true;
-            this.lblAddress.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold);
-            this.lblAddress.Location = new System.Drawing.Point(14, 32);
-            this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(47, 19);
-            this.lblAddress.TabIndex = 0;
-            this.lblAddress.Text = "label6";
             // 
             // frmInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(468, 517);
+            this.ClientSize = new System.Drawing.Size(468, 505);
             this.Controls.Add(this.pnlProgress);
             this.Controls.Add(this.pnlMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -299,9 +300,9 @@
             this.pnlMain.ResumeLayout(false);
             this.pnlMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userImage)).EndInit();
-            this.pnlProgress.ResumeLayout(false);
             this.pnlAddress.ResumeLayout(false);
             this.pnlAddress.PerformLayout();
+            this.pnlProgress.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

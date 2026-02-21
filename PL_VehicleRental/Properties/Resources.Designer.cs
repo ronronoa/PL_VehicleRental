@@ -133,6 +133,26 @@ namespace PL_VehicleRental.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap saveIcon {
+            get {
+                object obj = ResourceManager.GetObject("saveIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap saveIcon1 {
+            get {
+                object obj = ResourceManager.GetObject("saveIcon1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap searchIcon {
             get {
                 object obj = ResourceManager.GetObject("searchIcon", resourceCulture);

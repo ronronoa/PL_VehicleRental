@@ -218,37 +218,5 @@ namespace PL_VehicleRental.DAL.Repositories
                 }
             }
         }
-
-        public async Task<List<UserInfoDto>> GetAllUsersAsync()
-        {
-            var users = new List<UserInfoDto>();
-            const string query = @"SELECT id, userName, fullName, email, address, role, status FROM users";
-
-            using (MySqlConnection conn = MySQLConnectionContext.Create())
-            {
-                await conn.OpenAsync();
-
-                using (var cmd = new MySqlCommand(query, conn))
-                {
-                    using (var reader = await cmd.ExecuteReaderAsync())
-                    {
-                        while(await reader.ReadAsync())
-                        {
-                            users.Add(new UserInfoDto
-                            {
-                                Id = reader.GetInt32("id"),
-                                UserName = reader.GetString("userName"),
-                                FullName = reader.GetString("fullName"),
-                                Email = reader.GetString("email"),
-                                Address = reader.GetString("address"),
-                                Role = reader.GetString("role"),
-                                Status = reader.GetString("status")
-                            });
-                        }
-                    }
-                }
-            }
-            return users;
-        }
     }
 }

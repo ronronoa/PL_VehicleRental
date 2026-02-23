@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using VehicleManagementSystem.Dto;
 using MySqlConnector;
+using PL_VehicleRental.DAL.Repositories;
 
 namespace PL_VehicleRental.Forms
 {
@@ -17,7 +18,9 @@ namespace PL_VehicleRental.Forms
     {
         private readonly int _userId;
         private UserStatus _userStatus;
+        public event EventHandler UserUpdated;
 
+        private readonly userRepository _repository;
         public enum UserStatus
         {
             Active,
@@ -28,6 +31,7 @@ namespace PL_VehicleRental.Forms
         {
             InitializeComponent();
             _userId = userId;
+            _repository = new userRepository();
         }
 
         private void ToggleLoading(bool isLoading)
@@ -111,6 +115,7 @@ namespace PL_VehicleRental.Forms
 
             txtUserName.Text = user.UserName;
             txtFullName.Text = user.FullName;
+            txtEmail.Text = user.Email;
             txtAddress.Text = user.Address;
             roleCmb.SelectedItem = user.Role;
             statusCmb.SelectedItem = user.Status;
@@ -138,13 +143,10 @@ namespace PL_VehicleRental.Forms
         {
             return Enum.TryParse(dbStatus, true, out UserStatus status) ? status : UserStatus.Inactive;
         }
-        private void SetUserStatus(Label lblStatus, UserStatus status)
+        
+        protected virtual void OnUserUpdated()
         {
-            lblStatus.Text = status.ToString();
-            lblStatus.ForeColor = GetStatusColor(status);
-            lblStatus.Font = status == UserStatus.Suspended
-                ? new Font(lblStatus.Font, FontStyle.Bold)
-                : new Font(lblStatus.Font, FontStyle.Regular);
+            UserUpdated?.Invoke(this, EventArgs.Empty);
         }
 
         private async void frmEdit_Shown(object sender, EventArgs e)
@@ -155,6 +157,55 @@ namespace PL_VehicleRental.Forms
         private void exitBtn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private async void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ToggleLoading(true);
+                var user = new UserInfoDto
+                {
+                    Id = _userId,
+                    UserName = txtUserName.Text,
+                    FullName = txtFullName.Text,
+                    Email = txtEmail.Text,
+                    Address = txtAddress.Text,
+                    Role = roleCmb.SelectedItem.ToString(),
+                    Status = statusCmb.SelectedItem.ToString()
+                };
+
+                bool success = await _repository.UpdateUserAsync(user);
+
+                if (success)
+                {
+                    MessageBox.Show(
+                        "User updated successfully.",
+                        "Success",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
+                    DialogResult = DialogResult.OK;
+                    OnUserUpdated();
+                    Close();
+                } else
+                {
+                    MessageBox.Show("No changes were made.",
+                            "Info",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error updating user:\n" + ex.Message, 
+                    "Error", 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error);
+            } finally
+            {
+                ToggleLoading(false);
+            }
         }
     }
 }

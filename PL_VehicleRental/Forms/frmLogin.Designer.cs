@@ -58,9 +58,9 @@
             this.pnlBase.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(132)))), ((int)(((byte)(191)))));
             this.pnlBase.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(167)))), ((int)(((byte)(161)))));
             this.pnlBase.Location = new System.Drawing.Point(0, 0);
-            this.pnlBase.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlBase.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlBase.Name = "pnlBase";
-            this.pnlBase.Size = new System.Drawing.Size(632, 331);
+            this.pnlBase.Size = new System.Drawing.Size(843, 407);
             this.pnlBase.TabIndex = 0;
             // 
             // pnlLogo
@@ -70,9 +70,9 @@
             this.pnlLogo.Controls.Add(this.guna2PictureBox1);
             this.pnlLogo.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLogo.Location = new System.Drawing.Point(0, 0);
-            this.pnlLogo.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlLogo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlLogo.Name = "pnlLogo";
-            this.pnlLogo.Size = new System.Drawing.Size(318, 331);
+            this.pnlLogo.Size = new System.Drawing.Size(424, 407);
             this.pnlLogo.TabIndex = 4;
             // 
             // label1
@@ -81,8 +81,7 @@
             this.label1.BackColor = System.Drawing.SystemColors.Control;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Gray;
-            this.label1.Location = new System.Drawing.Point(120, 138);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(160, 170);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 32);
             this.label1.TabIndex = 4;
@@ -91,10 +90,10 @@
             // guna2PictureBox1
             // 
             this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(37, 51);
-            this.guna2PictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.guna2PictureBox1.Location = new System.Drawing.Point(49, 63);
+            this.guna2PictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(249, 206);
+            this.guna2PictureBox1.Size = new System.Drawing.Size(332, 254);
             this.guna2PictureBox1.TabIndex = 0;
             this.guna2PictureBox1.TabStop = false;
             // 
@@ -111,10 +110,10 @@
             this.guna2Panel1.CustomBorderColor = System.Drawing.Color.Silver;
             this.guna2Panel1.CustomBorderThickness = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.guna2Panel1.Location = new System.Drawing.Point(317, 0);
-            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(2);
+            this.guna2Panel1.Location = new System.Drawing.Point(423, 0);
+            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(315, 331);
+            this.guna2Panel1.Size = new System.Drawing.Size(420, 407);
             this.guna2Panel1.TabIndex = 3;
             // 
             // chkShowPassword
@@ -124,9 +123,10 @@
             this.chkShowPassword.Image = global::PL_VehicleRental.Properties.Resources.showPassIcon;
             this.chkShowPassword.ImageOffset = new System.Drawing.Point(0, 0);
             this.chkShowPassword.ImageRotate = 0F;
-            this.chkShowPassword.Location = new System.Drawing.Point(240, 160);
+            this.chkShowPassword.Location = new System.Drawing.Point(320, 197);
+            this.chkShowPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkShowPassword.Name = "chkShowPassword";
-            this.chkShowPassword.Size = new System.Drawing.Size(24, 24);
+            this.chkShowPassword.Size = new System.Drawing.Size(32, 30);
             this.chkShowPassword.TabIndex = 6;
             this.chkShowPassword.CheckedChanged += new System.EventHandler(this.chkShowPassword_CheckedChanged);
             this.chkShowPassword.MouseDown += new System.Windows.Forms.MouseEventHandler(this.chkShowPassword_MouseDown);
@@ -146,21 +146,22 @@
             this.passwordTxt.ForeColor = System.Drawing.Color.Gray;
             this.passwordTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.passwordTxt.IconLeft = global::PL_VehicleRental.Properties.Resources.passwordIcon;
-            this.passwordTxt.Location = new System.Drawing.Point(46, 157);
-            this.passwordTxt.Margin = new System.Windows.Forms.Padding(2);
+            this.passwordTxt.Location = new System.Drawing.Point(61, 193);
+            this.passwordTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.passwordTxt.Name = "passwordTxt";
             this.passwordTxt.PlaceholderText = "Password";
             this.passwordTxt.SelectedText = "";
-            this.passwordTxt.Size = new System.Drawing.Size(222, 29);
+            this.passwordTxt.Size = new System.Drawing.Size(296, 36);
             this.passwordTxt.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label2.Location = new System.Drawing.Point(43, 83);
+            this.label2.Location = new System.Drawing.Point(57, 102);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(214, 13);
+            this.label2.Size = new System.Drawing.Size(267, 16);
             this.label2.TabIndex = 5;
             this.label2.Text = "Enter your credentials to access the system.";
             // 
@@ -175,9 +176,10 @@
             this.exitBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.exitBtn.ForeColor = System.Drawing.Color.White;
             this.exitBtn.Image = global::PL_VehicleRental.Properties.Resources.closeIcon;
-            this.exitBtn.Location = new System.Drawing.Point(277, 3);
+            this.exitBtn.Location = new System.Drawing.Point(369, 4);
+            this.exitBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.exitBtn.Name = "exitBtn";
-            this.exitBtn.Size = new System.Drawing.Size(35, 26);
+            this.exitBtn.Size = new System.Drawing.Size(47, 32);
             this.exitBtn.TabIndex = 4;
             this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
             // 
@@ -186,8 +188,7 @@
             this.lblLogin.AutoSize = true;
             this.lblLogin.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLogin.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblLogin.Location = new System.Drawing.Point(110, 51);
-            this.lblLogin.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblLogin.Location = new System.Drawing.Point(147, 63);
             this.lblLogin.Name = "lblLogin";
             this.lblLogin.Size = new System.Drawing.Size(87, 32);
             this.lblLogin.TabIndex = 3;
@@ -204,10 +205,10 @@
             this.btnLogin.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(140)))));
             this.btnLogin.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(92, 220);
-            this.btnLogin.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLogin.Location = new System.Drawing.Point(123, 271);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(135, 37);
+            this.btnLogin.Size = new System.Drawing.Size(180, 46);
             this.btnLogin.TabIndex = 2;
             this.btnLogin.Text = "Login";
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -226,12 +227,12 @@
             this.usernameTxt.ForeColor = System.Drawing.Color.Gray;
             this.usernameTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.usernameTxt.IconLeft = global::PL_VehicleRental.Properties.Resources.personIcon;
-            this.usernameTxt.Location = new System.Drawing.Point(46, 113);
-            this.usernameTxt.Margin = new System.Windows.Forms.Padding(2);
+            this.usernameTxt.Location = new System.Drawing.Point(61, 139);
+            this.usernameTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.usernameTxt.Name = "usernameTxt";
             this.usernameTxt.PlaceholderText = "Email or username";
             this.usernameTxt.SelectedText = "";
-            this.usernameTxt.Size = new System.Drawing.Size(222, 29);
+            this.usernameTxt.Size = new System.Drawing.Size(296, 36);
             this.usernameTxt.TabIndex = 0;
             // 
             // guna2Elipse1
@@ -240,12 +241,12 @@
             // 
             // frmLogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(632, 331);
+            this.ClientSize = new System.Drawing.Size(843, 407);
             this.Controls.Add(this.pnlBase);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmLogin";

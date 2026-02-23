@@ -84,6 +84,32 @@ namespace PL_VehicleRental.Forms
             ToggleLoading(false);
         }
 
+        private async Task RefeshUserListAsync()
+        {
+            try
+            {
+                ToggleLoading(true);
+
+                var users = await _repository.GetAllUsersAsync();
+
+                foreach (var user in users)
+                {
+                    var card = new ucItemControl(user);
+                    flowUsers.Controls.Add(card);
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load users:\n" + ex.Message,
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+            } finally
+            {
+                flowUsers.ResumeLayout();
+                ToggleLoading(false);
+            }
+        }
+
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -215,11 +241,14 @@ namespace PL_VehicleRental.Forms
             }
         }
 
-        private void OpenEditForm(int userId)
+        private async void OpenEditForm(int userId)
         {
             using (frmEdit form = new frmEdit(userId))
             {
-                form.ShowDialog(this);
+                if(form.ShowDialog() == DialogResult.OK)
+                {
+                    await RefeshUserListAsync();
+                }
             }
         }
 

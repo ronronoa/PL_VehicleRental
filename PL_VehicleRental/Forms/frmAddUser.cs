@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -31,77 +32,6 @@ namespace PL_VehicleRental.Forms
             _validator = new Validator(errorProvider1);
             _userService = new UserService();
             userNameTextBox.TextChanged += userNameTextBox_TextChanged;
-        }
-
-        private async Task AddUsersAsync()
-        {
-            
-
-            string sql = "INSERT INTO users (userName, fullName, email, address, role, status) VALUES (@userName, @fullName, @email, @address, @role, @status)";
-
-            using (MySqlConnection conn = MySQLConnectionContext.Create())
-            {
-                try
-                {
-                   await conn.OpenAsync();
-
-                    string checkQuery = @"
-                                        SELECT COUNT(*) 
-                                        FROM users 
-                                        WHERE userName = @userName 
-                                        OR (fullName = @fullName AND userName = @userName AND email = @email)";
-
-                    MySqlCommand checkCmd = new MySqlCommand(checkQuery, conn);
-                    checkCmd.Parameters.AddWithValue("@userName", userNameTextBox.Text.Trim());
-                    checkCmd.Parameters.AddWithValue("@fullName", fullNameTxt.Text.Trim());
-                    checkCmd.Parameters.AddWithValue("@email", fullNameTxt.Text.Trim());
-
-                    int exists = Convert.ToInt32(await checkCmd.ExecuteScalarAsync());
-
-                    if (exists > 0)
-                    {
-                        MessageBox.Show(
-                            "Username or full name already exists.",
-                            "Duplicate Entry",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning
-                        );
-                        return;
-                    }
-
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@userName", userNameTextBox.Text);
-                    cmd.Parameters.AddWithValue("@fullName", fullNameTxt.Text);
-                    cmd.Parameters.AddWithValue("@email", emaiTxt.Text);
-                    cmd.Parameters.AddWithValue("@address", addressTextBox.Text);
-                    cmd.Parameters.AddWithValue("@role", roleCmb.Text);
-                    cmd.Parameters.AddWithValue("@status", statusCmb.Text);
-
-                    int result = await cmd.ExecuteNonQueryAsync();
-
-                    if (result > 0)
-                    {
-                        MessageBox.Show("User Added Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        userNameTextBox.Clear();
-                        fullNameTxt.Clear();
-                        addressTextBox.Clear();
-                        roleCmb.StartIndex = 0;
-                        statusCmb.StartIndex = 0;
-
-                        ClearFields();
-                        OnUserAdded();
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Failed to add user.");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error:", ex.Message);
-                }
-            }
         }
 
         private void ClearFields()
@@ -150,6 +80,7 @@ namespace PL_VehicleRental.Forms
                 _validator.IsEmail(emaiTxt, "Invalid email format");
 
                 _validator.Custom(userNameTextBox, () => userNameTextBox.Text.Length >= 5, "Username must be at least 5 characters");
+                _validator.Custom(userNameTextBox, () => Regex.IsMatch(userNameTextBox.Text, @"^[a-zA-Z0-9]+$"), "Username can only contain letters and numbers.");
 
                 if (!_validator.Validate() || !_isUsernameAvailable) return;
 

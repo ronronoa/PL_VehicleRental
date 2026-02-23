@@ -18,7 +18,6 @@ namespace PL_VehicleRental.Forms
     {
         private readonly int _userId;
         private UserStatus _userStatus;
-        public event EventHandler UserUpdated;
 
         private readonly userRepository _repository;
         public enum UserStatus
@@ -61,7 +60,7 @@ namespace PL_VehicleRental.Forms
         private async Task<UserInfoDto> GetUserByIdAsync(int userId)
         {
             const string query = @"
-                                SELECT id, userName, fullName, address, role, status
+                                SELECT id, userName, fullName, email, address, role, status
                                 FROM users
                                 WHERE id = @id";
 
@@ -121,32 +120,9 @@ namespace PL_VehicleRental.Forms
             statusCmb.SelectedItem = user.Status;
         }
 
-        private Color GetStatusColor(UserStatus status)
-        {
-            switch (status)
-            {
-                case UserStatus.Active:
-                    return Color.Green;
-
-                case UserStatus.Inactive:
-                    return Color.Goldenrod;
-
-                case UserStatus.Suspended:
-                    return Color.Red;
-
-                default:
-                    return Color.Black;
-            }
-        }
-
         private UserStatus ParseStatus(string dbStatus)
         {
             return Enum.TryParse(dbStatus, true, out UserStatus status) ? status : UserStatus.Inactive;
-        }
-        
-        protected virtual void OnUserUpdated()
-        {
-            UserUpdated?.Invoke(this, EventArgs.Empty);
         }
 
         private async void frmEdit_Shown(object sender, EventArgs e)
@@ -186,7 +162,6 @@ namespace PL_VehicleRental.Forms
                         MessageBoxIcon.Information);
 
                     DialogResult = DialogResult.OK;
-                    OnUserUpdated();
                     Close();
                 } else
                 {

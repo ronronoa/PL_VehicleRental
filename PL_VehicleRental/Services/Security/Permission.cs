@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace PL_VehicleRental.Services.Security
 {
-    public enum Role
+    public enum Permission
     {
-        Superadmin,
-        Admin,
-        Staff
+        ManageUsers,
+        AddUser,
+        EditUser,
+        DeleteUser,
+        ManageVehicles,
+        ViewReports
     }
 }

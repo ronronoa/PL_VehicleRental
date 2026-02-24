@@ -171,7 +171,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Security\Permission.cs" />
     <Compile Include="Services\Security\Role.cs" />
+    <Compile Include="Services\Security\RolePermissionMap.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="UI\Layout\UserTableLayout.cs" />
     <Compile Include="UserControl\ucHeaderTab.cs">

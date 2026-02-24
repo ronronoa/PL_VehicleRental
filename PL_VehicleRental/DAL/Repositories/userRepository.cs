@@ -137,10 +137,12 @@ namespace PL_VehicleRental.DAL.Repositories
 
                 string countQuery = @"
                                     SELECT COUNT(*) 
-                                    FROM users WHERE userName LIKE @Search
+                                    FROM users WHERE isDeleted = 0
+                                    AND (
+                                    userName LIKE @Search
                                       OR fullName LIKE @Search
                                       OR email LIKE @Search
-                                      OR address LIKE @Search";
+                                      OR address LIKE @Search)";
 
                 using (var countCmd = new MySqlCommand(countQuery, conn))
                 {
@@ -149,12 +151,14 @@ namespace PL_VehicleRental.DAL.Repositories
                 }
 
                 string dataQuery = @"
-                SELECT id, userName, fullName, email, address, role, status 
+                SELECT id, userName, fullName, email, address, role, status
                 FROM users 
-                WHERE userName LIKE @Search
+                WHERE isDeleted = 0
+                AND (
+                userName LIKE @Search
                    OR fullName LIKE @Search
                    OR email LIKE @Search
-                   OR address LIKE @Search
+                   OR address LIKE @Search)
                 ORDER BY created_at DESC LIMIT @PageSize OFFSET @Offset";
 
                 using (var cmd = new MySqlCommand(dataQuery, conn))
@@ -211,6 +215,25 @@ namespace PL_VehicleRental.DAL.Repositories
                     cmd.Parameters.AddWithValue("@Address", user.Address);
                     cmd.Parameters.AddWithValue("@Role", user.Role);
                     cmd.Parameters.AddWithValue("@Status", user.Status);
+
+                    int rows = await cmd.ExecuteNonQueryAsync();
+
+                    return rows > 0;
+                }
+            }
+        }
+
+        public async Task<bool> DeleteUserAsync(int userId)
+        {
+            const string query = @"UPDATE users SET isDeleted = 1 WHERE id = @Id";
+
+            using (MySqlConnection conn = MySQLConnectionContext.Create())
+            {
+                await conn.OpenAsync();
+
+                using (var cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", userId);
 
                     int rows = await cmd.ExecuteNonQueryAsync();
 

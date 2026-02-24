@@ -1,4 +1,12 @@
-﻿using System;
+﻿using Guna.UI2.WinForms;
+using MySqlConnector;
+using Mysqlx;
+using PL_VehicleRental.Classes;
+using PL_VehicleRental.DAL.Repositories;
+using PL_VehicleRental.Data;
+using PL_VehicleRental.UI.Layout;
+using PL_VehicleRental.UserControl;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -9,13 +17,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-using Guna.UI2.WinForms;
-using MySqlConnector;
-using PL_VehicleRental.Classes;
-using PL_VehicleRental.DAL.Repositories;
-using PL_VehicleRental.Data;
-using PL_VehicleRental.UI.Layout;
-using PL_VehicleRental.UserControl;
 using VehicleManagementSystem.Dto;
 
 namespace PL_VehicleRental.Forms
@@ -228,27 +229,37 @@ namespace PL_VehicleRental.Forms
 
         private async void DeleteUser(int userId, string userName)
         {
-            var result = MessageBox.Show($"Are you sure you want to delete user '{userName}'?",
+            var confirm = MessageBox.Show($"Are you sure you want to delete user '{userName}'?",
                 "Confirm Delete",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning);
 
-            if (result == DialogResult.Yes)
-            {
-                try
-                {
-                    // await DeleteUserFromDatabase(userId);
+            if (confirm != DialogResult.Yes) return;
 
-                    MessageBox.Show($"User '{userName}' has been deleted.", "Success",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                ToggleLoading(true);
+
+                bool success = await _repository.DeleteUserAsync(userId);
+
+                if (success)
+                {
+                    MessageBox.Show("User deleted successfully.", 
+                        "Success", 
+                        MessageBoxButtons.OK, 
+                        MessageBoxIcon.Information);
 
                     await LoadPageAsync();
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error deleting user: {ex.Message}", "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show("Error deleting users\n" + ex.Message, 
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+            } finally
+            {
+                ToggleLoading(false);
             }
         }
 

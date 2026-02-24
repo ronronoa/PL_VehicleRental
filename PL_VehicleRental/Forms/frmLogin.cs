@@ -1,4 +1,5 @@
 ﻿using PL_VehicleRental.DAL.Repositories;
+using PL_VehicleRental.Services.Security;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VehicleManagementSystem.Dto;
 
 namespace PL_VehicleRental.Forms
 {
@@ -38,6 +40,22 @@ namespace PL_VehicleRental.Forms
             }
 
             var user = await _repository.ValidateLoginAsync(username, password);
+
+            if (string.IsNullOrWhiteSpace(user.Role) ||
+                !Enum.TryParse<UserRole>(user.Role.Trim(), true, out var parsedRole))
+            {
+                MessageBox.Show("Invalid role value in database.");
+                return;
+            }
+            Session.User = new CurrentUser
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Role = parsedRole
+            };
+
+            Console.WriteLine($"Role from DB: '{user.Role}'");
+
             if (user == null)
             {
                 MessageBox.Show("Invalid username or password.", "Login Failed",

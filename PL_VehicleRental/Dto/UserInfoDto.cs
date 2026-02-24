@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PL_VehicleRental.Services.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,5 +19,12 @@ namespace VehicleManagementSystem.Dto
         public bool isDefaultPassword { get; set; }
         public bool isActive { get; set; }
 
+    }
+
+    public class CurrentUser
+    {
+        public int Id { get; set; }
+        public string UserName { get; set; }
+        public UserRole Role { get; set; }
     }
 }

@@ -8,17 +8,17 @@ namespace PL_VehicleRental.Services.Security
 {
     public static class RolePermissionMap
     {
-        public static readonly Dictionary<Role, List<Permission>> Map =
-            new Dictionary<Role, List<Permission>>()
+        public static readonly Dictionary<UserRole, List<Permission>> Map =
+            new Dictionary<UserRole, List<Permission>>()
             {
                 {
-                    Role.Superadmin,
+                    UserRole.Superadmin,
                     Enum.GetValues(typeof(Permission))
                         .Cast<Permission>()
                         .ToList()
                 },
                 {
-                    Role.Admin,
+                    UserRole.Admin,
                     new List<Permission>
                     {
                         Permission.ManageUsers,
@@ -30,7 +30,7 @@ namespace PL_VehicleRental.Services.Security
                     }
                 },
                 {
-                    Role.Staff,
+                    UserRole.Staff,
                     new List<Permission>
                     {
                         Permission.ManageVehicles

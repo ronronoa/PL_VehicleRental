@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VehicleManagementSystem.Dto;
 
 namespace PL_VehicleRental.Services.Security
 {
-    public enum UserRole
+    public static class Session
     {
-        Superadmin,
-        Admin,
-        Staff,
-        Mechanic
+        public static CurrentUser User { get; set; }
     }
 }

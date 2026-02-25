@@ -4,6 +4,7 @@ using Mysqlx;
 using PL_VehicleRental.Classes;
 using PL_VehicleRental.DAL.Repositories;
 using PL_VehicleRental.Data;
+using PL_VehicleRental.Services.Security;
 using PL_VehicleRental.UI.Layout;
 using PL_VehicleRental.UserControl;
 using System;
@@ -94,6 +95,7 @@ namespace PL_VehicleRental.Forms
         {
             TableHeader();
             FixHeaderScrollbarAlignment();
+            ApplyPermission();
             await LoadPageAsync();
         }
 
@@ -208,6 +210,17 @@ namespace PL_VehicleRental.Forms
             TableHeaderPanel.Padding = new Padding(0, 0, scrollBarWidth, 0);
         }
 
+        private void ApplyPermission()
+        {
+            var tip = new ToolTip();
+
+            if (!AuthorizationService.HasPermission(Permission.AddUser))
+            {
+                tip.SetToolTip(btnUserForm, "You don't have permission to add user.");
+                btnUserForm.Enabled = false;
+            }
+        }
+
         public void OpenInfo(int userId)
         {
             using (frmInfo frm = new frmInfo(userId))
@@ -239,6 +252,12 @@ namespace PL_VehicleRental.Forms
             try
             {
                 ToggleLoading(true);
+
+                if (!AuthorizationService.HasPermission(Permission.DeleteUser))
+                {
+                    MessageBox.Show("Access Denied.");
+                    return;
+                }
 
                 bool success = await _repository.DeleteUserAsync(userId);
 
@@ -274,7 +293,7 @@ namespace PL_VehicleRental.Forms
         }
 
         private void OpenAddUserForm()
-        {
+        { 
             using (frmAddUser form = new frmAddUser())
             {
                 form.UserAdded += async (sender, e) =>

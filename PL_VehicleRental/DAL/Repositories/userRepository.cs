@@ -75,7 +75,7 @@ namespace PL_VehicleRental.DAL.Repositories
             {
                 await conn.OpenAsync();
 
-                const string sql = @"SELECT userName, fullName, email, address, role, status, passwordHash, isDefaultPassword
+                const string sql = @"SELECT id, userName, fullName, email, address, role, status, passwordHash, isDefaultPassword
                                      FROM users WHERE (userName = @input OR email = @input) AND status = 'Active'";
 
                 using (var cmd = new MySqlCommand(sql, conn))
@@ -91,6 +91,7 @@ namespace PL_VehicleRental.DAL.Repositories
 
                         return new UserInfoDto
                         {
+                            Id = reader.GetInt32("id"),
                             UserName = reader.GetString("userName"),
                             FullName = reader.GetString("fullName"),
                             Email = reader.GetString("email"),

@@ -1,4 +1,5 @@
 ﻿using Guna.UI2.WinForms;
+using PL_VehicleRental.Services.Security;
 using PL_VehicleRental.UI.Layout;
 using System;
 using System.Collections.Generic;
@@ -16,10 +17,16 @@ namespace PL_VehicleRental.UserControl
 {
     public partial class ucItemControl : System.Windows.Forms.UserControl
     {
-        public int UserId { get; }
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public string Role { get; set; }
         public event EventHandler InfoClicked;
         public event EventHandler EditClicked;
         public event EventHandler DeleteClicked;
+
+        private Guna2Button btnInfo;
+        private Guna2Button btnEdit;
+        private Guna2Button btnDelete;
 
         private Panel actionPanel;
 
@@ -27,6 +34,8 @@ namespace PL_VehicleRental.UserControl
         {
             InitializeComponent();
             UserId = user.Id;
+            UserName = user.UserName;
+            Role = user.Role;
 
             lblUserID.Text = Convert.ToString(user.Id);
             lblUsername.Text = user.UserName;
@@ -47,16 +56,16 @@ namespace PL_VehicleRental.UserControl
                 BackColor = Color.Transparent,
             };
 
-            var btnInfo = CreateIconButton(
+            btnInfo = CreateIconButton(
                 Properties.Resources.infoIcon, "View Info", (_, __) => InfoClicked?.Invoke(this, EventArgs.Empty)
                 );
 
-            var btnEdit = CreateIconButton(
+            btnEdit = CreateIconButton(
                 Properties.Resources.editIcon, "Edit User", (_, __) => EditClicked?.Invoke(this, EventArgs.Empty)
                 );
 
-            var btnDelete = CreateIconButton(
-                Properties.Resources.deleteIcon, "Delete User", (_, __) => DeleteClicked?.Invoke(this, EventArgs.Empty)
+            btnDelete = CreateIconButton(
+                Properties.Resources.deleteIcon, "Delete User", (_, __) => DeleteClicked?.Invoke(this, EventArgs.Empty), true
                 );
 
             var toolTip = new System.Windows.Forms.ToolTip();
@@ -87,6 +96,7 @@ namespace PL_VehicleRental.UserControl
             flowLayout.Controls.Add(btnDelete);
 
             actionPanel.Controls.Add(flowLayout);
+            ApplyPermissions();
         }
 
         private Guna2Button CreateIconButton(
@@ -118,6 +128,36 @@ namespace PL_VehicleRental.UserControl
             new System.Windows.Forms.ToolTip().SetToolTip(btn, tooltip);
 
             return btn;
+        }
+
+        private void ApplyPermissions()
+        {
+            if (!AuthorizationService.HasPermission(Permission.DeleteUser))
+            {
+                btnDelete.Enabled = false;
+                btnDelete.Visible = false;
+            }
+
+            if (!AuthorizationService.HasPermission(Permission.EditUser))
+            {
+                btnEdit.Enabled = false;
+                btnEdit.Visible = false;
+            }
+
+            if (!AuthorizationService.CanModifyUser(Role))
+            {
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = false;
+
+                btnEdit.Visible = false;
+                btnDelete.Visible = false;
+            }
+
+            if (Session.User.Id == UserId)
+            {
+                btnDelete.Enabled = false;
+                btnDelete.Visible = false;
+            }
         }
 
         private void BtnInfo_Click(object sender, EventArgs e)

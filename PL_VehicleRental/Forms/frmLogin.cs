@@ -41,21 +41,6 @@ namespace PL_VehicleRental.Forms
 
             var user = await _repository.ValidateLoginAsync(username, password);
 
-            if (string.IsNullOrWhiteSpace(user.Role) ||
-                !Enum.TryParse<UserRole>(user.Role.Trim(), true, out var parsedRole))
-            {
-                MessageBox.Show("Invalid role value in database.");
-                return;
-            }
-            Session.User = new CurrentUser
-            {
-                Id = user.Id,
-                UserName = user.UserName,
-                Role = parsedRole
-            };
-
-            Console.WriteLine($"Role from DB: '{user.Role}'");
-
             if (user == null)
             {
                 MessageBox.Show("Invalid username or password.", "Login Failed",
@@ -86,6 +71,22 @@ namespace PL_VehicleRental.Forms
 
                 return;
             }
+
+            if (string.IsNullOrWhiteSpace(user.Role) ||
+                !Enum.TryParse<UserRole>(user.Role.Trim(), true, out var parsedRole))
+            {
+                MessageBox.Show("Invalid role value in database.");
+                return;
+            }
+
+            Session.User = new CurrentUser
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Role = parsedRole
+            };
+
+            Console.WriteLine($"Role from DB: '{user.Role}'");
 
             var mainForm = new UserManagementForm();
             mainForm.Show();

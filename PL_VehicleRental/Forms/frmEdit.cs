@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using VehicleManagementSystem.Dto;
 using MySqlConnector;
 using PL_VehicleRental.DAL.Repositories;
+using PL_VehicleRental.Services.Security;
 
 namespace PL_VehicleRental.Forms
 {
@@ -83,6 +84,7 @@ namespace PL_VehicleRental.Forms
                         Id = reader.GetInt32("id"),
                         UserName = reader.GetString("userName"),
                         FullName = reader.GetString("fullName"),
+                        Email = reader.GetString("email"),
                         Address = reader.GetString("address"),
                         Status = dbStatus,
                         Role = reader.GetString("role")
@@ -140,6 +142,13 @@ namespace PL_VehicleRental.Forms
             try
             {
                 ToggleLoading(true);
+
+                if (!AuthorizationService.HasPermission(Permission.EditUser))
+                {
+                    MessageBox.Show("Access Denied.");
+                    return;
+                }
+
                 var user = new UserInfoDto
                 {
                     Id = _userId,

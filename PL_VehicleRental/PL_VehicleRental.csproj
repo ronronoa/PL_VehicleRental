@@ -171,6 +171,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Security\AuthorizationService.cs" />
     <Compile Include="Services\Security\Permission.cs" />
     <Compile Include="Services\Security\Role.cs" />
     <Compile Include="Services\Security\RolePermissionMap.cs" />

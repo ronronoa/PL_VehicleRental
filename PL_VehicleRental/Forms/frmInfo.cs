@@ -66,7 +66,7 @@ namespace PL_VehicleRental.Forms
         private async Task<UserInfoDto> GetUserByIdAsync(int userId)
         {
             const string query = @"
-                                SELECT id, userName, fullName, address, role, status
+                                SELECT id, userName, fullName, email, address, role, status
                                 FROM users
                                 WHERE id = @id";
 
@@ -89,6 +89,7 @@ namespace PL_VehicleRental.Forms
                         Id = reader.GetInt32("id"),
                         UserName = reader.GetString("userName"),
                         FullName = reader.GetString("fullName"),
+                        Email = reader.GetString("email"),
                         Address = reader.GetString("address"),
                         Status = dbStatus,
                         Role = reader.GetString("role")
@@ -99,8 +100,9 @@ namespace PL_VehicleRental.Forms
 
         private void BindUser(UserInfoDto user)
         {
-            txtUserName.Text = user.UserName;
-            txtFullName.Text = user.FullName;
+            lblUsernane.Text = user.UserName;
+            lblFullName.Text = user.FullName;
+            lblEmail.Text = user.Email;
             lblAddress.Text = user.Address;
             lblRole.Text = user.Role;
             lblStatus.Text = user.Status;
@@ -145,9 +147,6 @@ namespace PL_VehicleRental.Forms
         private async void frmInfo_Shown(object sender, EventArgs e)
         {
            await LoadUserInfoAsync();
-            txtUserName.ReadOnly = true;
-            txtFullName.ReadOnly = true;
-
             SetUserStatus(lblStatus, _userStatus);
         }
 
@@ -172,6 +171,11 @@ namespace PL_VehicleRental.Forms
         }
 
         private void lblStatus_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
         {
 
         }

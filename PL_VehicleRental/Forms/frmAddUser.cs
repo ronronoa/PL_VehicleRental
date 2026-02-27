@@ -11,7 +11,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySqlConnector;
+using PL_VehicleRental.DAL.Repositories;
 using PL_VehicleRental.Data;
+using PL_VehicleRental.Helpers;
 using PL_VehicleRental.Services;
 using PL_VehicleRental.Validation;
 using VehicleManagementSystem.Dto;
@@ -23,6 +25,8 @@ namespace PL_VehicleRental.Forms
         public event EventHandler UserAdded;
         private Validator _validator;
         private UserService _userService;
+        private readonly userRepository _repository = new userRepository();
+        private readonly int _userId;
         private CancellationTokenSource _usernameCts;
         private bool _isUsernameAvailable = false;
         private bool _isSubmitting = false;
@@ -38,46 +42,28 @@ namespace PL_VehicleRental.Forms
         {
             fullNameTxt.Clear();
             userNameTextBox.Clear();
+            emaiTextBox.Clear();
+            phoneTxt.Clear();
             addressTextBox.Clear();
             roleCmb.StartIndex = 0;
             statusCmb.StartIndex = 0;
         }
 
-        private void addBtn_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void clearBtn_Click(object sender, EventArgs e)
-        {
-            ClearFields();
-        }
-
-        private void headerLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void exitBtn_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private async void addBtn_Click_1(object sender, EventArgs e)
+        private async void addBtn_Click(object sender, EventArgs e)
         {
             if (_isSubmitting) return;
 
             _isSubmitting = true;
             addBtn.Enabled = false;
 
-           try
+            try
             {
                 _validator.Clear();
 
                 _validator.Required(userNameTextBox, "Username is required");
                 _validator.Required(fullNameTxt, "Full name is required");
                 _validator.Required(addressTextBox, "Address is required");
-                _validator.IsEmail(emaiTxt, "Invalid email format");
+                _validator.IsEmail(emaiTextBox, "Invalid email format");
 
                 _validator.Custom(userNameTextBox, () => userNameTextBox.Text.Length >= 5, "Username must be at least 5 characters");
                 _validator.Custom(userNameTextBox, () => Regex.IsMatch(userNameTextBox.Text, @"^[a-zA-Z0-9]+$"), "Username can only contain letters and numbers.");
@@ -88,13 +74,17 @@ namespace PL_VehicleRental.Forms
                 {
                     UserName = userNameTextBox.Text.Trim(),
                     FullName = fullNameTxt.Text.Trim(),
-                    Email = emaiTxt.Text.Trim(),
+                    Email = emaiTextBox.Text.Trim(),
                     Address = addressTextBox.Text.Trim(),
                     Role = roleCmb.Text,
                     Status = statusCmb.Text
                 };
 
-                var result = await _userService.CreateUserAsync(dto);
+                Image imageToSave = userImage.Image != null
+                    ? ImageHelper.Resize(userImage.Image, 256, 256)
+                    : null;
+
+                var result = await _userService.CreateUserAsync(dto, imageToSave);
 
                 if (!result.Success)
                 {
@@ -109,11 +99,28 @@ namespace PL_VehicleRental.Forms
                 ClearFields();
                 OnUserAdded();
                 Close();
-            } finally
+            }
+            finally
             {
                 _isSubmitting = false;
                 UpdateAddButtonState();
             }
+        }
+
+        private void clearBtn_Click(object sender, EventArgs e)
+        {
+            
+            ClearFields();
+        }
+
+        private void headerLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exitBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         protected virtual void OnUserAdded()
@@ -143,7 +150,7 @@ namespace PL_VehicleRental.Forms
             bool basicValid =
                 !string.IsNullOrWhiteSpace(userNameTextBox.Text) &&
                 !string.IsNullOrWhiteSpace(fullNameTxt.Text) &&
-                !string.IsNullOrWhiteSpace(emaiTxt.Text) &&
+                !string.IsNullOrWhiteSpace(emaiTextBox.Text) &&
                 !string.IsNullOrWhiteSpace(addressTextBox.Text) &&
                 roleCmb.SelectedIndex != -1 &&
                 statusCmb.SelectedIndex != -1;
@@ -213,6 +220,29 @@ namespace PL_VehicleRental.Forms
         private void statusCmb_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateAddButtonState();
+        }
+
+        private void userImage_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    userImage.Image = Image.FromFile(ofd.FileName);
+                }
+            }
+        }
+
+        private void roleLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmAddUser_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

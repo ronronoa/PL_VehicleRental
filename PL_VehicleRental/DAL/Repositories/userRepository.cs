@@ -51,8 +51,8 @@ namespace PL_VehicleRental.DAL.Repositories
             {
                 await conn.OpenAsync();
 
-                const string sql = @"INSERT INTO users (userName, fullName, email, address, role, status, passwordHash, isDefaultPassword)
-                                     VALUES (@userName, @fullName, @email, @address, @role, @status, @passwordHash, 1)";
+                const string sql = @"INSERT INTO users (userName, fullName, email, address, role, status, passwordHash, isDefaultPassword, isDeleted)
+                                     VALUES (@userName, @fullName, @email, @address, @role, @status, @passwordHash, 1, 0)";
 
                 using (var cmd = new MySqlCommand(sql, conn))
                 {
@@ -63,6 +63,7 @@ namespace PL_VehicleRental.DAL.Repositories
                     cmd.Parameters.AddWithValue("@role", dto.Role);
                     cmd.Parameters.AddWithValue("@status", dto.Status);
                     cmd.Parameters.AddWithValue("@passwordHash", PasswordHelper.GetDefaultPasswordHash());
+                    cmd.Parameters.AddWithValue("@isDeleted", dto.isDeleted);
 
                     return await cmd.ExecuteNonQueryAsync() > 0;
                 }

@@ -57,14 +57,14 @@ namespace PL_VehicleRental.Forms
         {
             ToggleLoading(true);
 
-            var result = await _repository.GetPagedUsersAsync(
+            var (users, totalCount) = await _repository.GetPagedUsersAsync(
                 currentSearch,
                 _currentPage,
                 _pageSize);
 
             flowUsers.Controls.Clear();
 
-            foreach (var user in result.Users)
+            foreach (var user in users)
             {
                 var item = new ucItemControl(user);
 
@@ -76,7 +76,7 @@ namespace PL_VehicleRental.Forms
                 item.DeleteClicked += (_, __) => DeleteUser(user.Id, user.UserName);
             }
 
-            _totalPages = (int)Math.Ceiling((double)result.TotalCount / _pageSize);
+            _totalPages = (int)Math.Ceiling((double)totalCount / _pageSize);
 
             lblPageInfo.Text = $"Page {_currentPage} of {_totalPages}";
 

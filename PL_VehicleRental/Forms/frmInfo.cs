@@ -100,7 +100,7 @@ namespace PL_VehicleRental.Forms
 
         private void BindUser(UserInfoDto user)
         {
-            lblUsernane.Text = user.UserName;
+            lblUsername.Text = user.UserName;
             lblFullName.Text = user.FullName;
             lblEmail.Text = user.Email;
             lblAddress.Text = user.Address;
@@ -141,7 +141,7 @@ namespace PL_VehicleRental.Forms
 
         private void frmInfo_Load(object sender, EventArgs e)
         {
-         
+
         }
 
         private async void frmInfo_Shown(object sender, EventArgs e)

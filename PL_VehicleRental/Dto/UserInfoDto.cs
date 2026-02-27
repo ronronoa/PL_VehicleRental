@@ -18,6 +18,7 @@ namespace VehicleManagementSystem.Dto
         public string Status { get; set; }
         public bool isDefaultPassword { get; set; }
         public bool isActive { get; set; }
+        public bool isDeleted { get; set; }
 
     }
 

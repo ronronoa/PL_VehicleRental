@@ -242,6 +242,14 @@ namespace PL_VehicleRental.Forms
 
         private void frmAddUser_Load(object sender, EventArgs e)
         {
+            userImage.SizeMode = PictureBoxSizeMode.Zoom;
+            userImage.Anchor = AnchorStyles.None;
+            userImage.Location = new Point((pnlUserImage.Width - userImage.Width) / 2,
+                                            (pnlUserImage.Height - userImage.Height) / 2);
+        }
+
+        private void guna2Separator1_Click(object sender, EventArgs e)
+        {
 
         }
     }

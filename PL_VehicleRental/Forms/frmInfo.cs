@@ -114,7 +114,14 @@ namespace PL_VehicleRental.Forms
             lblAddress.Text = user.Address;
             lblRole.Text = user.Role;
             lblStatus.Text = user.Status;
-            userImage.Image = user.UserImage;
+
+            if (user.UserImage != null)
+            {
+                userImage.Image = user.UserImage;
+            }
+            else
+                userImage.Image = Properties.Resources.avatar_default;
+            
         }
 
         private Color GetStatusColor(UserStatus status)
@@ -150,7 +157,7 @@ namespace PL_VehicleRental.Forms
 
         private void frmInfo_Load(object sender, EventArgs e)
         {
-
+            userImage.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         private async void frmInfo_Shown(object sender, EventArgs e)

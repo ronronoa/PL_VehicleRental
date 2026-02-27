@@ -30,10 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.pnlMain = new Guna.UI2.WinForms.Guna2Panel();
+            this.userImage = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.phoneTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.lblEmail = new System.Windows.Forms.Label();
             this.exitBtn = new Guna.UI2.WinForms.Guna2Button();
             this.statusLabel = new System.Windows.Forms.Label();
-            this.userImage = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.headerLabel = new System.Windows.Forms.Label();
             this.roleCmb = new Guna.UI2.WinForms.Guna2ComboBox();
             this.emaiTextBox = new Guna.UI2.WinForms.Guna2TextBox();
@@ -51,44 +53,81 @@
             this.roleLabel = new System.Windows.Forms.Label();
             this.userNameTextBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.phoneTxt = new Guna.UI2.WinForms.Guna2TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.pnlUserImage = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.pnlUserImage.SuspendLayout();
+            this.guna2Panel2.SuspendLayout();
+            this.guna2Panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMain
             // 
             this.pnlMain.BorderColor = System.Drawing.Color.Silver;
             this.pnlMain.BorderThickness = 2;
-            this.pnlMain.Controls.Add(this.label2);
-            this.pnlMain.Controls.Add(this.phoneTxt);
-            this.pnlMain.Controls.Add(this.lblEmail);
-            this.pnlMain.Controls.Add(this.exitBtn);
-            this.pnlMain.Controls.Add(this.statusLabel);
-            this.pnlMain.Controls.Add(this.userImage);
-            this.pnlMain.Controls.Add(this.headerLabel);
-            this.pnlMain.Controls.Add(this.roleCmb);
-            this.pnlMain.Controls.Add(this.emaiTextBox);
-            this.pnlMain.Controls.Add(this.guna2Separator1);
-            this.pnlMain.Controls.Add(this.label1);
-            this.pnlMain.Controls.Add(this.addressLabel);
-            this.pnlMain.Controls.Add(this.guna2Separator2);
-            this.pnlMain.Controls.Add(this.clearBtn);
-            this.pnlMain.Controls.Add(this.statusCmb);
-            this.pnlMain.Controls.Add(this.fullNameLabel);
-            this.pnlMain.Controls.Add(this.label3);
-            this.pnlMain.Controls.Add(this.addressTextBox);
-            this.pnlMain.Controls.Add(this.fullNameTxt);
-            this.pnlMain.Controls.Add(this.addBtn);
-            this.pnlMain.Controls.Add(this.roleLabel);
-            this.pnlMain.Controls.Add(this.userNameTextBox);
+            this.pnlMain.Controls.Add(this.guna2Panel3);
+            this.pnlMain.Controls.Add(this.pnlUserImage);
+            this.pnlMain.Controls.Add(this.guna2Panel2);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Padding = new System.Windows.Forms.Padding(10);
             this.pnlMain.Size = new System.Drawing.Size(509, 766);
             this.pnlMain.TabIndex = 0;
+            // 
+            // userImage
+            // 
+            this.userImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.userImage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.userImage.ImageFlip = Guna.UI2.WinForms.Enums.FlipOrientation.Horizontal;
+            this.userImage.ImageRotate = 0F;
+            this.userImage.Location = new System.Drawing.Point(151, 6);
+            this.userImage.Name = "userImage";
+            this.userImage.Size = new System.Drawing.Size(180, 154);
+            this.userImage.TabIndex = 8;
+            this.userImage.TabStop = false;
+            this.userImage.Click += new System.EventHandler(this.userImage_Click);
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(261, 99);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(70, 17);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Phone no.";
+            // 
+            // phoneTxt
+            // 
+            this.phoneTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.phoneTxt.BackColor = System.Drawing.Color.Transparent;
+            this.phoneTxt.BorderRadius = 5;
+            this.phoneTxt.BorderThickness = 2;
+            this.phoneTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.phoneTxt.DefaultText = "";
+            this.phoneTxt.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.phoneTxt.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.phoneTxt.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.phoneTxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.phoneTxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.phoneTxt.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.phoneTxt.ForeColor = System.Drawing.Color.Black;
+            this.phoneTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.phoneTxt.Location = new System.Drawing.Point(245, 111);
+            this.phoneTxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.phoneTxt.Name = "phoneTxt";
+            this.phoneTxt.PlaceholderText = "";
+            this.phoneTxt.SelectedText = "";
+            this.phoneTxt.Size = new System.Drawing.Size(218, 53);
+            this.phoneTxt.TabIndex = 4;
             // 
             // lblEmail
             // 
@@ -97,7 +136,7 @@
             this.lblEmail.AutoSize = true;
             this.lblEmail.BackColor = System.Drawing.Color.Transparent;
             this.lblEmail.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmail.Location = new System.Drawing.Point(59, 337);
+            this.lblEmail.Location = new System.Drawing.Point(34, 99);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(40, 17);
             this.lblEmail.TabIndex = 0;
@@ -106,6 +145,7 @@
             // exitBtn
             // 
             this.exitBtn.BorderThickness = 2;
+            this.exitBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.exitBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.exitBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.exitBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -113,7 +153,7 @@
             this.exitBtn.FillColor = System.Drawing.Color.Transparent;
             this.exitBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exitBtn.ForeColor = System.Drawing.Color.Black;
-            this.exitBtn.Location = new System.Drawing.Point(461, 2);
+            this.exitBtn.Location = new System.Drawing.Point(441, 2);
             this.exitBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.exitBtn.Name = "exitBtn";
             this.exitBtn.Size = new System.Drawing.Size(45, 34);
@@ -128,31 +168,18 @@
             this.statusLabel.AutoSize = true;
             this.statusLabel.BackColor = System.Drawing.Color.Transparent;
             this.statusLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.statusLabel.Location = new System.Drawing.Point(286, 592);
+            this.statusLabel.Location = new System.Drawing.Point(242, 335);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(49, 17);
             this.statusLabel.TabIndex = 0;
             this.statusLabel.Text = "Status:";
-            // 
-            // userImage
-            // 
-            this.userImage.FillColor = System.Drawing.Color.Gray;
-            this.userImage.ImageRotate = 0F;
-            this.userImage.Location = new System.Drawing.Point(179, 67);
-            this.userImage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.userImage.Name = "userImage";
-            this.userImage.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.userImage.Size = new System.Drawing.Size(156, 148);
-            this.userImage.TabIndex = 76;
-            this.userImage.TabStop = false;
-            this.userImage.Click += new System.EventHandler(this.userImage_Click);
             // 
             // headerLabel
             // 
             this.headerLabel.AutoSize = true;
             this.headerLabel.BackColor = System.Drawing.Color.Transparent;
             this.headerLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.headerLabel.Location = new System.Drawing.Point(16, 26);
+            this.headerLabel.Location = new System.Drawing.Point(10, 28);
             this.headerLabel.Name = "headerLabel";
             this.headerLabel.Size = new System.Drawing.Size(201, 25);
             this.headerLabel.TabIndex = 0;
@@ -163,6 +190,7 @@
             this.roleCmb.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.roleCmb.BackColor = System.Drawing.Color.Transparent;
+            this.roleCmb.Cursor = System.Windows.Forms.Cursors.Hand;
             this.roleCmb.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.roleCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.roleCmb.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
@@ -175,10 +203,10 @@
             "Admin",
             "Staff",
             "Mechanic"});
-            this.roleCmb.Location = new System.Drawing.Point(45, 611);
+            this.roleCmb.Location = new System.Drawing.Point(37, 354);
             this.roleCmb.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.roleCmb.Name = "roleCmb";
-            this.roleCmb.Size = new System.Drawing.Size(172, 36);
+            this.roleCmb.Size = new System.Drawing.Size(171, 36);
             this.roleCmb.StartIndex = 0;
             this.roleCmb.TabIndex = 6;
             this.roleCmb.SelectedIndexChanged += new System.EventHandler(this.roleCmb_SelectedIndexChanged);
@@ -200,12 +228,12 @@
             this.emaiTextBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.emaiTextBox.ForeColor = System.Drawing.Color.Black;
             this.emaiTextBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.emaiTextBox.Location = new System.Drawing.Point(45, 349);
+            this.emaiTextBox.Location = new System.Drawing.Point(20, 111);
             this.emaiTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.emaiTextBox.Name = "emaiTextBox";
             this.emaiTextBox.PlaceholderText = "";
             this.emaiTextBox.SelectedText = "";
-            this.emaiTextBox.Size = new System.Drawing.Size(192, 53);
+            this.emaiTextBox.Size = new System.Drawing.Size(218, 53);
             this.emaiTextBox.TabIndex = 3;
             this.emaiTextBox.TextChanged += new System.EventHandler(this.emaiTxt_TextChanged);
             // 
@@ -214,18 +242,19 @@
             this.guna2Separator1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2Separator1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Separator1.Location = new System.Drawing.Point(21, 554);
+            this.guna2Separator1.Location = new System.Drawing.Point(1, 316);
             this.guna2Separator1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2Separator1.Name = "guna2Separator1";
-            this.guna2Separator1.Size = new System.Drawing.Size(445, 10);
+            this.guna2Separator1.Size = new System.Drawing.Size(494, 10);
             this.guna2Separator1.TabIndex = 0;
+            this.guna2Separator1.Click += new System.EventHandler(this.guna2Separator1_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(40, 527);
+            this.label1.Location = new System.Drawing.Point(16, 289);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(150, 25);
             this.label1.TabIndex = 0;
@@ -238,7 +267,7 @@
             this.addressLabel.AutoSize = true;
             this.addressLabel.BackColor = System.Drawing.Color.Transparent;
             this.addressLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.addressLabel.Location = new System.Drawing.Point(54, 422);
+            this.addressLabel.Location = new System.Drawing.Point(34, 185);
             this.addressLabel.Name = "addressLabel";
             this.addressLabel.Size = new System.Drawing.Size(57, 17);
             this.addressLabel.TabIndex = 0;
@@ -249,10 +278,10 @@
             this.guna2Separator2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2Separator2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Separator2.Location = new System.Drawing.Point(21, 53);
+            this.guna2Separator2.Location = new System.Drawing.Point(15, 55);
             this.guna2Separator2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2Separator2.Name = "guna2Separator2";
-            this.guna2Separator2.Size = new System.Drawing.Size(443, 10);
+            this.guna2Separator2.Size = new System.Drawing.Size(427, 10);
             this.guna2Separator2.TabIndex = 0;
             // 
             // clearBtn
@@ -263,6 +292,7 @@
             this.clearBtn.BorderColor = System.Drawing.Color.Transparent;
             this.clearBtn.BorderRadius = 22;
             this.clearBtn.BorderThickness = 1;
+            this.clearBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.clearBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.clearBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.clearBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -270,7 +300,7 @@
             this.clearBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.clearBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold);
             this.clearBtn.ForeColor = System.Drawing.Color.White;
-            this.clearBtn.Location = new System.Drawing.Point(258, 695);
+            this.clearBtn.Location = new System.Drawing.Point(234, 436);
             this.clearBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.clearBtn.Name = "clearBtn";
             this.clearBtn.Size = new System.Drawing.Size(97, 46);
@@ -283,6 +313,7 @@
             this.statusCmb.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.statusCmb.BackColor = System.Drawing.Color.Transparent;
+            this.statusCmb.Cursor = System.Windows.Forms.Cursors.Hand;
             this.statusCmb.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.statusCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.statusCmb.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
@@ -294,10 +325,10 @@
             "Active",
             "Inactive",
             "Suspended"});
-            this.statusCmb.Location = new System.Drawing.Point(270, 611);
+            this.statusCmb.Location = new System.Drawing.Point(245, 354);
             this.statusCmb.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.statusCmb.Name = "statusCmb";
-            this.statusCmb.Size = new System.Drawing.Size(152, 36);
+            this.statusCmb.Size = new System.Drawing.Size(150, 36);
             this.statusCmb.StartIndex = 0;
             this.statusCmb.TabIndex = 7;
             this.statusCmb.SelectedIndexChanged += new System.EventHandler(this.statusCmb_SelectedIndexChanged);
@@ -309,7 +340,7 @@
             this.fullNameLabel.AutoSize = true;
             this.fullNameLabel.BackColor = System.Drawing.Color.Transparent;
             this.fullNameLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.fullNameLabel.Location = new System.Drawing.Point(286, 249);
+            this.fullNameLabel.Location = new System.Drawing.Point(261, 13);
             this.fullNameLabel.Name = "fullNameLabel";
             this.fullNameLabel.Size = new System.Drawing.Size(69, 17);
             this.fullNameLabel.TabIndex = 0;
@@ -322,7 +353,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(59, 249);
+            this.label3.Location = new System.Drawing.Point(34, 13);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 17);
             this.label3.TabIndex = 0;
@@ -344,12 +375,12 @@
             this.addressTextBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.addressTextBox.ForeColor = System.Drawing.Color.Black;
             this.addressTextBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.addressTextBox.Location = new System.Drawing.Point(45, 434);
+            this.addressTextBox.Location = new System.Drawing.Point(21, 194);
             this.addressTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.addressTextBox.Name = "addressTextBox";
             this.addressTextBox.PlaceholderText = "";
             this.addressTextBox.SelectedText = "";
-            this.addressTextBox.Size = new System.Drawing.Size(417, 74);
+            this.addressTextBox.Size = new System.Drawing.Size(442, 74);
             this.addressTextBox.TabIndex = 5;
             this.addressTextBox.TextChanged += new System.EventHandler(this.addressTextBox_TextChanged);
             // 
@@ -370,12 +401,12 @@
             this.fullNameTxt.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.fullNameTxt.ForeColor = System.Drawing.Color.Black;
             this.fullNameTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.fullNameTxt.Location = new System.Drawing.Point(270, 259);
+            this.fullNameTxt.Location = new System.Drawing.Point(245, 23);
             this.fullNameTxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.fullNameTxt.Name = "fullNameTxt";
             this.fullNameTxt.PlaceholderText = "";
             this.fullNameTxt.SelectedText = "";
-            this.fullNameTxt.Size = new System.Drawing.Size(192, 53);
+            this.fullNameTxt.Size = new System.Drawing.Size(218, 53);
             this.fullNameTxt.TabIndex = 2;
             this.fullNameTxt.TextChanged += new System.EventHandler(this.fullNameTxt_TextChanged);
             // 
@@ -387,6 +418,7 @@
             this.addBtn.BorderColor = System.Drawing.Color.Transparent;
             this.addBtn.BorderRadius = 22;
             this.addBtn.BorderThickness = 1;
+            this.addBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.addBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.addBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -394,7 +426,7 @@
             this.addBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(132)))), ((int)(((byte)(191)))));
             this.addBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold);
             this.addBtn.ForeColor = System.Drawing.Color.White;
-            this.addBtn.Location = new System.Drawing.Point(361, 695);
+            this.addBtn.Location = new System.Drawing.Point(337, 436);
             this.addBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(140, 46);
@@ -409,7 +441,7 @@
             this.roleLabel.AutoSize = true;
             this.roleLabel.BackColor = System.Drawing.Color.Transparent;
             this.roleLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.roleLabel.Location = new System.Drawing.Point(42, 587);
+            this.roleLabel.Location = new System.Drawing.Point(37, 335);
             this.roleLabel.Name = "roleLabel";
             this.roleLabel.Size = new System.Drawing.Size(37, 17);
             this.roleLabel.TabIndex = 0;
@@ -432,12 +464,12 @@
             this.userNameTextBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.userNameTextBox.ForeColor = System.Drawing.Color.Black;
             this.userNameTextBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.userNameTextBox.Location = new System.Drawing.Point(45, 259);
+            this.userNameTextBox.Location = new System.Drawing.Point(20, 23);
             this.userNameTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userNameTextBox.Name = "userNameTextBox";
             this.userNameTextBox.PlaceholderText = "";
             this.userNameTextBox.SelectedText = "";
-            this.userNameTextBox.Size = new System.Drawing.Size(192, 53);
+            this.userNameTextBox.Size = new System.Drawing.Size(219, 53);
             this.userNameTextBox.TabIndex = 1;
             this.userNameTextBox.TextChanged += new System.EventHandler(this.userNameTextBox_TextChanged);
             // 
@@ -445,43 +477,52 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // phoneTxt
+            // pnlUserImage
             // 
-            this.phoneTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.phoneTxt.BackColor = System.Drawing.Color.Transparent;
-            this.phoneTxt.BorderRadius = 5;
-            this.phoneTxt.BorderThickness = 2;
-            this.phoneTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.phoneTxt.DefaultText = "";
-            this.phoneTxt.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.phoneTxt.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.phoneTxt.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.phoneTxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.phoneTxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.phoneTxt.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.phoneTxt.ForeColor = System.Drawing.Color.Black;
-            this.phoneTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.phoneTxt.Location = new System.Drawing.Point(270, 349);
-            this.phoneTxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.phoneTxt.Name = "phoneTxt";
-            this.phoneTxt.PlaceholderText = "";
-            this.phoneTxt.SelectedText = "";
-            this.phoneTxt.Size = new System.Drawing.Size(192, 53);
-            this.phoneTxt.TabIndex = 4;
+            this.pnlUserImage.Controls.Add(this.userImage);
+            this.pnlUserImage.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlUserImage.Location = new System.Drawing.Point(10, 77);
+            this.pnlUserImage.Name = "pnlUserImage";
+            this.pnlUserImage.Size = new System.Drawing.Size(489, 165);
+            this.pnlUserImage.TabIndex = 9;
             // 
-            // label2
+            // guna2Panel2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(285, 337);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 17);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Phone no.";
+            this.guna2Panel2.Controls.Add(this.exitBtn);
+            this.guna2Panel2.Controls.Add(this.headerLabel);
+            this.guna2Panel2.Controls.Add(this.guna2Separator2);
+            this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.guna2Panel2.Location = new System.Drawing.Point(10, 10);
+            this.guna2Panel2.Name = "guna2Panel2";
+            this.guna2Panel2.Padding = new System.Windows.Forms.Padding(10);
+            this.guna2Panel2.Size = new System.Drawing.Size(489, 67);
+            this.guna2Panel2.TabIndex = 10;
+            // 
+            // guna2Panel3
+            // 
+            this.guna2Panel3.Controls.Add(this.roleCmb);
+            this.guna2Panel3.Controls.Add(this.statusLabel);
+            this.guna2Panel3.Controls.Add(this.addBtn);
+            this.guna2Panel3.Controls.Add(this.clearBtn);
+            this.guna2Panel3.Controls.Add(this.roleLabel);
+            this.guna2Panel3.Controls.Add(this.label2);
+            this.guna2Panel3.Controls.Add(this.statusCmb);
+            this.guna2Panel3.Controls.Add(this.phoneTxt);
+            this.guna2Panel3.Controls.Add(this.guna2Separator1);
+            this.guna2Panel3.Controls.Add(this.lblEmail);
+            this.guna2Panel3.Controls.Add(this.label1);
+            this.guna2Panel3.Controls.Add(this.fullNameLabel);
+            this.guna2Panel3.Controls.Add(this.addressLabel);
+            this.guna2Panel3.Controls.Add(this.label3);
+            this.guna2Panel3.Controls.Add(this.userNameTextBox);
+            this.guna2Panel3.Controls.Add(this.emaiTextBox);
+            this.guna2Panel3.Controls.Add(this.addressTextBox);
+            this.guna2Panel3.Controls.Add(this.fullNameTxt);
+            this.guna2Panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.guna2Panel3.Location = new System.Drawing.Point(10, 242);
+            this.guna2Panel3.Name = "guna2Panel3";
+            this.guna2Panel3.Size = new System.Drawing.Size(489, 495);
+            this.guna2Panel3.TabIndex = 11;
             // 
             // frmAddUser
             // 
@@ -497,9 +538,13 @@
             this.Text = "frmAddUser";
             this.Load += new System.EventHandler(this.frmAddUser_Load);
             this.pnlMain.ResumeLayout(false);
-            this.pnlMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.pnlUserImage.ResumeLayout(false);
+            this.guna2Panel2.ResumeLayout(false);
+            this.guna2Panel2.PerformLayout();
+            this.guna2Panel3.ResumeLayout(false);
+            this.guna2Panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -510,7 +555,6 @@
         private System.Windows.Forms.Label lblEmail;
         private Guna.UI2.WinForms.Guna2Button exitBtn;
         private System.Windows.Forms.Label statusLabel;
-        private Guna.UI2.WinForms.Guna2CirclePictureBox userImage;
         private System.Windows.Forms.Label headerLabel;
         private Guna.UI2.WinForms.Guna2ComboBox roleCmb;
         private Guna.UI2.WinForms.Guna2TextBox emaiTextBox;
@@ -530,5 +574,9 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Label label2;
         private Guna.UI2.WinForms.Guna2TextBox phoneTxt;
+        private Guna.UI2.WinForms.Guna2PictureBox userImage;
+        private Guna.UI2.WinForms.Guna2Panel pnlUserImage;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel3;
     }
 }

@@ -193,6 +193,8 @@
       <DependentUpon>ucItemControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Validation\Validator.cs" />
+    <None Include="Resources\avatar-default.png" />
+    <None Include="Resources\default_avatar.jpg" />
     <None Include="Resources\saveIcon1.png" />
     <None Include="Resources\saveIcon.png" />
     <None Include="Resources\showPassIcon.png" />

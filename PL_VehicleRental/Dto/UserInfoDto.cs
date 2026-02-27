@@ -1,6 +1,7 @@
 ﻿using PL_VehicleRental.Services.Security;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace VehicleManagementSystem.Dto
         public bool isDefaultPassword { get; set; }
         public bool isActive { get; set; }
         public bool isDeleted { get; set; }
-        public byte[] UserImage { get; set; }
+        public Image UserImage { get; set; }
 
     }
 

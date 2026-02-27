@@ -2,6 +2,7 @@
 using Guna.UI2.WinForms;
 using MySqlConnector;
 using PL_VehicleRental.Data;
+using PL_VehicleRental.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -66,7 +67,7 @@ namespace PL_VehicleRental.Forms
         private async Task<UserInfoDto> GetUserByIdAsync(int userId)
         {
             const string query = @"
-                                SELECT id, userName, fullName, email, address, role, status
+                                SELECT id, userName, fullName, email, address, role, status, userImage
                                 FROM users
                                 WHERE id = @id";
 
@@ -80,6 +81,12 @@ namespace PL_VehicleRental.Forms
                 {
                     if (!await reader.ReadAsync()) 
                         return null;
+                    byte[] imgBytes = reader["userImage"] as byte[];
+                    Image userImg = null;
+                    if (imgBytes != null && imgBytes.Length > 0)
+                    {
+                        userImg = ImageHelper.BytesToImage(imgBytes);
+                    }
 
                     string dbStatus = reader.GetString("status");
                     _userStatus = ParseStatus(dbStatus);
@@ -92,7 +99,8 @@ namespace PL_VehicleRental.Forms
                         Email = reader.GetString("email"),
                         Address = reader.GetString("address"),
                         Status = dbStatus,
-                        Role = reader.GetString("role")
+                        Role = reader.GetString("role"),
+                        UserImage = userImg
                     };
                 }
             }
@@ -106,6 +114,7 @@ namespace PL_VehicleRental.Forms
             lblAddress.Text = user.Address;
             lblRole.Text = user.Role;
             lblStatus.Text = user.Status;
+            userImage.Image = user.UserImage;
         }
 
         private Color GetStatusColor(UserStatus status)

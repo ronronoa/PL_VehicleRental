@@ -48,9 +48,16 @@ namespace PL_VehicleRental.Helpers
 
         public static Image BytesToImage(byte[] bytes)
         {
-            using (var ms = new MemoryStream())
+            if (bytes == null || bytes.Length == 0) return null;
+            try
             {
-                return Image.FromStream(ms);
+                using (var ms = new MemoryStream(bytes))
+                {
+                    return Image.FromStream(ms);
+                }
+            } catch
+            {
+                return null;
             }
         }
     }

@@ -243,5 +243,43 @@ namespace PL_VehicleRental.DAL.Repositories
                 }
             }
         }
+
+        public async Task<bool> UpdateUserImageAsync(int userId, byte[] imageBytes)
+        {
+            const string query = @"UPDATE users SET userImage = @Image WHERE id = @Id";
+
+            using (MySqlConnection conn = MySQLConnectionContext.Create())
+            {
+                await conn.OpenAsync();
+
+                using (var cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Image", imageBytes);
+                    cmd.Parameters.AddWithValue("@Id", userId);
+
+                    int rows = await cmd.ExecuteNonQueryAsync();
+                    return rows > 0;
+                }
+            }
+        }
+
+        public async Task<byte[]> GetUserImageAsync(int userId)
+        {
+            const string query = @"SELECT userImage FROM users WHERE id = @Id AND isDeleted = 0";
+
+            using (MySqlConnection conn = MySQLConnectionContext.Create())
+            {
+                await conn.OpenAsync();
+
+                using (var cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", userId);
+
+                    object result = await cmd.ExecuteScalarAsync();
+
+                    return result != DBNull.Value ? (byte[])result : null;
+                }
+            }
+        }
     }
 }

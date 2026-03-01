@@ -205,6 +205,7 @@ namespace PL_VehicleRental.DAL.Repositories
                     address = @Address,
                     role = @Role,
                     status = @Status
+                    userImage = COALESCE(@UserImage, userImage)
                 WHERE id = @Id";
 
             using (MySqlConnection conn = MySQLConnectionContext.Create())
@@ -220,6 +221,8 @@ namespace PL_VehicleRental.DAL.Repositories
                     cmd.Parameters.AddWithValue("@Address", user.Address);
                     cmd.Parameters.AddWithValue("@Role", user.Role);
                     cmd.Parameters.AddWithValue("@Status", user.Status);
+
+                    
 
                     int rows = await cmd.ExecuteNonQueryAsync();
 

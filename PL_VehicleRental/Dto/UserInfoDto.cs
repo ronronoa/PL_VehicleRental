@@ -20,7 +20,7 @@ namespace VehicleManagementSystem.Dto
         public bool isDefaultPassword { get; set; }
         public bool isActive { get; set; }
         public bool isDeleted { get; set; }
-        public Image UserImage { get; set; }
+        public byte[] UserImage { get; set; }
 
     }
 

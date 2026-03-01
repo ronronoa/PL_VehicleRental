@@ -83,12 +83,6 @@ namespace PL_VehicleRental.Forms
                         return null;
 
                     byte[] imgBytes = reader["userImage"] as byte[];
-                    Image userImg = null;
-
-                    if (imgBytes != null && imgBytes.Length > 0)
-                    {
-                        userImg = ImageHelper.BytesToImage(imgBytes);
-                    }
 
                     string dbStatus = reader.GetString("status");
                     _userStatus = ParseStatus(dbStatus);
@@ -102,7 +96,7 @@ namespace PL_VehicleRental.Forms
                         Address = reader.GetString("address"),
                         Status = dbStatus,
                         Role = reader.GetString("role"),
-                        UserImage = userImg
+                        UserImage = imgBytes
                     };
                 }
             }
@@ -117,9 +111,9 @@ namespace PL_VehicleRental.Forms
             lblRole.Text = user.Role;
             lblStatus.Text = user.Status;
 
-            if (user.UserImage != null)
+            if (user.UserImage != null && user.UserImage.Length > 0)
             {
-                userImage.Image = user.UserImage;
+                userImage.Image = ImageHelper.BytesToImage(user.UserImage);
             }
             else
                 userImage.Image = Properties.Resources.avatar_default;

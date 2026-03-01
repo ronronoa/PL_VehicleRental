@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace PL_VehicleRental.Forms
         private UserStatus _userStatus;
         private readonly userRepository _repository;
         private bool _isImageChanged;
+        private const long MaxFileSize = 2 * 1024 * 1024;
         public enum UserStatus
         {
             Active,
@@ -218,10 +220,34 @@ namespace PL_VehicleRental.Forms
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
+
                 ofd.Filter = "Image Files |*.jpg;*.jpeg;*.png;*.bmp";
 
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
+                    FileInfo fileInfo = new FileInfo(ofd.FileName);
+
+                    if (fileInfo.Length > MaxFileSize)
+                    {
+                        MessageBox.Show("Image is too large. Maximum allowed size is 2MB.",
+                                 "File Too Large",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    Image img = Image.FromFile(ofd.FileName);
+
+                    if(img.Width > 3000 || img.Height > 3000)
+                    {
+                        MessageBox.Show("Image resolution is too high. Max 3000x3000 allowed.",
+                                "Image Too Large",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                       
+                        return;
+                    }
+
                     userImage.Image = Image.FromFile(ofd.FileName);
                     _isImageChanged = true;
                 }

@@ -1,21 +1,22 @@
-﻿using System;
+﻿using MySqlConnector;
+using PL_VehicleRental.DAL.Repositories;
+using PL_VehicleRental.Data;
+using PL_VehicleRental.Helpers;
+using PL_VehicleRental.Services;
+using PL_VehicleRental.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySqlConnector;
-using PL_VehicleRental.DAL.Repositories;
-using PL_VehicleRental.Data;
-using PL_VehicleRental.Helpers;
-using PL_VehicleRental.Services;
-using PL_VehicleRental.Validation;
 using VehicleManagementSystem.Dto;
 
 namespace PL_VehicleRental.Forms
@@ -30,6 +31,7 @@ namespace PL_VehicleRental.Forms
         private CancellationTokenSource _usernameCts;
         private bool _isUsernameAvailable = false;
         private bool _isSubmitting = false;
+        private const long MaxFileSize = 2 * 1024 * 1024;
         public frmAddUser()
         {
             InitializeComponent();
@@ -228,10 +230,34 @@ namespace PL_VehicleRental.Forms
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
-                ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+
+                ofd.Filter = "Image Files |*.jpg;*.jpeg;*.png;*.bmp";
 
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
+                    FileInfo fileInfo = new FileInfo(ofd.FileName);
+
+                    if (fileInfo.Length > MaxFileSize)
+                    {
+                        MessageBox.Show("Image is too large. Maximum allowed size is 2MB.",
+                                 "File Too Large",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    Image img = Image.FromFile(ofd.FileName);
+
+                    if (img.Width > 3000 || img.Height > 3000)
+                    {
+                        MessageBox.Show("Image resolution is too high. Max 3000x3000 allowed.",
+                                "Image Too Large",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+
+                        return;
+                    }
+
                     userImage.Image = Image.FromFile(ofd.FileName);
                 }
             }

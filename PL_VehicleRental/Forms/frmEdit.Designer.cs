@@ -394,7 +394,7 @@
             this.resetImg.Name = "resetImg";
             this.resetImg.Size = new System.Drawing.Size(96, 26);
             this.resetImg.TabIndex = 22;
-            this.resetImg.Text = "Reset Picture";
+            this.resetImg.Text = "Reset";
             this.resetImg.Click += new System.EventHandler(this.resetImg_Click);
             // 
             // frmEdit

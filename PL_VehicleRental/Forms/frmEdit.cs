@@ -20,8 +20,8 @@ namespace PL_VehicleRental.Forms
     {
         private readonly int _userId;
         private UserStatus _userStatus;
-
         private readonly userRepository _repository;
+        private bool _isImageChanged;
         public enum UserStatus
         {
             Active,
@@ -33,6 +33,7 @@ namespace PL_VehicleRental.Forms
             InitializeComponent();
             _userId = userId;
             _repository = new userRepository();
+            _isImageChanged = false;
         }
 
         private void ToggleLoading(bool isLoading)
@@ -160,6 +161,14 @@ namespace PL_VehicleRental.Forms
                     return;
                 }
 
+                byte[] imgBytes = null;
+
+                if(userImage.Image != null)
+                {
+                    Image resized = ImageHelper.Resize(userImage.Image, 256, 256);
+                    imgBytes = ImageHelper.ImageToBytes(resized);
+                }
+
                 var user = new UserInfoDto
                 {
                     Id = _userId,
@@ -168,7 +177,9 @@ namespace PL_VehicleRental.Forms
                     Email = txtEmail.Text,
                     Address = txtAddress.Text,
                     Role = roleCmb.SelectedItem.ToString(),
-                    Status = statusCmb.SelectedItem.ToString()
+                    Status = statusCmb.SelectedItem.ToString(),
+                    UserImage = imgBytes,
+                    isImageChanged = _isImageChanged
                 };
 
                 bool success = await _repository.UpdateUserAsync(user);
@@ -212,6 +223,7 @@ namespace PL_VehicleRental.Forms
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     userImage.Image = Image.FromFile(ofd.FileName);
+                    _isImageChanged = true;
                 }
             }
         }
@@ -219,6 +231,11 @@ namespace PL_VehicleRental.Forms
         private void frmEdit_Load(object sender, EventArgs e)
         {
             userImage.SizeMode = PictureBoxSizeMode.Zoom;
+        }
+
+        private void resetImg_Click(object sender, EventArgs e)
+        {
+            userImage.Image = Properties.Resources.avatar_default;
         }
     }
 }

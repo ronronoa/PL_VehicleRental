@@ -47,6 +47,8 @@ namespace PL_VehicleRental.Forms
             addressTextBox.Clear();
             roleCmb.StartIndex = 0;
             statusCmb.StartIndex = 0;
+            userImage.Image = null;
+
         }
 
         private async void addBtn_Click(object sender, EventArgs e)

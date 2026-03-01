@@ -196,7 +196,25 @@ namespace PL_VehicleRental.DAL.Repositories
 
         public async Task<bool> UpdateUserAsync(UserInfoDto user)
         {
-            const string query = @"
+            string query;
+
+            if(user.isImageChanged)
+            {
+                query = @"
+                UPDATE users 
+                SET
+                    userName = @Username,
+                    fullName = @Fullname,
+                    email = @Email,
+                    address = @Address,
+                    role = @Role,
+                    status = @Status,
+                    userImage = @UserImage
+                WHERE id = @Id";
+            } 
+            else
+            {
+               query = @"
                 UPDATE users 
                 SET
                     userName = @Username,
@@ -205,30 +223,35 @@ namespace PL_VehicleRental.DAL.Repositories
                     address = @Address,
                     role = @Role,
                     status = @Status
-                    userImage = COALESCE(@UserImage, userImage)
                 WHERE id = @Id";
-
-            using (MySqlConnection conn = MySQLConnectionContext.Create())
-            {
-                await conn.OpenAsync();
-
-                using (var cmd = new MySqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@Id", user.Id);
-                    cmd.Parameters.AddWithValue("@Username", user.UserName);
-                    cmd.Parameters.AddWithValue("@Fullname", user.FullName);
-                    cmd.Parameters.AddWithValue("@Email", user.Email);
-                    cmd.Parameters.AddWithValue("@Address", user.Address);
-                    cmd.Parameters.AddWithValue("@Role", user.Role);
-                    cmd.Parameters.AddWithValue("@Status", user.Status);
-
-                    
-
-                    int rows = await cmd.ExecuteNonQueryAsync();
-
-                    return rows > 0;
-                }
             }
+
+                using (MySqlConnection conn = MySQLConnectionContext.Create())
+                {
+                    await conn.OpenAsync();
+
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Id", user.Id);
+                        cmd.Parameters.AddWithValue("@Username", user.UserName);
+                        cmd.Parameters.AddWithValue("@Fullname", user.FullName);
+                        cmd.Parameters.AddWithValue("@Email", user.Email);
+                        cmd.Parameters.AddWithValue("@Address", user.Address);
+                        cmd.Parameters.AddWithValue("@Role", user.Role);
+                        cmd.Parameters.AddWithValue("@Status", user.Status);
+
+                        if (user.isImageChanged)
+                    {
+                        cmd.Parameters.Add("UserImage", MySqlDbType.Blob).
+                            Value = (object)user.UserImage ?? DBNull.Value;
+                    }
+                            
+
+                        int rows = await cmd.ExecuteNonQueryAsync();
+
+                        return rows > 0;
+                    }
+                }
         }
 
         public async Task<bool> DeleteUserAsync(int userId)

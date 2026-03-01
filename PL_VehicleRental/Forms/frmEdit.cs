@@ -1,4 +1,8 @@
-﻿using PL_VehicleRental.Data;
+﻿using MySqlConnector;
+using PL_VehicleRental.DAL.Repositories;
+using PL_VehicleRental.Data;
+using PL_VehicleRental.Helpers;
+using PL_VehicleRental.Services.Security;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,9 +13,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VehicleManagementSystem.Dto;
-using MySqlConnector;
-using PL_VehicleRental.DAL.Repositories;
-using PL_VehicleRental.Services.Security;
 
 namespace PL_VehicleRental.Forms
 {
@@ -61,7 +62,7 @@ namespace PL_VehicleRental.Forms
         private async Task<UserInfoDto> GetUserByIdAsync(int userId)
         {
             const string query = @"
-                                SELECT id, userName, fullName, email, address, role, status
+                                SELECT id, userName, fullName, email, address, role, status, userImage
                                 FROM users
                                 WHERE id = @id";
 
@@ -76,6 +77,12 @@ namespace PL_VehicleRental.Forms
                     if (!await reader.ReadAsync())
                         return null;
 
+                    byte[] imgBytes = reader["userImage"] as byte[];
+                    Image userImg = null;
+
+                    if (imgBytes != null && imgBytes.Length > 0)
+                        userImg = ImageHelper.BytesToImage(imgBytes);
+
                     string dbStatus = reader.GetString("status");
                     _userStatus = ParseStatus(dbStatus);
 
@@ -87,7 +94,8 @@ namespace PL_VehicleRental.Forms
                         Email = reader.GetString("email"),
                         Address = reader.GetString("address"),
                         Status = dbStatus,
-                        Role = reader.GetString("role")
+                        Role = reader.GetString("role"),
+                        UserImage = userImg
                     };
                 }
             }
@@ -120,6 +128,13 @@ namespace PL_VehicleRental.Forms
             txtAddress.Text = user.Address;
             roleCmb.SelectedItem = user.Role;
             statusCmb.SelectedItem = user.Status;
+
+            if (user.UserImage != null)
+            {
+                userImage.Image = user.UserImage;
+            }
+            else
+                userImage.Image = Properties.Resources.avatar_default;
         }
 
         private UserStatus ParseStatus(string dbStatus)
@@ -190,6 +205,24 @@ namespace PL_VehicleRental.Forms
             {
                 ToggleLoading(false);
             }
+        }
+
+        private void userImage_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "Image Files |*.jpg;*.jpeg;*.png;*.bmp";
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    userImage.Image = Image.FromFile(ofd.FileName);
+                }
+            }
+        }
+
+        private void frmEdit_Load(object sender, EventArgs e)
+        {
+            userImage.SizeMode = PictureBoxSizeMode.Zoom;
         }
     }
 }

@@ -81,8 +81,10 @@ namespace PL_VehicleRental.Forms
                 {
                     if (!await reader.ReadAsync()) 
                         return null;
+
                     byte[] imgBytes = reader["userImage"] as byte[];
                     Image userImg = null;
+
                     if (imgBytes != null && imgBytes.Length > 0)
                     {
                         userImg = ImageHelper.BytesToImage(imgBytes);

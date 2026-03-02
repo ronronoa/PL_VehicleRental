@@ -21,6 +21,7 @@ namespace VehicleManagementSystem.Dto
         public bool isActive { get; set; }
         public bool isDeleted { get; set; }
         public byte[] UserImage { get; set; }
+        public string ImagePath { get; set; }
         public bool isImageChanged { get; set; }
 
     }

@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,7 +68,7 @@ namespace PL_VehicleRental.Forms
         private async Task<UserInfoDto> GetUserByIdAsync(int userId)
         {
             const string query = @"
-                                SELECT id, userName, fullName, email, address, role, status, userImage
+                                SELECT id, userName, fullName, email, address, role, status, imagePath
                                 FROM users
                                 WHERE id = @id";
 
@@ -82,8 +83,6 @@ namespace PL_VehicleRental.Forms
                     if (!await reader.ReadAsync()) 
                         return null;
 
-                    byte[] imgBytes = reader["userImage"] as byte[];
-
                     string dbStatus = reader.GetString("status");
                     _userStatus = ParseStatus(dbStatus);
 
@@ -96,7 +95,9 @@ namespace PL_VehicleRental.Forms
                         Address = reader.GetString("address"),
                         Status = dbStatus,
                         Role = reader.GetString("role"),
-                        UserImage = imgBytes
+                        ImagePath = reader.IsDBNull(reader.GetOrdinal("imagePath"))
+                        ? null
+                        : reader.GetString("imagePath")
                     };
                 }
             }
@@ -111,12 +112,31 @@ namespace PL_VehicleRental.Forms
             lblRole.Text = user.Role;
             lblStatus.Text = user.Status;
 
-            if (user.UserImage != null && user.UserImage.Length > 0)
+            if (userImage.Image != null && userImage.Image != Properties.Resources.avatar_default)
+                userImage.Image.Dispose();
+
+            if (!string.IsNullOrWhiteSpace(user.ImagePath))
             {
-                userImage.Image = ImageHelper.BytesToImage(user.UserImage);
-            }
+                var service = new UserImageService();
+                string fullPath = service.GetFullPath(user.ImagePath);
+
+                if (File.Exists(fullPath))
+                {
+                    using (var fs = new FileStream(fullPath, FileMode.Open, FileAccess.Read))
+                    {
+                        userImage.Image = Image.FromStream(fs);
+                    }
+                    return;
+                } 
+                else
+                {
+                    userImage.Image = Properties.Resources.avatar_default;
+                }
+            } 
             else
+            {
                 userImage.Image = Properties.Resources.avatar_default;
+            }
             
         }
 

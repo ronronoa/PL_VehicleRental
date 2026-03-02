@@ -27,15 +27,15 @@ namespace PL_VehicleRental.Services
             if (await _repository.UsernameExistsAsync(dto.UserName))
                 return (false, "Username already exists.", 0);
 
-            byte[] imgBytes = null;
+            string imagePath = null;
+            var imageService = new UserImageService();
             
             if (userImage != null)
             {
-                Image resized = ImageHelper.Resize(userImage, 256, 256);
-                imgBytes = ImageHelper.ImageToBytes(resized);
+                imagePath = imageService.Save(userImage);
             }
 
-            int insertResult = await _repository.InsertAsync(dto, imgBytes);
+            int insertResult = await _repository.InsertAsync(dto, imagePath);
 
             if (insertResult <= 0) return (false, "Failed to insert user.", 0);
 

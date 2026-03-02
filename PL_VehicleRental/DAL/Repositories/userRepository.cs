@@ -8,6 +8,7 @@ using MySqlConnector;
 using VehicleManagementSystem.Dto;
 using System.Security.Cryptography;
 using Org.BouncyCastle.Bcpg;
+using System.Drawing;
 
 namespace PL_VehicleRental.DAL.Repositories
 {
@@ -45,14 +46,14 @@ namespace PL_VehicleRental.DAL.Repositories
             }
         }
 
-        public async Task<int> InsertAsync(UserInfoDto dto, byte[] imageBytes)
+        public async Task<int> InsertAsync(UserInfoDto dto, string userImage)
         {
             using (var conn = MySQLConnectionContext.Create())
             {
                 await conn.OpenAsync();
 
-                const string sql = @"INSERT INTO users (userName, fullName, email, address, role, status, passwordHash, isDefaultPassword, isDeleted, userImage)
-                                     VALUES (@userName, @fullName, @email, @address, @role, @status, @passwordHash, 1, 0, @image);
+                const string sql = @"INSERT INTO users (userName, fullName, email, address, role, status, passwordHash, isDefaultPassword, isDeleted, imagePath)
+                                     VALUES (@userName, @fullName, @email, @address, @role, @status, @passwordHash, 1, 0, @ImagePath);
                                      SELECT LAST_INSERT_ID();";
 
                 using (var cmd = new MySqlCommand(sql, conn))
@@ -65,7 +66,7 @@ namespace PL_VehicleRental.DAL.Repositories
                     cmd.Parameters.AddWithValue("@status", dto.Status);
                     cmd.Parameters.AddWithValue("@passwordHash", PasswordHelper.GetDefaultPasswordHash());
                     cmd.Parameters.AddWithValue("@isDeleted", dto.isDeleted);
-                    cmd.Parameters.AddWithValue("@image", imageBytes ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ImagePath", (object)userImage ?? (object)DBNull.Value);
 
                     int newId = Convert.ToInt32(await cmd.ExecuteScalarAsync());
                     return newId;

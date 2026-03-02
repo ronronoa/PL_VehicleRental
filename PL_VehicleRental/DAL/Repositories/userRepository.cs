@@ -9,6 +9,7 @@ using VehicleManagementSystem.Dto;
 using System.Security.Cryptography;
 using Org.BouncyCastle.Bcpg;
 using System.Drawing;
+using PL_VehicleRental.Helpers;
 
 namespace PL_VehicleRental.DAL.Repositories
 {
@@ -195,8 +196,12 @@ namespace PL_VehicleRental.DAL.Repositories
             return (users, totalCount);
         }
 
-        public async Task<bool> UpdateUserAsync(UserInfoDto user)
+        public async Task<bool> UpdateUserAsync(UserInfoDto user, Image newImage = null)
         {
+            var imageService = new UserImageService();
+
+            string newImagePath = null;
+            string oldImagePath = null;
             string query;
 
             if(user.isImageChanged)
@@ -210,7 +215,7 @@ namespace PL_VehicleRental.DAL.Repositories
                     address = @Address,
                     role = @Role,
                     status = @Status,
-                    userImage = @UserImage
+                    imagePath = @ImagePath
                 WHERE id = @Id";
             } 
             else
@@ -231,7 +236,21 @@ namespace PL_VehicleRental.DAL.Repositories
                 {
                     await conn.OpenAsync();
 
-                    using (var cmd = new MySqlCommand(query, conn))
+                const string selectQuery = "SELECT imagePath FROM users WHERE id = @Id";
+
+                using (var selectCmd = new MySqlCommand(selectQuery, conn))
+                {
+                    selectCmd.Parameters.AddWithValue("@Id", user.Id);
+                    var result = await selectCmd.ExecuteScalarAsync();
+                    oldImagePath = result == DBNull.Value ? null : result?.ToString();
+                }
+
+                if (user.isImageChanged && newImage != null)
+                {
+                    newImagePath = imageService.Save(newImage);
+                }
+
+                using (var cmd = new MySqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@Id", user.Id);
                         cmd.Parameters.AddWithValue("@Username", user.UserName);
@@ -241,16 +260,18 @@ namespace PL_VehicleRental.DAL.Repositories
                         cmd.Parameters.AddWithValue("@Role", user.Role);
                         cmd.Parameters.AddWithValue("@Status", user.Status);
 
-                        if (user.isImageChanged)
+                    if (user.isImageChanged)
                     {
-                        cmd.Parameters.Add("UserImage", MySqlDbType.Blob).
-                            Value = (object)user.UserImage ?? DBNull.Value;
+                        cmd.Parameters.AddWithValue("@ImagePath", (object)newImagePath ?? DBNull.Value);
                     }
-                            
 
-                        int rows = await cmd.ExecuteNonQueryAsync();
+                    int rows = await cmd.ExecuteNonQueryAsync();
 
-                        return rows > 0;
+                    if (rows > 0 && user.isImageChanged && oldImagePath != null)
+                    {
+                        imageService.Delete(oldImagePath);
+                    }
+                    return rows > 0;
                     }
                 }
         }

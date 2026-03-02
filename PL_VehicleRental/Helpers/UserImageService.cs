@@ -10,13 +10,13 @@ namespace PL_VehicleRental.Helpers
 {
     public class UserImageService
     {
-        private readonly string _folder =
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "PL_VehicleRental", "UserImages");
+        private readonly string _folder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UserImages");
         public UserImageService()
         {
             if (!Directory.Exists(_folder))
                 Directory.CreateDirectory(_folder);
+
+            Console.WriteLine($"Image saved to {_folder}");
         }
 
         public string Save(Image image)

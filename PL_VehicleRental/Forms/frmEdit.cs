@@ -10,6 +10,8 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -65,7 +67,7 @@ namespace PL_VehicleRental.Forms
         private async Task<UserInfoDto> GetUserByIdAsync(int userId)
         {
             const string query = @"
-                                SELECT id, userName, fullName, email, address, role, status, userImage
+                                SELECT id, userName, fullName, email, address, role, status, imagePath
                                 FROM users
                                 WHERE id = @id";
 
@@ -80,8 +82,6 @@ namespace PL_VehicleRental.Forms
                     if (!await reader.ReadAsync())
                         return null;
 
-                    byte[] imgBytes = reader["userImage"] as byte[];
-
                     string dbStatus = reader.GetString("status");
                     _userStatus = ParseStatus(dbStatus);
 
@@ -94,7 +94,9 @@ namespace PL_VehicleRental.Forms
                         Address = reader.GetString("address"),
                         Status = dbStatus,
                         Role = reader.GetString("role"),
-                        UserImage = imgBytes
+                        ImagePath = reader.IsDBNull(reader.GetOrdinal("imagePath")) 
+                        ? null 
+                        : reader.GetString("imagePath")
                     };
                 }
             }
@@ -128,12 +130,26 @@ namespace PL_VehicleRental.Forms
             roleCmb.SelectedItem = user.Role;
             statusCmb.SelectedItem = user.Status;
 
-            if (user.UserImage != null && user.UserImage.Length > 0)
+            if (userImage.Image != null &&
+                userImage.Image != Properties.Resources.avatar_default)
+                userImage.Image.Dispose();
+
+            var service = new UserImageService();
+
+            if (!string.IsNullOrWhiteSpace(user.ImagePath))
             {
-                userImage.Image = ImageHelper.BytesToImage(user.UserImage);
+                string fullPath = service.GetFullPath(user.ImagePath);
+
+                if (File.Exists(fullPath))
+                {
+                    using (var fs = new FileStream(fullPath, FileMode.Open, FileAccess.Read))
+                    {
+                        userImage.Image = Image.FromStream(fs);
+                    }
+                    return;
+                }
             }
-            else
-                userImage.Image = Properties.Resources.avatar_default;
+            userImage.Image = Properties.Resources.avatar_default;
         }
 
         private UserStatus ParseStatus(string dbStatus)
@@ -163,14 +179,6 @@ namespace PL_VehicleRental.Forms
                     return;
                 }
 
-                byte[] imgBytes = null;
-
-                if(userImage.Image != null)
-                {
-                    Image resized = ImageHelper.Resize(userImage.Image, 256, 256);
-                    imgBytes = ImageHelper.ImageToBytes(resized);
-                }
-
                 var user = new UserInfoDto
                 {
                     Id = _userId,
@@ -180,11 +188,10 @@ namespace PL_VehicleRental.Forms
                     Address = txtAddress.Text,
                     Role = roleCmb.SelectedItem.ToString(),
                     Status = statusCmb.SelectedItem.ToString(),
-                    UserImage = imgBytes,
                     isImageChanged = _isImageChanged
                 };
 
-                bool success = await _repository.UpdateUserAsync(user);
+                bool success = await _repository.UpdateUserAsync(user, userImage.Image);
 
                 if (success)
                 {

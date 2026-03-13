@@ -1,6 +1,4 @@
-﻿using Guna.UI2.WinForms;
-using MySqlConnector;
-using Mysqlx;
+﻿
 using PL_VehicleRental.Classes;
 using PL_VehicleRental.DAL.Repositories;
 using PL_VehicleRental.Data;
@@ -374,6 +372,11 @@ namespace PL_VehicleRental.Forms
         private void pnlOverlay_Resize(object sender, EventArgs e)
         {
             
+        }
+
+        private void UserManagementForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
         }
     }
 }

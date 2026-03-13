@@ -90,7 +90,7 @@ namespace PL_VehicleRental.Forms
 
             var mainForm = new UserManagementForm();
             mainForm.Show();
-            this.Hide();
+            this.Dispose();
         }
 
         private void exitBtn_Click(object sender, EventArgs e)
@@ -116,6 +116,11 @@ namespace PL_VehicleRental.Forms
         private void frmLogin_KeyDown(object sender, KeyEventArgs e)
         {
             
+        }
+
+        private void frmLogin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
         }
     }
 }

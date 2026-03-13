@@ -124,7 +124,7 @@
             this.chkShowPassword.ImageOffset = new System.Drawing.Point(0, 0);
             this.chkShowPassword.ImageRotate = 0F;
             this.chkShowPassword.Location = new System.Drawing.Point(320, 197);
-            this.chkShowPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkShowPassword.Margin = new System.Windows.Forms.Padding(4);
             this.chkShowPassword.Name = "chkShowPassword";
             this.chkShowPassword.Size = new System.Drawing.Size(32, 30);
             this.chkShowPassword.TabIndex = 6;
@@ -177,7 +177,7 @@
             this.exitBtn.ForeColor = System.Drawing.Color.White;
             this.exitBtn.Image = global::PL_VehicleRental.Properties.Resources.closeIcon;
             this.exitBtn.Location = new System.Drawing.Point(369, 4);
-            this.exitBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.exitBtn.Margin = new System.Windows.Forms.Padding(4);
             this.exitBtn.Name = "exitBtn";
             this.exitBtn.Size = new System.Drawing.Size(47, 32);
             this.exitBtn.TabIndex = 4;
@@ -250,6 +250,7 @@
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmLogin";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmLogin_FormClosed);
             this.Load += new System.EventHandler(this.frmLogin_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmLogin_KeyDown);
             this.pnlBase.ResumeLayout(false);

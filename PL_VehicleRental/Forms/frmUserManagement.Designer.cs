@@ -37,6 +37,8 @@ namespace PL_VehicleRental.Forms
             this.flowUsers = new System.Windows.Forms.FlowLayoutPanel();
             this.TableHeaderPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.headerPanel = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
+            this.btnUserForm = new Guna.UI2.WinForms.Guna2Button();
             this.headerLabel = new System.Windows.Forms.Label();
             this.pnlOverlay = new Guna.UI2.WinForms.Guna2Panel();
             this.progressBar = new Guna.UI2.WinForms.Guna2ProgressBar();
@@ -46,8 +48,6 @@ namespace PL_VehicleRental.Forms
             this.btnPrev = new Guna.UI2.WinForms.Guna2Button();
             this.btnNext = new Guna.UI2.WinForms.Guna2Button();
             this.lblPageInfo = new System.Windows.Forms.Label();
-            this.txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
-            this.btnUserForm = new Guna.UI2.WinForms.Guna2Button();
             this.BackgroundPanel.SuspendLayout();
             this.UserManagementPanel.SuspendLayout();
             this.headerPanel.SuspendLayout();
@@ -132,6 +132,54 @@ namespace PL_VehicleRental.Forms
             this.headerPanel.Name = "headerPanel";
             this.headerPanel.Size = new System.Drawing.Size(1272, 100);
             this.headerPanel.TabIndex = 1;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSearch.BorderRadius = 5;
+            this.txtSearch.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtSearch.DefaultText = "";
+            this.txtSearch.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtSearch.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtSearch.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtSearch.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtSearch.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtSearch.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(132)))), ((int)(((byte)(191)))));
+            this.txtSearch.IconLeft = global::PL_VehicleRental.Properties.Resources.searchIcon;
+            this.txtSearch.IconLeftOffset = new System.Drawing.Point(5, 0);
+            this.txtSearch.Location = new System.Drawing.Point(729, 30);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.PlaceholderText = "Search user...";
+            this.txtSearch.SelectedText = "";
+            this.txtSearch.Size = new System.Drawing.Size(267, 44);
+            this.txtSearch.TabIndex = 4;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
+            // btnUserForm
+            // 
+            this.btnUserForm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUserForm.BorderColor = System.Drawing.Color.Transparent;
+            this.btnUserForm.BorderRadius = 5;
+            this.btnUserForm.BorderThickness = 2;
+            this.btnUserForm.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUserForm.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnUserForm.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnUserForm.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnUserForm.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnUserForm.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(132)))), ((int)(((byte)(191)))));
+            this.btnUserForm.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.btnUserForm.ForeColor = System.Drawing.Color.White;
+            this.btnUserForm.Image = ((System.Drawing.Image)(resources.GetObject("btnUserForm.Image")));
+            this.btnUserForm.ImageSize = new System.Drawing.Size(25, 25);
+            this.btnUserForm.Location = new System.Drawing.Point(1041, 28);
+            this.btnUserForm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnUserForm.Name = "btnUserForm";
+            this.btnUserForm.Size = new System.Drawing.Size(203, 46);
+            this.btnUserForm.TabIndex = 2;
+            this.btnUserForm.Text = "Add User";
+            this.btnUserForm.Click += new System.EventHandler(this.btnUserForm_Click);
             // 
             // headerLabel
             // 
@@ -255,54 +303,6 @@ namespace PL_VehicleRental.Forms
             this.lblPageInfo.Text = "label1";
             this.lblPageInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // txtSearch
-            // 
-            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSearch.BorderRadius = 5;
-            this.txtSearch.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtSearch.DefaultText = "";
-            this.txtSearch.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtSearch.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtSearch.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtSearch.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtSearch.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtSearch.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(132)))), ((int)(((byte)(191)))));
-            this.txtSearch.IconLeft = global::PL_VehicleRental.Properties.Resources.searchIcon;
-            this.txtSearch.IconLeftOffset = new System.Drawing.Point(5, 0);
-            this.txtSearch.Location = new System.Drawing.Point(729, 30);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.PlaceholderText = "Search user...";
-            this.txtSearch.SelectedText = "";
-            this.txtSearch.Size = new System.Drawing.Size(267, 44);
-            this.txtSearch.TabIndex = 4;
-            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
-            // 
-            // btnUserForm
-            // 
-            this.btnUserForm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUserForm.BorderColor = System.Drawing.Color.Transparent;
-            this.btnUserForm.BorderRadius = 5;
-            this.btnUserForm.BorderThickness = 2;
-            this.btnUserForm.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUserForm.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnUserForm.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnUserForm.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnUserForm.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnUserForm.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(132)))), ((int)(((byte)(191)))));
-            this.btnUserForm.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            this.btnUserForm.ForeColor = System.Drawing.Color.White;
-            this.btnUserForm.Image = ((System.Drawing.Image)(resources.GetObject("btnUserForm.Image")));
-            this.btnUserForm.ImageSize = new System.Drawing.Size(25, 25);
-            this.btnUserForm.Location = new System.Drawing.Point(1041, 28);
-            this.btnUserForm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnUserForm.Name = "btnUserForm";
-            this.btnUserForm.Size = new System.Drawing.Size(203, 46);
-            this.btnUserForm.TabIndex = 2;
-            this.btnUserForm.Text = "Add User";
-            this.btnUserForm.Click += new System.EventHandler(this.btnUserForm_Click);
-            // 
             // UserManagementForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -313,6 +313,7 @@ namespace PL_VehicleRental.Forms
             this.Name = "UserManagementForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "User Management";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.UserManagementForm_FormClosed);
             this.Load += new System.EventHandler(this.UserManagementForm_Load);
             this.Shown += new System.EventHandler(this.UserManagementForm_Shown);
             this.Resize += new System.EventHandler(this.UserManagementForm_Resize);

@@ -68,6 +68,7 @@ namespace PL_VehicleRental.Forms
                 _validator.Required(fullNameTxt, "Full name is required");
                 _validator.Required(addressTextBox, "Address is required");
                 _validator.IsEmail(emaiTextBox, "Invalid email format");
+                _validator.IsPhoneNumber(phoneTxt, "Invalid phone number.");
 
                 _validator.Custom(userNameTextBox, () => userNameTextBox.Text.Length >= 5, "Username must be at least 5 characters");
                 _validator.Custom(userNameTextBox, () => Regex.IsMatch(userNameTextBox.Text, @"^[a-zA-Z0-9]+$"), "Username can only contain letters and numbers.");
@@ -79,6 +80,7 @@ namespace PL_VehicleRental.Forms
                     UserName = userNameTextBox.Text.Trim(),
                     FullName = fullNameTxt.Text.Trim(),
                     Email = emaiTextBox.Text.Trim(),
+                    PhoneNumber = phoneTxt.Text.Trim(),
                     Address = addressTextBox.Text.Trim(),
                     Role = roleCmb.Text,
                     Status = statusCmb.Text
@@ -145,6 +147,8 @@ namespace PL_VehicleRental.Forms
             fullNameTxt.Clear();
             userNameTextBox.Clear();
             addressTextBox.Clear();
+            emaiTextBox.Clear();
+            phoneTxt.Clear();
             roleCmb.StartIndex = 0;
             statusCmb.StartIndex = 0;
         }
@@ -155,6 +159,7 @@ namespace PL_VehicleRental.Forms
                 !string.IsNullOrWhiteSpace(userNameTextBox.Text) &&
                 !string.IsNullOrWhiteSpace(fullNameTxt.Text) &&
                 !string.IsNullOrWhiteSpace(emaiTextBox.Text) &&
+                !string.IsNullOrWhiteSpace(phoneTxt.Text) &&
                 !string.IsNullOrWhiteSpace(addressTextBox.Text) &&
                 roleCmb.SelectedIndex != -1 &&
                 statusCmb.SelectedIndex != -1;
@@ -279,6 +284,11 @@ namespace PL_VehicleRental.Forms
         private void guna2Separator1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void phoneTxt_TextChanged(object sender, EventArgs e)
+        {
+            UpdateAddButtonState();
         }
     }
 }

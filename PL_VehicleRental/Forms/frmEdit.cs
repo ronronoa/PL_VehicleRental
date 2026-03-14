@@ -67,7 +67,7 @@ namespace PL_VehicleRental.Forms
         private async Task<UserInfoDto> GetUserByIdAsync(int userId)
         {
             const string query = @"
-                                SELECT id, userName, fullName, email, address, role, status, imagePath
+                                SELECT id, userName, fullName, email, phoneNumber, address, role, status, imagePath
                                 FROM users
                                 WHERE id = @id";
 
@@ -91,6 +91,7 @@ namespace PL_VehicleRental.Forms
                         UserName = reader.GetString("userName"),
                         FullName = reader.GetString("fullName"),
                         Email = reader.GetString("email"),
+                        PhoneNumber = reader.IsDBNull(reader.GetOrdinal("phoneNumber")) ? null : reader.GetString("phoneNumber"),
                         Address = reader.GetString("address"),
                         Status = dbStatus,
                         Role = reader.GetString("role"),
@@ -126,6 +127,7 @@ namespace PL_VehicleRental.Forms
             txtUserName.Text = user.UserName;
             txtFullName.Text = user.FullName;
             txtEmail.Text = user.Email;
+            txtPhone.Text = user?.PhoneNumber;
             txtAddress.Text = user.Address;
             roleCmb.SelectedItem = user.Role;
             statusCmb.SelectedItem = user.Status;
@@ -185,6 +187,7 @@ namespace PL_VehicleRental.Forms
                     UserName = txtUserName.Text,
                     FullName = txtFullName.Text,
                     Email = txtEmail.Text,
+                    PhoneNumber = txtPhone.Text,
                     Address = txtAddress.Text,
                     Role = roleCmb.SelectedItem.ToString(),
                     Status = statusCmb.SelectedItem.ToString(),

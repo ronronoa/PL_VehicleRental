@@ -89,6 +89,7 @@ namespace PL_VehicleRental.Forms
             Console.WriteLine($"Role from DB: '{user.Role}'");
 
             var mainForm = new UserManagementForm();
+            mainForm.FormClosed += (s, args) => this.Close(); 
             mainForm.Show();
             this.Dispose();
         }

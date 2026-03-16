@@ -1,4 +1,5 @@
 ﻿using PL_VehicleRental.DAL.Repositories;
+using PL_VehicleRental.Services;
 using PL_VehicleRental.Services.Security;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VehicleManagementSystem.Dto;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PL_VehicleRental.Forms
 {
@@ -40,6 +42,14 @@ namespace PL_VehicleRental.Forms
             }
 
             var user = await _repository.ValidateLoginAsync(username, password);
+
+            await AuditService.LogAsync(new AuditLog { 
+                UserId = user.Id,
+                ActionType = "LOGIN",
+                Description = "User logged in",
+                TableAffected = "users",
+                RecordId = user.Id,
+            });
 
             if (user == null)
             {
@@ -88,15 +98,14 @@ namespace PL_VehicleRental.Forms
 
             Console.WriteLine($"Role from DB: '{user.Role}'");
 
-            var mainForm = new UserManagementForm();
-            mainForm.FormClosed += (s, args) => this.Close(); 
+            var mainForm = new UserManagementForm(); 
             mainForm.Show();
             this.Dispose();
         }
 
         private void exitBtn_Click(object sender, EventArgs e)
         {
-            this.Close();
+            System.Windows.Forms.Application.Exit();
         }
 
         private void chkShowPassword_CheckedChanged(object sender, EventArgs e)
@@ -121,7 +130,7 @@ namespace PL_VehicleRental.Forms
 
         private void frmLogin_FormClosed(object sender, FormClosedEventArgs e)
         {
-
+            System.Windows.Forms.Application.Exit();
         }
     }
 }

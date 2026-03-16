@@ -67,9 +67,14 @@ namespace PL_VehicleRental.Forms
                 _validator.Required(userNameTextBox, "Username is required");
                 _validator.Required(fullNameTxt, "Full name is required");
                 _validator.Required(addressTextBox, "Address is required");
+                _validator.Required(phoneTxt, "Phone number is required.");
                 _validator.IsEmail(emaiTextBox, "Invalid email format");
                 _validator.IsPhoneNumber(phoneTxt, "Invalid phone number.");
 
+                _validator.Custom(phoneTxt, () =>
+                {
+                    return phoneTxt.Text.Length == 13 && phoneTxt.Text.StartsWith("+639");
+                }, "Phone number must be +639 followed by 9 digits.");
                 _validator.Custom(userNameTextBox, () => userNameTextBox.Text.Length >= 5, "Username must be at least 5 characters");
                 _validator.Custom(userNameTextBox, () => Regex.IsMatch(userNameTextBox.Text, @"^[a-zA-Z0-9]+$"), "Username can only contain letters and numbers.");
 
@@ -288,7 +293,29 @@ namespace PL_VehicleRental.Forms
 
         private void phoneTxt_TextChanged(object sender, EventArgs e)
         {
+            if (!phoneTxt.Text.StartsWith("+63"))
+            {
+                phoneTxt.Text = "+63";
+                phoneTxt.SelectionStart = phoneTxt.Text.Length;
+            }
             UpdateAddButtonState();
+        }
+
+        private void phoneTxt_Enter(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(phoneTxt.Text))
+            {
+                phoneTxt.Text = "+63";
+                phoneTxt.SelectionStart = phoneTxt.Text.Length;
+            }
+        }
+
+        private void phoneTxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

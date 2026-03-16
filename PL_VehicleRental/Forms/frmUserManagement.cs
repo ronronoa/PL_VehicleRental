@@ -363,6 +363,7 @@ namespace PL_VehicleRental.Forms
 
         private void UserManagementForm_Resize(object sender, EventArgs e)
         {
+            
         }
 
         private void rolesTablePanel_Resize(object sender, EventArgs e)
@@ -377,6 +378,12 @@ namespace PL_VehicleRental.Forms
         private void UserManagementForm_FormClosed(object sender, FormClosedEventArgs e)
         {
 
+        }
+
+        private void logsBtn_Click(object sender, EventArgs e)
+        {
+            frmLogs logsForm = new frmLogs();
+            logsForm.ShowDialog();
         }
     }
 }

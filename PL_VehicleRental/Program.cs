@@ -34,7 +34,6 @@ namespace PL_VehicleRental
 
             var loginForm = new frmLogin();
             loginForm.Show();
-
             Application.Run();
             //EncryptConnectionString();
         }
